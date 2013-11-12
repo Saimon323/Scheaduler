@@ -9,5 +9,8 @@ namespace Scheduler.Model.Repositories.Interfaces
 {
     public interface IProjectRepository
     {
+        Project GetProjectById(int idProject);
+        IEnumerable<Project> GetAllProjects();
+        int CreateNewPorject(string projectName);
     }
 }

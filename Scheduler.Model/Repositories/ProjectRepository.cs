@@ -26,5 +26,47 @@ namespace Scheduler.Model.Repositories
         }
 
         #endregion
+
+        public int autoIncrementField = 0;
+
+        /// <summary>
+        /// Pobieranie projektu po jego Id
+        /// </summary>
+        /// <param name="idProject"></param>
+        /// <returns></returns>
+        public Project GetProjectById(int idProject)
+        {
+            return Items.Where(x => x.id.Equals(idProject)).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Pobieranie wszyskich projektow
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Project> GetAllProjects()
+        {
+            return Items.Select(x => x);
+        }
+
+        /// <summary>
+        /// Dodawanie nowego projektu do bazy
+        /// </summary>
+        /// <param name="projectName"></param>
+        /// <returns></returns>
+        public int CreateNewPorject(string projectName)
+        {
+            projectName = projectName.ToLower();
+            var checkProjectExist = Items.Where(t => t.id.Equals(projectName)).FirstOrDefault();
+
+            if (checkProjectExist == null)
+            {
+                Project newProject = Project.CreateProject(autoIncrementField, projectName);
+                Entities.AddToProjects(newProject);
+                Entities.SaveChanges();
+                return newProject.id;
+            }
+            else
+                return checkProjectExist.id;
+        }
     }
 }
