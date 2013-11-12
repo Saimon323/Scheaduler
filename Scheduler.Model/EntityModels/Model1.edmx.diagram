@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0597e60fb194479b9259e2e8793b118b" Name="Diagram1">
+        <EntityTypeShape EntityType="SchedulerModel.Coment" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.Group" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.MenagersProject" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.Project" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.Task" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.User" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.UsersGroup" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SchedulerModel.FK_Coments_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulerModel.FK_UsersGroups_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulerModel.FK_MenagersProject_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulerModel.FK_MenagersProject_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulerModel.FK_Tasks_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulerModel.FK_UsersGroups_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

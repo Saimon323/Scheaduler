@@ -1,0 +1,7 @@
+*.suo
+*.sln
+bin
+obj
+*.user
+
+/Scheduler.Test/Service References

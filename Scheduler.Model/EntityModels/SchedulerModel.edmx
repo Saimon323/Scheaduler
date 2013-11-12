@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjectsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ProjectsModelStoreContainer">
+          <EntitySet Name="Coments" EntityType="ProjectsModel.Store.Coments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Groups" EntityType="ProjectsModel.Store.Groups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MenagersProject" EntityType="ProjectsModel.Store.MenagersProject" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Projects" EntityType="ProjectsModel.Store.Projects" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tasks" EntityType="ProjectsModel.Store.Tasks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="ProjectsModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UsersGroups" EntityType="ProjectsModel.Store.UsersGroups" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Coments_Tasks" Association="ProjectsModel.Store.FK_Coments_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Coments" EntitySet="Coments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenagersProject_Projects" Association="ProjectsModel.Store.FK_MenagersProject_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="MenagersProject" EntitySet="MenagersProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenagersProject_Users" Association="ProjectsModel.Store.FK_MenagersProject_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MenagersProject" EntitySet="MenagersProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Projects" Association="ProjectsModel.Store.FK_Tasks_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersGroups_Groups" Association="ProjectsModel.Store.FK_UsersGroups_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="UsersGroups" EntitySet="UsersGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersGroups_Users" Association="ProjectsModel.Store.FK_UsersGroups_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersGroups" EntitySet="UsersGroups" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Coments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenagersProject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NameProject" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Login" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UsersGroups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Coments_Tasks">
+          <End Role="Tasks" Type="ProjectsModel.Store.Tasks" Multiplicity="1" />
+          <End Role="Coments" Type="ProjectsModel.Store.Coments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Coments">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenagersProject_Projects">
+          <End Role="Projects" Type="ProjectsModel.Store.Projects" Multiplicity="1" />
+          <End Role="MenagersProject" Type="ProjectsModel.Store.MenagersProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenagersProject">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenagersProject_Users">
+          <End Role="Users" Type="ProjectsModel.Store.Users" Multiplicity="1" />
+          <End Role="MenagersProject" Type="ProjectsModel.Store.MenagersProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenagersProject">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Projects">
+          <End Role="Projects" Type="ProjectsModel.Store.Projects" Multiplicity="1" />
+          <End Role="Tasks" Type="ProjectsModel.Store.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersGroups_Groups">
+          <End Role="Groups" Type="ProjectsModel.Store.Groups" Multiplicity="1" />
+          <End Role="UsersGroups" Type="ProjectsModel.Store.UsersGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsersGroups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersGroups_Users">
+          <End Role="Users" Type="ProjectsModel.Store.Users" Multiplicity="1" />
+          <End Role="UsersGroups" Type="ProjectsModel.Store.UsersGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsersGroups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProjectsEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Coments" EntityType="ProjectsModel.Coment" />
+          <EntitySet Name="Groups" EntityType="ProjectsModel.Group" />
+          <EntitySet Name="MenagersProjects" EntityType="ProjectsModel.MenagersProject" />
+          <EntitySet Name="Projects" EntityType="ProjectsModel.Project" />
+          <EntitySet Name="Tasks" EntityType="ProjectsModel.Task" />
+          <EntitySet Name="Users" EntityType="ProjectsModel.User" />
+          <EntitySet Name="UsersGroups" EntityType="ProjectsModel.UsersGroup" />
+          <AssociationSet Name="FK_Coments_Tasks" Association="ProjectsModel.FK_Coments_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="Coments" EntitySet="Coments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersGroups_Groups" Association="ProjectsModel.FK_UsersGroups_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="UsersGroups" EntitySet="UsersGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenagersProject_Projects" Association="ProjectsModel.FK_MenagersProject_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="MenagersProject" EntitySet="MenagersProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenagersProject_Users" Association="ProjectsModel.FK_MenagersProject_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="MenagersProject" EntitySet="MenagersProjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Projects" Association="ProjectsModel.FK_Tasks_Projects">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Tasks" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersGroups_Users" Association="ProjectsModel.FK_UsersGroups_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersGroups" EntitySet="UsersGroups" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Coment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TaskId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="ProjectsModel.FK_Coments_Tasks" FromRole="Coments" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UsersGroups" Relationship="ProjectsModel.FK_UsersGroups_Groups" FromRole="Groups" ToRole="UsersGroups" />
+        </EntityType>
+        <EntityType Name="MenagersProject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="ProjectsModel.FK_MenagersProject_Projects" FromRole="MenagersProject" ToRole="Projects" />
+          <NavigationProperty Name="User" Relationship="ProjectsModel.FK_MenagersProject_Users" FromRole="MenagersProject" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NameProject" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="MenagersProjects" Relationship="ProjectsModel.FK_MenagersProject_Projects" FromRole="Projects" ToRole="MenagersProject" />
+          <NavigationProperty Name="Tasks" Relationship="ProjectsModel.FK_Tasks_Projects" FromRole="Projects" ToRole="Tasks" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Coments" Relationship="ProjectsModel.FK_Coments_Tasks" FromRole="Tasks" ToRole="Coments" />
+          <NavigationProperty Name="Project" Relationship="ProjectsModel.FK_Tasks_Projects" FromRole="Tasks" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="MenagersProjects" Relationship="ProjectsModel.FK_MenagersProject_Users" FromRole="Users" ToRole="MenagersProject" />
+          <NavigationProperty Name="UsersGroups" Relationship="ProjectsModel.FK_UsersGroups_Users" FromRole="Users" ToRole="UsersGroups" />
+        </EntityType>
+        <EntityType Name="UsersGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="ProjectsModel.FK_UsersGroups_Groups" FromRole="UsersGroups" ToRole="Groups" />
+          <NavigationProperty Name="User" Relationship="ProjectsModel.FK_UsersGroups_Users" FromRole="UsersGroups" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Coments_Tasks">
+          <End Role="Tasks" Type="ProjectsModel.Task" Multiplicity="1" />
+          <End Role="Coments" Type="ProjectsModel.Coment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Coments">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersGroups_Groups">
+          <End Role="Groups" Type="ProjectsModel.Group" Multiplicity="1" />
+          <End Role="UsersGroups" Type="ProjectsModel.UsersGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsersGroups">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenagersProject_Projects">
+          <End Role="Projects" Type="ProjectsModel.Project" Multiplicity="1" />
+          <End Role="MenagersProject" Type="ProjectsModel.MenagersProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenagersProject">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenagersProject_Users">
+          <End Role="Users" Type="ProjectsModel.User" Multiplicity="1" />
+          <End Role="MenagersProject" Type="ProjectsModel.MenagersProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenagersProject">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tasks_Projects">
+          <End Role="Projects" Type="ProjectsModel.Project" Multiplicity="1" />
+          <End Role="Tasks" Type="ProjectsModel.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="ProjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersGroups_Users">
+          <End Role="Users" Type="ProjectsModel.User" Multiplicity="1" />
+          <End Role="UsersGroups" Type="ProjectsModel.UsersGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UsersGroups">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectsModelStoreContainer" CdmEntityContainer="ProjectsEntities">
+          <EntitySetMapping Name="Coments">
+            <EntityTypeMapping TypeName="ProjectsModel.Coment">
+              <MappingFragment StoreEntitySet="Coments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="ProjectsModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenagersProjects">
+            <EntityTypeMapping TypeName="ProjectsModel.MenagersProject">
+              <MappingFragment StoreEntitySet="MenagersProject">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="ProjectsModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="NameProject" ColumnName="NameProject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="ProjectsModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ProjectsModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersGroups">
+            <EntityTypeMapping TypeName="ProjectsModel.UsersGroup">
+              <MappingFragment StoreEntitySet="UsersGroups">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="f12c2ab72cfa40c4b8211ef3e51a9151" Name="Diagram1">
+        <EntityTypeShape EntityType="ProjectsModel.Coment" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectsModel.Group" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectsModel.MenagersProject" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectsModel.Project" Width="1.5" PointX="5.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectsModel.Task" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectsModel.User" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectsModel.UsersGroup" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ProjectsModel.FK_Coments_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectsModel.FK_UsersGroups_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectsModel.FK_MenagersProject_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectsModel.FK_MenagersProject_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectsModel.FK_Tasks_Projects" ManuallyRouted="false" />
+        <AssociationConnector Association="ProjectsModel.FK_UsersGroups_Users" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
