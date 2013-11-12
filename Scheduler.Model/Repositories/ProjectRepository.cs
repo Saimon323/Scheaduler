@@ -56,7 +56,7 @@ namespace Scheduler.Model.Repositories
         public int CreateNewPorject(string projectName)
         {
             projectName = projectName.ToLower();
-            var checkProjectExist = Items.Where(t => t.id.Equals(projectName)).FirstOrDefault();
+            var checkProjectExist = Items.Where(t => t.NameProject.Equals(projectName)).FirstOrDefault();
 
             if (checkProjectExist == null)
             {
