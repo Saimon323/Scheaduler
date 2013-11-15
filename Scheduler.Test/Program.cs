@@ -24,7 +24,7 @@ namespace Scheduler.Test
                 case 1:
                     Console.WriteLine("Podaj id usera ");
                     int idUser = Convert.ToInt32(Console.ReadLine());
-                    User example = user.GetUserById(10);
+                    User example = user.GetUserById(idUser);
                     Console.WriteLine(example.id + " " + example.Login + " " + example.Name + " " + example.Surname);
                     break;
                 case 2:
