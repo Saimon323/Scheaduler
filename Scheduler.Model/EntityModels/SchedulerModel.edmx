@@ -4,12 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProjectsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProjectsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="ProjectsModelStoreContainer">
           <EntitySet Name="Coments" EntityType="ProjectsModel.Store.Coments" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Groups" EntityType="ProjectsModel.Store.Groups" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MenagersProject" EntityType="ProjectsModel.Store.MenagersProject" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Projects" EntityType="ProjectsModel.Store.Projects" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="ProjectsModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tasks" EntityType="ProjectsModel.Store.Tasks" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="ProjectsModel.Store.Users" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UsersGroups" EntityType="ProjectsModel.Store.UsersGroups" store:Type="Tables" Schema="dbo" />
@@ -69,6 +70,16 @@
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NameProject" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Tasks">
           <Key>
             <PropertyRef Name="id" />
@@ -76,6 +87,7 @@
           <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ProjectId" Type="int" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="TaskName" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -167,8 +179,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -204,6 +215,7 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UsersGroups" EntitySet="UsersGroups" />
           </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="ProjectsModel.sysdiagrams" />
         </EntityContainer>
         <EntityType Name="Coment">
           <Key>
@@ -251,6 +263,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Coments" Relationship="ProjectsModel.FK_Coments_Tasks" FromRole="Tasks" ToRole="Coments" />
           <NavigationProperty Name="Project" Relationship="ProjectsModel.FK_Tasks_Projects" FromRole="Tasks" ToRole="Projects" />
+          <Property Type="String" Name="TaskName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -346,6 +359,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -390,6 +413,7 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="ProjectsModel.Task">
               <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="TaskName" ColumnName="TaskName" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -413,6 +437,17 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ProjectsModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -451,6 +486,7 @@
         <AssociationConnector Association="ProjectsModel.FK_MenagersProject_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectsModel.FK_Tasks_Projects" ManuallyRouted="false" />
         <AssociationConnector Association="ProjectsModel.FK_UsersGroups_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ProjectsModel.sysdiagrams" Width="1.5" PointX="3.5482749173176824" PointY="27.684554962294435" />
       </Diagram>
     </Diagrams>
   </Designer>
