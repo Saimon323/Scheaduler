@@ -1,5 +1,4 @@
 *.suo
-*.sln
 bin
 obj
 *.user
