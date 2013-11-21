@@ -59,6 +59,21 @@ namespace Scheduler.Test
                         Console.WriteLine(us.Name + " " + us.Surname + " " + us.Login + " " + us.Password);
                     }
                     break;
+                case 6:
+                    Console.WriteLine("Podaj Nazwe grupy ");
+                    string groupName = Console.ReadLine();
+                    Console.WriteLine("Podaj nazwe projektu ");
+                    projectName = Console.ReadLine();
+                    user.CreateGroup(groupName, projectName);
+                    break;
+                case 7:
+                    Console.WriteLine("Podaj nazwe usera ");
+                    login = Console.ReadLine();
+                    Console.WriteLine("Podaj nazwe grupy do ktorej chesz dolaczyc ");
+                    groupName = Console.ReadLine();
+                    user.AddUserToGroup(login, groupName);
+                    break;
+
             }
 
 

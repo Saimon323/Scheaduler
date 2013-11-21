@@ -39,6 +39,11 @@ namespace Scheduler.Model.Repositories
             return Items.Where(x => x.id.Equals(idProject)).FirstOrDefault();
         }
 
+        public Project GetProjectByName(string nameProject)
+        {
+            return Items.Where(x => x.NameProject.Equals(nameProject)).FirstOrDefault();
+        }
+
         /// <summary>
         /// Pobieranie wszyskich projektow
         /// </summary>
@@ -68,5 +73,11 @@ namespace Scheduler.Model.Repositories
             else
                 return checkProjectExist.id;
         }
+
+
+
+        
+
+
     }
 }

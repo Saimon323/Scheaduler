@@ -12,5 +12,8 @@ namespace Scheduler.Model.Repositories.Interfaces
         User GetUserById(int idUser);
         IEnumerable<User> GetAllUsers();
         User CreateUser(string name, string surname, string login, string password);
+        Group GetGroupById(int idGroup);
+        Group GetGroupByName(string groupName);
+        void CreateGroup(string groupName, string projectName);
     }
 }

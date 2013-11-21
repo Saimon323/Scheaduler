@@ -29,10 +29,16 @@ namespace Scheduler.Model.Repositories
         #endregion
 
         public int autoIncrementField = 0;
+        ProjectRepository ProjectRepo = new ProjectRepository();
 
         public User GetUserById(int idUser)
         {
             return Items.Where(u => u.id.Equals(idUser)).FirstOrDefault();
+        }
+
+        public User GetUserByLogin(string login)
+        {
+            return Items.Where(x => x.Login.Equals(login)).FirstOrDefault();
         }
 
         public IEnumerable<User> GetAllUsers()
@@ -55,6 +61,57 @@ namespace Scheduler.Model.Repositories
             }
             else
                 return checkProjectExist;
+        }
+
+        public Group GetGroupById(int idGroup)
+        {
+            return Entities.Groups.Where(x => x.id.Equals(idGroup)).FirstOrDefault();
+        }
+
+        public Group GetGroupByName(string groupName)
+        {
+            return Entities.Groups.Where(x => x.Name.Equals(groupName)).FirstOrDefault();
+        }
+
+        public Group GetGroupAndProject(string groupName, string projectName)
+        {
+            Project proj = ProjectRepo.GetProjectByName(projectName);
+            return Entities.Groups.Where(x => x.Name.Equals(groupName) && x.ProjectId.Equals(proj.id)).FirstOrDefault();
+        }
+
+        public void CreateGroup(string groupName, string projectName)
+        {
+            groupName = groupName.ToLower();
+            projectName = projectName.ToLower();
+            
+            var checkProjectExist = ProjectRepo.GetProjectByName(projectName);
+
+            if(checkProjectExist == null)
+                return;
+
+            //var checkGroupExist = Items.Where(t => t.Name.Equals(groupName)).FirstOrDefault();
+            Group checkExistRecord = GetGroupAndProject(groupName, projectName);
+
+            if (checkExistRecord != null)
+                return;
+
+            Group newGroup = Group.CreateGroup(autoIncrementField, groupName, checkProjectExist.id);
+            Entities.AddToGroups(newGroup);
+            Entities.SaveChanges();
+
+        }
+
+        public void AddUserToGroup(string login, string groupName)
+        {
+            User user = GetUserByLogin(login);
+            Group group = GetGroupByName(groupName);
+
+            if (user == null || group == null)
+                return;
+
+            UsersGroup newUserInGroup = UsersGroup.CreateUsersGroup(autoIncrementField, user.id, group.id);
+            Entities.AddToUsersGroups(newUserInGroup);
+            Entities.SaveChanges();
         }
 
 
