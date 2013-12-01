@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Scheduler.Model.EntityModels
 {
-    public partial class Group :IIdentifable
+    public partial class Group : IIdentifable
     {
+
     }
 }

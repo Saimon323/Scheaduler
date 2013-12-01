@@ -13,7 +13,9 @@ namespace Scheduler.Test
     {
         static void Main(string[] args)
         {
-            UserRepository user = new UserRepository();
+
+            #region old
+            /* UserRepository user = new UserRepository();
             ProjectRepository project = new ProjectRepository();
 
             Console.WriteLine("1: Wyswietlenie usera po ID \n2: Dodanie nowego projektu \n3: Pobranie wszystkich projektow \n4: Dodanie nowego usera \n5: Wypisanie wszystkich userow");
@@ -74,12 +76,20 @@ namespace Scheduler.Test
                     user.AddUserToGroup(login, groupName);
                     break;
 
-            }
+            }*/
+            #endregion 
+            UserRepository UserRepo = new UserRepository();
+            GroupRepository GroupRepo = new GroupRepository();
+            DateTime creat = new DateTime(2012, 11, 10);
+            //UserRepo.addNewRole("Worker");
+           // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker");
+           // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker");
+            //UserRepo.addNewUser("Hiro", "Nakamura", "Django", "123", "Worker", );
+            //UserRepo.addNewUser("Pitter", "Petrelli", "Ojson", "123", "Menager");
+            GroupRepo.addNewGroups("Ojson", "Sos", creat);
 
 
 
-
-            
             Console.ReadLine();
 
 
