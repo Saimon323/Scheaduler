@@ -4,16 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Scheduler.Model.EntityModels;
+using System.Data.Spatial;
 
 namespace Scheduler.Model.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        User GetUserById(int idUser);
-        IEnumerable<User> GetAllUsers();
-        User CreateUser(string name, string surname, string login, string password);
-        Group GetGroupById(int idGroup);
-        Group GetGroupByName(string groupName);
-        void CreateGroup(string groupName, string projectName);
     }
 }

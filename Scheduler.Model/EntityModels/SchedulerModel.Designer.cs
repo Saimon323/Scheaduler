@@ -19,12 +19,19 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("ProjectsModel", "FK_Coments_Tasks", "Tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Task), "Coments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Coment), true)]
-[assembly: EdmRelationshipAttribute("ProjectsModel", "FK_UsersGroups_Groups", "Groups", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Group), "UsersGroups", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.UsersGroup), true)]
-[assembly: EdmRelationshipAttribute("ProjectsModel", "FK_MenagersProject_Projects", "Projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Project), "MenagersProject", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.MenagersProject), true)]
-[assembly: EdmRelationshipAttribute("ProjectsModel", "FK_MenagersProject_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.User), "MenagersProject", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.MenagersProject), true)]
-[assembly: EdmRelationshipAttribute("ProjectsModel", "FK_Tasks_Projects", "Projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Project), "Tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Task), true)]
-[assembly: EdmRelationshipAttribute("ProjectsModel", "FK_UsersGroups_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.User), "UsersGroups", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.UsersGroup), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Coments_Tasks", "Tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Task), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Comment), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Coments_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.User), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Comment), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Documents_Projects", "Projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Project), "Documents", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Document), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Documents_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.User), "Documents", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Document), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Groups_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.User), "Groups", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Group), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Users_Groups", "Groups", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Scheduler.Model.EntityModels.Group), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.User), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Messages_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.User), "Messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Message), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Messages_Users1", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.User), "Messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Message), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Projects_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.User), "Projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Project), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Tasks_Projects", "Projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Project), "Tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Task), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Users_Roles", "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Role), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.User), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Tasks_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Scheduler.Model.EntityModels.User), "Tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Task), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "ProjectsToGroupsRealizations", "Groups", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Group), "Projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Project))]
 
 #endregion
 
@@ -35,32 +42,32 @@ namespace Scheduler.Model.EntityModels
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class ProjectsEntities : ObjectContext
+    public partial class SchedulerEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new ProjectsEntities object using the connection string found in the 'ProjectsEntities' section of the application configuration file.
+        /// Initializes a new SchedulerEntities object using the connection string found in the 'SchedulerEntities' section of the application configuration file.
         /// </summary>
-        public ProjectsEntities() : base("name=ProjectsEntities", "ProjectsEntities")
+        public SchedulerEntities() : base("name=SchedulerEntities", "SchedulerEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ProjectsEntities object.
+        /// Initialize a new SchedulerEntities object.
         /// </summary>
-        public ProjectsEntities(string connectionString) : base(connectionString, "ProjectsEntities")
+        public SchedulerEntities(string connectionString) : base(connectionString, "SchedulerEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new ProjectsEntities object.
+        /// Initialize a new SchedulerEntities object.
         /// </summary>
-        public ProjectsEntities(EntityConnection connection) : base(connection, "ProjectsEntities")
+        public SchedulerEntities(EntityConnection connection) : base(connection, "SchedulerEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -79,18 +86,34 @@ namespace Scheduler.Model.EntityModels
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Coment> Coments
+        public ObjectSet<Comment> Comments
         {
             get
             {
-                if ((_Coments == null))
+                if ((_Comments == null))
                 {
-                    _Coments = base.CreateObjectSet<Coment>("Coments");
+                    _Comments = base.CreateObjectSet<Comment>("Comments");
                 }
-                return _Coments;
+                return _Comments;
             }
         }
-        private ObjectSet<Coment> _Coments;
+        private ObjectSet<Comment> _Comments;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Document> Documents
+        {
+            get
+            {
+                if ((_Documents == null))
+                {
+                    _Documents = base.CreateObjectSet<Document>("Documents");
+                }
+                return _Documents;
+            }
+        }
+        private ObjectSet<Document> _Documents;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -111,18 +134,18 @@ namespace Scheduler.Model.EntityModels
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<MenagersProject> MenagersProjects
+        public ObjectSet<Message> Messages
         {
             get
             {
-                if ((_MenagersProjects == null))
+                if ((_Messages == null))
                 {
-                    _MenagersProjects = base.CreateObjectSet<MenagersProject>("MenagersProjects");
+                    _Messages = base.CreateObjectSet<Message>("Messages");
                 }
-                return _MenagersProjects;
+                return _Messages;
             }
         }
-        private ObjectSet<MenagersProject> _MenagersProjects;
+        private ObjectSet<Message> _Messages;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -139,6 +162,22 @@ namespace Scheduler.Model.EntityModels
             }
         }
         private ObjectSet<Project> _Projects;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Role> Roles
+        {
+            get
+            {
+                if ((_Roles == null))
+                {
+                    _Roles = base.CreateObjectSet<Role>("Roles");
+                }
+                return _Roles;
+            }
+        }
+        private ObjectSet<Role> _Roles;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -171,49 +210,25 @@ namespace Scheduler.Model.EntityModels
             }
         }
         private ObjectSet<User> _Users;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<UsersGroup> UsersGroups
-        {
-            get
-            {
-                if ((_UsersGroups == null))
-                {
-                    _UsersGroups = base.CreateObjectSet<UsersGroup>("UsersGroups");
-                }
-                return _UsersGroups;
-            }
-        }
-        private ObjectSet<UsersGroup> _UsersGroups;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<sysdiagrams> sysdiagrams
-        {
-            get
-            {
-                if ((_sysdiagrams == null))
-                {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagrams>("sysdiagrams");
-                }
-                return _sysdiagrams;
-            }
-        }
-        private ObjectSet<sysdiagrams> _sysdiagrams;
 
         #endregion
 
         #region AddTo Methods
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Coments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Comments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToComents(Coment coment)
+        public void AddToComments(Comment comment)
         {
-            base.AddObject("Coments", coment);
+            base.AddObject("Comments", comment);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Documents EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDocuments(Document document)
+        {
+            base.AddObject("Documents", document);
         }
     
         /// <summary>
@@ -225,11 +240,11 @@ namespace Scheduler.Model.EntityModels
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the MenagersProjects EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Messages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToMenagersProjects(MenagersProject menagersProject)
+        public void AddToMessages(Message message)
         {
-            base.AddObject("MenagersProjects", menagersProject);
+            base.AddObject("Messages", message);
         }
     
         /// <summary>
@@ -238,6 +253,14 @@ namespace Scheduler.Model.EntityModels
         public void AddToProjects(Project project)
         {
             base.AddObject("Projects", project);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Roles EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToRoles(Role role)
+        {
+            base.AddObject("Roles", role);
         }
     
         /// <summary>
@@ -255,22 +278,6 @@ namespace Scheduler.Model.EntityModels
         {
             base.AddObject("Users", user);
         }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the UsersGroups EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUsersGroups(UsersGroup usersGroup)
-        {
-            base.AddObject("UsersGroups", usersGroup);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTosysdiagrams(sysdiagrams sysdiagrams)
-        {
-            base.AddObject("sysdiagrams", sysdiagrams);
-        }
 
         #endregion
 
@@ -283,26 +290,30 @@ namespace Scheduler.Model.EntityModels
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProjectsModel", Name="Coment")]
+    [EdmEntityTypeAttribute(NamespaceName="SchedulerModel", Name="Comment")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Coment : EntityObject
+    public partial class Comment : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Coment object.
+        /// Create a new Comment object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
-        /// <param name="description">Initial value of the Description property.</param>
         /// <param name="taskId">Initial value of the TaskId property.</param>
-        public static Coment CreateComent(global::System.Int32 id, global::System.String description, global::System.Int32 taskId)
+        /// <param name="text">Initial value of the Text property.</param>
+        /// <param name="time">Initial value of the Time property.</param>
+        /// <param name="authorId">Initial value of the AuthorId property.</param>
+        public static Comment CreateComment(global::System.Int32 id, global::System.Int32 taskId, global::System.String text, global::System.DateTime time, global::System.Int32 authorId)
         {
-            Coment coment = new Coment();
-            coment.id = id;
-            coment.Description = description;
-            coment.TaskId = taskId;
-            return coment;
+            Comment comment = new Comment();
+            comment.id = id;
+            comment.TaskId = taskId;
+            comment.Text = text;
+            comment.Time = time;
+            comment.AuthorId = authorId;
+            return comment;
         }
 
         #endregion
@@ -341,30 +352,6 @@ namespace Scheduler.Model.EntityModels
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Description
-        {
-            get
-            {
-                return _Description;
-            }
-            set
-            {
-                OnDescriptionChanging(value);
-                ReportPropertyChanging("Description");
-                _Description = StructuralObject.SetValidValue(value, false, "Description");
-                ReportPropertyChanged("Description");
-                OnDescriptionChanged();
-            }
-        }
-        private global::System.String _Description;
-        partial void OnDescriptionChanging(global::System.String value);
-        partial void OnDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 TaskId
         {
             get
@@ -383,6 +370,78 @@ namespace Scheduler.Model.EntityModels
         private global::System.Int32 _TaskId;
         partial void OnTaskIdChanging(global::System.Int32 value);
         partial void OnTaskIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Text
+        {
+            get
+            {
+                return _Text;
+            }
+            set
+            {
+                OnTextChanging(value);
+                ReportPropertyChanging("Text");
+                _Text = StructuralObject.SetValidValue(value, false, "Text");
+                ReportPropertyChanged("Text");
+                OnTextChanged();
+            }
+        }
+        private global::System.String _Text;
+        partial void OnTextChanging(global::System.String value);
+        partial void OnTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Time
+        {
+            get
+            {
+                return _Time;
+            }
+            set
+            {
+                OnTimeChanging(value);
+                ReportPropertyChanging("Time");
+                _Time = StructuralObject.SetValidValue(value, "Time");
+                ReportPropertyChanged("Time");
+                OnTimeChanged();
+            }
+        }
+        private global::System.DateTime _Time;
+        partial void OnTimeChanging(global::System.DateTime value);
+        partial void OnTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AuthorId
+        {
+            get
+            {
+                return _AuthorId;
+            }
+            set
+            {
+                OnAuthorIdChanging(value);
+                ReportPropertyChanging("AuthorId");
+                _AuthorId = StructuralObject.SetValidValue(value, "AuthorId");
+                ReportPropertyChanged("AuthorId");
+                OnAuthorIdChanged();
+            }
+        }
+        private global::System.Int32 _AuthorId;
+        partial void OnAuthorIdChanging(global::System.Int32 value);
+        partial void OnAuthorIdChanged();
 
         #endregion
 
@@ -394,16 +453,16 @@ namespace Scheduler.Model.EntityModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_Coments_Tasks", "Tasks")]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Coments_Tasks", "Tasks")]
         public Task Task
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Task>("ProjectsModel.FK_Coments_Tasks", "Tasks").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Task>("SchedulerModel.FK_Coments_Tasks", "Tasks").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Task>("ProjectsModel.FK_Coments_Tasks", "Tasks").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Task>("SchedulerModel.FK_Coments_Tasks", "Tasks").Value = value;
             }
         }
         /// <summary>
@@ -415,13 +474,51 @@ namespace Scheduler.Model.EntityModels
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Task>("ProjectsModel.FK_Coments_Tasks", "Tasks");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Task>("SchedulerModel.FK_Coments_Tasks", "Tasks");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Task>("ProjectsModel.FK_Coments_Tasks", "Tasks", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Task>("SchedulerModel.FK_Coments_Tasks", "Tasks", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Coments_Users", "Users")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Coments_Users", "Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Coments_Users", "Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Coments_Users", "Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SchedulerModel.FK_Coments_Users", "Users", value);
                 }
             }
         }
@@ -433,7 +530,247 @@ namespace Scheduler.Model.EntityModels
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProjectsModel", Name="Group")]
+    [EdmEntityTypeAttribute(NamespaceName="SchedulerModel", Name="Document")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Document : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Document object.
+        /// </summary>
+        /// <param name="id">Initial value of the id property.</param>
+        /// <param name="projectId">Initial value of the ProjectId property.</param>
+        /// <param name="documentName">Initial value of the DocumentName property.</param>
+        /// <param name="documentContent">Initial value of the DocumentContent property.</param>
+        /// <param name="authorId">Initial value of the AuthorId property.</param>
+        public static Document CreateDocument(global::System.Int32 id, global::System.Int32 projectId, global::System.String documentName, global::System.String documentContent, global::System.Int32 authorId)
+        {
+            Document document = new Document();
+            document.id = id;
+            document.ProjectId = projectId;
+            document.DocumentName = documentName;
+            document.DocumentContent = documentContent;
+            document.AuthorId = authorId;
+            return document;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value, "id");
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProjectId
+        {
+            get
+            {
+                return _ProjectId;
+            }
+            set
+            {
+                OnProjectIdChanging(value);
+                ReportPropertyChanging("ProjectId");
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
+                ReportPropertyChanged("ProjectId");
+                OnProjectIdChanged();
+            }
+        }
+        private global::System.Int32 _ProjectId;
+        partial void OnProjectIdChanging(global::System.Int32 value);
+        partial void OnProjectIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DocumentName
+        {
+            get
+            {
+                return _DocumentName;
+            }
+            set
+            {
+                OnDocumentNameChanging(value);
+                ReportPropertyChanging("DocumentName");
+                _DocumentName = StructuralObject.SetValidValue(value, false, "DocumentName");
+                ReportPropertyChanged("DocumentName");
+                OnDocumentNameChanged();
+            }
+        }
+        private global::System.String _DocumentName;
+        partial void OnDocumentNameChanging(global::System.String value);
+        partial void OnDocumentNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DocumentContent
+        {
+            get
+            {
+                return _DocumentContent;
+            }
+            set
+            {
+                OnDocumentContentChanging(value);
+                ReportPropertyChanging("DocumentContent");
+                _DocumentContent = StructuralObject.SetValidValue(value, false, "DocumentContent");
+                ReportPropertyChanged("DocumentContent");
+                OnDocumentContentChanged();
+            }
+        }
+        private global::System.String _DocumentContent;
+        partial void OnDocumentContentChanging(global::System.String value);
+        partial void OnDocumentContentChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AuthorId
+        {
+            get
+            {
+                return _AuthorId;
+            }
+            set
+            {
+                OnAuthorIdChanging(value);
+                ReportPropertyChanging("AuthorId");
+                _AuthorId = StructuralObject.SetValidValue(value, "AuthorId");
+                ReportPropertyChanged("AuthorId");
+                OnAuthorIdChanged();
+            }
+        }
+        private global::System.Int32 _AuthorId;
+        partial void OnAuthorIdChanging(global::System.Int32 value);
+        partial void OnAuthorIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Documents_Projects", "Projects")]
+        public Project Project
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("SchedulerModel.FK_Documents_Projects", "Projects").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("SchedulerModel.FK_Documents_Projects", "Projects").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Project> ProjectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("SchedulerModel.FK_Documents_Projects", "Projects");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Project>("SchedulerModel.FK_Documents_Projects", "Projects", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Documents_Users", "Users")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Documents_Users", "Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Documents_Users", "Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Documents_Users", "Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SchedulerModel.FK_Documents_Users", "Users", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SchedulerModel", Name="Group")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Group : EntityObject
@@ -444,15 +781,791 @@ namespace Scheduler.Model.EntityModels
         /// Create a new Group object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="projectId">Initial value of the ProjectId property.</param>
-        public static Group CreateGroup(global::System.Int32 id, global::System.String name, global::System.Int32 projectId)
+        /// <param name="menagerId">Initial value of the MenagerId property.</param>
+        /// <param name="groupName">Initial value of the GroupName property.</param>
+        /// <param name="creationData">Initial value of the CreationData property.</param>
+        public static Group CreateGroup(global::System.Int32 id, global::System.Int32 menagerId, global::System.String groupName, global::System.DateTime creationData)
         {
             Group group = new Group();
             group.id = id;
-            group.Name = name;
-            group.ProjectId = projectId;
+            group.MenagerId = menagerId;
+            group.GroupName = groupName;
+            group.CreationData = creationData;
             return group;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value, "id");
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 MenagerId
+        {
+            get
+            {
+                return _MenagerId;
+            }
+            set
+            {
+                OnMenagerIdChanging(value);
+                ReportPropertyChanging("MenagerId");
+                _MenagerId = StructuralObject.SetValidValue(value, "MenagerId");
+                ReportPropertyChanged("MenagerId");
+                OnMenagerIdChanged();
+            }
+        }
+        private global::System.Int32 _MenagerId;
+        partial void OnMenagerIdChanging(global::System.Int32 value);
+        partial void OnMenagerIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String GroupName
+        {
+            get
+            {
+                return _GroupName;
+            }
+            set
+            {
+                OnGroupNameChanging(value);
+                ReportPropertyChanging("GroupName");
+                _GroupName = StructuralObject.SetValidValue(value, false, "GroupName");
+                ReportPropertyChanged("GroupName");
+                OnGroupNameChanged();
+            }
+        }
+        private global::System.String _GroupName;
+        partial void OnGroupNameChanging(global::System.String value);
+        partial void OnGroupNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreationData
+        {
+            get
+            {
+                return _CreationData;
+            }
+            set
+            {
+                OnCreationDataChanging(value);
+                ReportPropertyChanging("CreationData");
+                _CreationData = StructuralObject.SetValidValue(value, "CreationData");
+                ReportPropertyChanged("CreationData");
+                OnCreationDataChanged();
+            }
+        }
+        private global::System.DateTime _CreationData;
+        partial void OnCreationDataChanging(global::System.DateTime value);
+        partial void OnCreationDataChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Groups_Users", "Users")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Groups_Users", "Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Groups_Users", "Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Groups_Users", "Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SchedulerModel.FK_Groups_Users", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Users_Groups", "Users")]
+        public EntityCollection<User> Users
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SchedulerModel.FK_Users_Groups", "Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SchedulerModel.FK_Users_Groups", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "ProjectsToGroupsRealizations", "Projects")]
+        public EntityCollection<Project> Projects
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Project>("SchedulerModel.ProjectsToGroupsRealizations", "Projects");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Project>("SchedulerModel.ProjectsToGroupsRealizations", "Projects", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SchedulerModel", Name="Message")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Message : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Message object.
+        /// </summary>
+        /// <param name="id">Initial value of the id property.</param>
+        /// <param name="toUserId">Initial value of the ToUserId property.</param>
+        /// <param name="time">Initial value of the Time property.</param>
+        /// <param name="title">Initial value of the Title property.</param>
+        /// <param name="text">Initial value of the Text property.</param>
+        /// <param name="fromUserId">Initial value of the FromUserId property.</param>
+        public static Message CreateMessage(global::System.Int32 id, global::System.Int32 toUserId, global::System.DateTime time, global::System.String title, global::System.String text, global::System.Int32 fromUserId)
+        {
+            Message message = new Message();
+            message.id = id;
+            message.ToUserId = toUserId;
+            message.Time = time;
+            message.Title = title;
+            message.Text = text;
+            message.FromUserId = fromUserId;
+            return message;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value, "id");
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ToUserId
+        {
+            get
+            {
+                return _ToUserId;
+            }
+            set
+            {
+                OnToUserIdChanging(value);
+                ReportPropertyChanging("ToUserId");
+                _ToUserId = StructuralObject.SetValidValue(value, "ToUserId");
+                ReportPropertyChanged("ToUserId");
+                OnToUserIdChanged();
+            }
+        }
+        private global::System.Int32 _ToUserId;
+        partial void OnToUserIdChanging(global::System.Int32 value);
+        partial void OnToUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Time
+        {
+            get
+            {
+                return _Time;
+            }
+            set
+            {
+                OnTimeChanging(value);
+                ReportPropertyChanging("Time");
+                _Time = StructuralObject.SetValidValue(value, "Time");
+                ReportPropertyChanged("Time");
+                OnTimeChanged();
+            }
+        }
+        private global::System.DateTime _Time;
+        partial void OnTimeChanging(global::System.DateTime value);
+        partial void OnTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, false, "Title");
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Text
+        {
+            get
+            {
+                return _Text;
+            }
+            set
+            {
+                OnTextChanging(value);
+                ReportPropertyChanging("Text");
+                _Text = StructuralObject.SetValidValue(value, false, "Text");
+                ReportPropertyChanged("Text");
+                OnTextChanged();
+            }
+        }
+        private global::System.String _Text;
+        partial void OnTextChanging(global::System.String value);
+        partial void OnTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FromUserId
+        {
+            get
+            {
+                return _FromUserId;
+            }
+            set
+            {
+                OnFromUserIdChanging(value);
+                ReportPropertyChanging("FromUserId");
+                _FromUserId = StructuralObject.SetValidValue(value, "FromUserId");
+                ReportPropertyChanged("FromUserId");
+                OnFromUserIdChanged();
+            }
+        }
+        private global::System.Int32 _FromUserId;
+        partial void OnFromUserIdChanging(global::System.Int32 value);
+        partial void OnFromUserIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Messages_Users", "Users")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Messages_Users", "Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Messages_Users", "Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Messages_Users", "Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SchedulerModel.FK_Messages_Users", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Messages_Users1", "Users")]
+        public User User1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Messages_Users1", "Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Messages_Users1", "Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> User1Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Messages_Users1", "Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SchedulerModel.FK_Messages_Users1", "Users", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SchedulerModel", Name="Project")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Project : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Project object.
+        /// </summary>
+        /// <param name="id">Initial value of the id property.</param>
+        /// <param name="projectName">Initial value of the ProjectName property.</param>
+        /// <param name="budget">Initial value of the Budget property.</param>
+        /// <param name="startTime">Initial value of the StartTime property.</param>
+        /// <param name="ownerId">Initial value of the OwnerId property.</param>
+        public static Project CreateProject(global::System.Int32 id, global::System.String projectName, global::System.Double budget, global::System.DateTime startTime, global::System.Int32 ownerId)
+        {
+            Project project = new Project();
+            project.id = id;
+            project.ProjectName = projectName;
+            project.Budget = budget;
+            project.StartTime = startTime;
+            project.OwnerId = ownerId;
+            return project;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value, "id");
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ProjectName
+        {
+            get
+            {
+                return _ProjectName;
+            }
+            set
+            {
+                OnProjectNameChanging(value);
+                ReportPropertyChanging("ProjectName");
+                _ProjectName = StructuralObject.SetValidValue(value, false, "ProjectName");
+                ReportPropertyChanged("ProjectName");
+                OnProjectNameChanged();
+            }
+        }
+        private global::System.String _ProjectName;
+        partial void OnProjectNameChanging(global::System.String value);
+        partial void OnProjectNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Budget
+        {
+            get
+            {
+                return _Budget;
+            }
+            set
+            {
+                OnBudgetChanging(value);
+                ReportPropertyChanging("Budget");
+                _Budget = StructuralObject.SetValidValue(value, "Budget");
+                ReportPropertyChanged("Budget");
+                OnBudgetChanged();
+            }
+        }
+        private global::System.Double _Budget;
+        partial void OnBudgetChanging(global::System.Double value);
+        partial void OnBudgetChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime StartTime
+        {
+            get
+            {
+                return _StartTime;
+            }
+            set
+            {
+                OnStartTimeChanging(value);
+                ReportPropertyChanging("StartTime");
+                _StartTime = StructuralObject.SetValidValue(value, "StartTime");
+                ReportPropertyChanged("StartTime");
+                OnStartTimeChanged();
+            }
+        }
+        private global::System.DateTime _StartTime;
+        partial void OnStartTimeChanging(global::System.DateTime value);
+        partial void OnStartTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> StopTime
+        {
+            get
+            {
+                return _StopTime;
+            }
+            set
+            {
+                OnStopTimeChanging(value);
+                ReportPropertyChanging("StopTime");
+                _StopTime = StructuralObject.SetValidValue(value, "StopTime");
+                ReportPropertyChanged("StopTime");
+                OnStopTimeChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _StopTime;
+        partial void OnStopTimeChanging(Nullable<global::System.DateTime> value);
+        partial void OnStopTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OwnerId
+        {
+            get
+            {
+                return _OwnerId;
+            }
+            set
+            {
+                OnOwnerIdChanging(value);
+                ReportPropertyChanging("OwnerId");
+                _OwnerId = StructuralObject.SetValidValue(value, "OwnerId");
+                ReportPropertyChanged("OwnerId");
+                OnOwnerIdChanged();
+            }
+        }
+        private global::System.Int32 _OwnerId;
+        partial void OnOwnerIdChanging(global::System.Int32 value);
+        partial void OnOwnerIdChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Documents_Projects", "Documents")]
+        public EntityCollection<Document> Documents
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Document>("SchedulerModel.FK_Documents_Projects", "Documents");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Document>("SchedulerModel.FK_Documents_Projects", "Documents", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Projects_Users", "Users")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Projects_Users", "Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Projects_Users", "Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Projects_Users", "Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SchedulerModel.FK_Projects_Users", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Tasks_Projects", "Tasks")]
+        public EntityCollection<Task> Tasks
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Task>("SchedulerModel.FK_Tasks_Projects", "Tasks");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Task>("SchedulerModel.FK_Tasks_Projects", "Tasks", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "ProjectsToGroupsRealizations", "Groups")]
+        public EntityCollection<Group> Groups
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Group>("SchedulerModel.ProjectsToGroupsRealizations", "Groups");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("SchedulerModel.ProjectsToGroupsRealizations", "Groups", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SchedulerModel", Name="Role")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Role : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Role object.
+        /// </summary>
+        /// <param name="id">Initial value of the id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static Role CreateRole(global::System.Int32 id, global::System.String name)
+        {
+            Role role = new Role();
+            role.id = id;
+            role.Name = name;
+            return role;
         }
 
         #endregion
@@ -509,30 +1622,6 @@ namespace Scheduler.Model.EntityModels
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ProjectId
-        {
-            get
-            {
-                return _ProjectId;
-            }
-            set
-            {
-                OnProjectIdChanging(value);
-                ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
-                ReportPropertyChanged("ProjectId");
-                OnProjectIdChanged();
-            }
-        }
-        private global::System.Int32 _ProjectId;
-        partial void OnProjectIdChanging(global::System.Int32 value);
-        partial void OnProjectIdChanged();
 
         #endregion
 
@@ -544,18 +1633,18 @@ namespace Scheduler.Model.EntityModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_UsersGroups_Groups", "UsersGroups")]
-        public EntityCollection<UsersGroup> UsersGroups
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Users_Roles", "Users")]
+        public EntityCollection<User> Users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UsersGroup>("ProjectsModel.FK_UsersGroups_Groups", "UsersGroups");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SchedulerModel.FK_Users_Roles", "Users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UsersGroup>("ProjectsModel.FK_UsersGroups_Groups", "UsersGroups", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SchedulerModel.FK_Users_Roles", "Users", value);
                 }
             }
         }
@@ -567,481 +1656,7 @@ namespace Scheduler.Model.EntityModels
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProjectsModel", Name="MenagersProject")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class MenagersProject : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new MenagersProject object.
-        /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="projectId">Initial value of the ProjectId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        public static MenagersProject CreateMenagersProject(global::System.Int32 id, global::System.Int32 projectId, global::System.Int32 userId)
-        {
-            MenagersProject menagersProject = new MenagersProject();
-            menagersProject.id = id;
-            menagersProject.ProjectId = projectId;
-            menagersProject.UserId = userId;
-            return menagersProject;
-        }
-
-        #endregion
-
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (_id != value)
-                {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value, "id");
-                    ReportPropertyChanged("id");
-                    OnidChanged();
-                }
-            }
-        }
-        private global::System.Int32 _id;
-        partial void OnidChanging(global::System.Int32 value);
-        partial void OnidChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ProjectId
-        {
-            get
-            {
-                return _ProjectId;
-            }
-            set
-            {
-                OnProjectIdChanging(value);
-                ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
-                ReportPropertyChanged("ProjectId");
-                OnProjectIdChanged();
-            }
-        }
-        private global::System.Int32 _ProjectId;
-        partial void OnProjectIdChanging(global::System.Int32 value);
-        partial void OnProjectIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 UserId
-        {
-            get
-            {
-                return _UserId;
-            }
-            set
-            {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value, "UserId");
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
-            }
-        }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
-
-        #endregion
-
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_MenagersProject_Projects", "Projects")]
-        public Project Project
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("ProjectsModel.FK_MenagersProject_Projects", "Projects").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("ProjectsModel.FK_MenagersProject_Projects", "Projects").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Project> ProjectReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("ProjectsModel.FK_MenagersProject_Projects", "Projects");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Project>("ProjectsModel.FK_MenagersProject_Projects", "Projects", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_MenagersProject_Users", "Users")]
-        public User User
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("ProjectsModel.FK_MenagersProject_Users", "Users").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("ProjectsModel.FK_MenagersProject_Users", "Users").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> UserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("ProjectsModel.FK_MenagersProject_Users", "Users");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("ProjectsModel.FK_MenagersProject_Users", "Users", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProjectsModel", Name="Project")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Project : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Project object.
-        /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="nameProject">Initial value of the NameProject property.</param>
-        public static Project CreateProject(global::System.Int32 id, global::System.String nameProject)
-        {
-            Project project = new Project();
-            project.id = id;
-            project.NameProject = nameProject;
-            return project;
-        }
-
-        #endregion
-
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (_id != value)
-                {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value, "id");
-                    ReportPropertyChanged("id");
-                    OnidChanged();
-                }
-            }
-        }
-        private global::System.Int32 _id;
-        partial void OnidChanging(global::System.Int32 value);
-        partial void OnidChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String NameProject
-        {
-            get
-            {
-                return _NameProject;
-            }
-            set
-            {
-                OnNameProjectChanging(value);
-                ReportPropertyChanging("NameProject");
-                _NameProject = StructuralObject.SetValidValue(value, false, "NameProject");
-                ReportPropertyChanged("NameProject");
-                OnNameProjectChanged();
-            }
-        }
-        private global::System.String _NameProject;
-        partial void OnNameProjectChanging(global::System.String value);
-        partial void OnNameProjectChanged();
-
-        #endregion
-
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_MenagersProject_Projects", "MenagersProject")]
-        public EntityCollection<MenagersProject> MenagersProjects
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MenagersProject>("ProjectsModel.FK_MenagersProject_Projects", "MenagersProject");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MenagersProject>("ProjectsModel.FK_MenagersProject_Projects", "MenagersProject", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_Tasks_Projects", "Tasks")]
-        public EntityCollection<Task> Tasks
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Task>("ProjectsModel.FK_Tasks_Projects", "Tasks");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Task>("ProjectsModel.FK_Tasks_Projects", "Tasks", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProjectsModel", Name="sysdiagrams")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class sysdiagrams : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new sysdiagrams object.
-        /// </summary>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="principal_id">Initial value of the principal_id property.</param>
-        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
-        public static sysdiagrams Createsysdiagrams(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
-        {
-            sysdiagrams sysdiagrams = new sysdiagrams();
-            sysdiagrams.name = name;
-            sysdiagrams.principal_id = principal_id;
-            sysdiagrams.diagram_id = diagram_id;
-            return sysdiagrams;
-        }
-
-        #endregion
-
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false, "name");
-                ReportPropertyChanged("name");
-                OnnameChanged();
-            }
-        }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 principal_id
-        {
-            get
-            {
-                return _principal_id;
-            }
-            set
-            {
-                Onprincipal_idChanging(value);
-                ReportPropertyChanging("principal_id");
-                _principal_id = StructuralObject.SetValidValue(value, "principal_id");
-                ReportPropertyChanged("principal_id");
-                Onprincipal_idChanged();
-            }
-        }
-        private global::System.Int32 _principal_id;
-        partial void Onprincipal_idChanging(global::System.Int32 value);
-        partial void Onprincipal_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 diagram_id
-        {
-            get
-            {
-                return _diagram_id;
-            }
-            set
-            {
-                if (_diagram_id != value)
-                {
-                    Ondiagram_idChanging(value);
-                    ReportPropertyChanging("diagram_id");
-                    _diagram_id = StructuralObject.SetValidValue(value, "diagram_id");
-                    ReportPropertyChanged("diagram_id");
-                    Ondiagram_idChanged();
-                }
-            }
-        }
-        private global::System.Int32 _diagram_id;
-        partial void Ondiagram_idChanging(global::System.Int32 value);
-        partial void Ondiagram_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> version
-        {
-            get
-            {
-                return _version;
-            }
-            set
-            {
-                OnversionChanging(value);
-                ReportPropertyChanging("version");
-                _version = StructuralObject.SetValidValue(value, "version");
-                ReportPropertyChanged("version");
-                OnversionChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _version;
-        partial void OnversionChanging(Nullable<global::System.Int32> value);
-        partial void OnversionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.Byte[] definition
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_definition);
-            }
-            set
-            {
-                OndefinitionChanging(value);
-                ReportPropertyChanging("definition");
-                _definition = StructuralObject.SetValidValue(value, true, "definition");
-                ReportPropertyChanged("definition");
-                OndefinitionChanged();
-            }
-        }
-        private global::System.Byte[] _definition;
-        partial void OndefinitionChanging(global::System.Byte[] value);
-        partial void OndefinitionChanged();
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProjectsModel", Name="Task")]
+    [EdmEntityTypeAttribute(NamespaceName="SchedulerModel", Name="Task")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Task : EntityObject
@@ -1052,16 +1667,18 @@ namespace Scheduler.Model.EntityModels
         /// Create a new Task object.
         /// </summary>
         /// <param name="id">Initial value of the id property.</param>
-        /// <param name="projectId">Initial value of the ProjectId property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="startTime">Initial value of the StartTime property.</param>
         /// <param name="taskName">Initial value of the TaskName property.</param>
-        public static Task CreateTask(global::System.Int32 id, global::System.Int32 projectId, global::System.Int32 userId, global::System.String taskName)
+        /// <param name="hours">Initial value of the Hours property.</param>
+        /// <param name="projectId">Initial value of the ProjectId property.</param>
+        public static Task CreateTask(global::System.Int32 id, global::System.DateTime startTime, global::System.String taskName, global::System.Int32 hours, global::System.Int32 projectId)
         {
             Task task = new Task();
             task.id = id;
-            task.ProjectId = projectId;
-            task.UserId = userId;
+            task.StartTime = startTime;
             task.TaskName = taskName;
+            task.Hours = hours;
+            task.ProjectId = projectId;
             return task;
         }
 
@@ -1099,50 +1716,74 @@ namespace Scheduler.Model.EntityModels
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 ProjectId
+        public Nullable<global::System.Int32> WorkerId
         {
             get
             {
-                return _ProjectId;
+                return _WorkerId;
             }
             set
             {
-                OnProjectIdChanging(value);
-                ReportPropertyChanging("ProjectId");
-                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
-                ReportPropertyChanged("ProjectId");
-                OnProjectIdChanged();
+                OnWorkerIdChanging(value);
+                ReportPropertyChanging("WorkerId");
+                _WorkerId = StructuralObject.SetValidValue(value, "WorkerId");
+                ReportPropertyChanged("WorkerId");
+                OnWorkerIdChanged();
             }
         }
-        private global::System.Int32 _ProjectId;
-        partial void OnProjectIdChanging(global::System.Int32 value);
-        partial void OnProjectIdChanged();
+        private Nullable<global::System.Int32> _WorkerId;
+        partial void OnWorkerIdChanging(Nullable<global::System.Int32> value);
+        partial void OnWorkerIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.DateTime StartTime
         {
             get
             {
-                return _UserId;
+                return _StartTime;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value, "UserId");
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnStartTimeChanging(value);
+                ReportPropertyChanging("StartTime");
+                _StartTime = StructuralObject.SetValidValue(value, "StartTime");
+                ReportPropertyChanged("StartTime");
+                OnStartTimeChanged();
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.DateTime _StartTime;
+        partial void OnStartTimeChanging(global::System.DateTime value);
+        partial void OnStartTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> StopTime
+        {
+            get
+            {
+                return _StopTime;
+            }
+            set
+            {
+                OnStopTimeChanging(value);
+                ReportPropertyChanging("StopTime");
+                _StopTime = StructuralObject.SetValidValue(value, "StopTime");
+                ReportPropertyChanged("StopTime");
+                OnStopTimeChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _StopTime;
+        partial void OnStopTimeChanging(Nullable<global::System.DateTime> value);
+        partial void OnStopTimeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1167,6 +1808,54 @@ namespace Scheduler.Model.EntityModels
         private global::System.String _TaskName;
         partial void OnTaskNameChanging(global::System.String value);
         partial void OnTaskNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Hours
+        {
+            get
+            {
+                return _Hours;
+            }
+            set
+            {
+                OnHoursChanging(value);
+                ReportPropertyChanging("Hours");
+                _Hours = StructuralObject.SetValidValue(value, "Hours");
+                ReportPropertyChanged("Hours");
+                OnHoursChanged();
+            }
+        }
+        private global::System.Int32 _Hours;
+        partial void OnHoursChanging(global::System.Int32 value);
+        partial void OnHoursChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ProjectId
+        {
+            get
+            {
+                return _ProjectId;
+            }
+            set
+            {
+                OnProjectIdChanging(value);
+                ReportPropertyChanging("ProjectId");
+                _ProjectId = StructuralObject.SetValidValue(value, "ProjectId");
+                ReportPropertyChanged("ProjectId");
+                OnProjectIdChanged();
+            }
+        }
+        private global::System.Int32 _ProjectId;
+        partial void OnProjectIdChanging(global::System.Int32 value);
+        partial void OnProjectIdChanged();
 
         #endregion
 
@@ -1178,18 +1867,18 @@ namespace Scheduler.Model.EntityModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_Coments_Tasks", "Coments")]
-        public EntityCollection<Coment> Coments
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Coments_Tasks", "Comments")]
+        public EntityCollection<Comment> Comments
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Coment>("ProjectsModel.FK_Coments_Tasks", "Coments");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("SchedulerModel.FK_Coments_Tasks", "Comments");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Coment>("ProjectsModel.FK_Coments_Tasks", "Coments", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("SchedulerModel.FK_Coments_Tasks", "Comments", value);
                 }
             }
         }
@@ -1200,16 +1889,16 @@ namespace Scheduler.Model.EntityModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_Tasks_Projects", "Projects")]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Tasks_Projects", "Projects")]
         public Project Project
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("ProjectsModel.FK_Tasks_Projects", "Projects").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("SchedulerModel.FK_Tasks_Projects", "Projects").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("ProjectsModel.FK_Tasks_Projects", "Projects").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("SchedulerModel.FK_Tasks_Projects", "Projects").Value = value;
             }
         }
         /// <summary>
@@ -1221,13 +1910,51 @@ namespace Scheduler.Model.EntityModels
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("ProjectsModel.FK_Tasks_Projects", "Projects");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Project>("SchedulerModel.FK_Tasks_Projects", "Projects");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Project>("ProjectsModel.FK_Tasks_Projects", "Projects", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Project>("SchedulerModel.FK_Tasks_Projects", "Projects", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Tasks_Users", "Users")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Tasks_Users", "Users").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Tasks_Users", "Users").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SchedulerModel.FK_Tasks_Users", "Users");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SchedulerModel.FK_Tasks_Users", "Users", value);
                 }
             }
         }
@@ -1239,7 +1966,7 @@ namespace Scheduler.Model.EntityModels
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProjectsModel", Name="User")]
+    [EdmEntityTypeAttribute(NamespaceName="SchedulerModel", Name="User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class User : EntityObject
@@ -1254,7 +1981,8 @@ namespace Scheduler.Model.EntityModels
         /// <param name="surname">Initial value of the Surname property.</param>
         /// <param name="login">Initial value of the Login property.</param>
         /// <param name="password">Initial value of the Password property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String name, global::System.String surname, global::System.String login, global::System.String password)
+        /// <param name="roleId">Initial value of the RoleId property.</param>
+        public static User CreateUser(global::System.Int32 id, global::System.String name, global::System.String surname, global::System.String login, global::System.String password, global::System.Int32 roleId)
         {
             User user = new User();
             user.id = id;
@@ -1262,6 +1990,7 @@ namespace Scheduler.Model.EntityModels
             user.Surname = surname;
             user.Login = login;
             user.Password = password;
+            user.RoleId = roleId;
             return user;
         }
 
@@ -1391,145 +2120,37 @@ namespace Scheduler.Model.EntityModels
         private global::System.String _Password;
         partial void OnPasswordChanging(global::System.String value);
         partial void OnPasswordChanged();
-
-        #endregion
-
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_MenagersProject_Users", "MenagersProject")]
-        public EntityCollection<MenagersProject> MenagersProjects
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MenagersProject>("ProjectsModel.FK_MenagersProject_Users", "MenagersProject");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MenagersProject>("ProjectsModel.FK_MenagersProject_Users", "MenagersProject", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_UsersGroups_Users", "UsersGroups")]
-        public EntityCollection<UsersGroup> UsersGroups
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UsersGroup>("ProjectsModel.FK_UsersGroups_Users", "UsersGroups");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UsersGroup>("ProjectsModel.FK_UsersGroups_Users", "UsersGroups", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="ProjectsModel", Name="UsersGroup")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class UsersGroup : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new UsersGroup object.
-        /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="userId">Initial value of the UserId property.</param>
-        /// <param name="groupId">Initial value of the GroupId property.</param>
-        public static UsersGroup CreateUsersGroup(global::System.Int32 id, global::System.Int32 userId, global::System.Int32 groupId)
-        {
-            UsersGroup usersGroup = new UsersGroup();
-            usersGroup.id = id;
-            usersGroup.UserId = userId;
-            usersGroup.GroupId = groupId;
-            return usersGroup;
-        }
-
-        #endregion
-
-        #region Simple Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (_id != value)
-                {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value, "id");
-                    ReportPropertyChanged("id");
-                    OnidChanged();
-                }
-            }
-        }
-        private global::System.Int32 _id;
-        partial void OnidChanging(global::System.Int32 value);
-        partial void OnidChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 UserId
+        public global::System.Int32 RoleId
         {
             get
             {
-                return _UserId;
+                return _RoleId;
             }
             set
             {
-                OnUserIdChanging(value);
-                ReportPropertyChanging("UserId");
-                _UserId = StructuralObject.SetValidValue(value, "UserId");
-                ReportPropertyChanged("UserId");
-                OnUserIdChanged();
+                OnRoleIdChanging(value);
+                ReportPropertyChanging("RoleId");
+                _RoleId = StructuralObject.SetValidValue(value, "RoleId");
+                ReportPropertyChanged("RoleId");
+                OnRoleIdChanged();
             }
         }
-        private global::System.Int32 _UserId;
-        partial void OnUserIdChanging(global::System.Int32 value);
-        partial void OnUserIdChanged();
+        private global::System.Int32 _RoleId;
+        partial void OnRoleIdChanging(global::System.Int32 value);
+        partial void OnRoleIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 GroupId
+        public Nullable<global::System.Int32> GroupId
         {
             get
             {
@@ -1544,8 +2165,8 @@ namespace Scheduler.Model.EntityModels
                 OnGroupIdChanged();
             }
         }
-        private global::System.Int32 _GroupId;
-        partial void OnGroupIdChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _GroupId;
+        partial void OnGroupIdChanging(Nullable<global::System.Int32> value);
         partial void OnGroupIdChanged();
 
         #endregion
@@ -1558,16 +2179,82 @@ namespace Scheduler.Model.EntityModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_UsersGroups_Groups", "Groups")]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Coments_Users", "Comments")]
+        public EntityCollection<Comment> Comments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Comment>("SchedulerModel.FK_Coments_Users", "Comments");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Comment>("SchedulerModel.FK_Coments_Users", "Comments", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Documents_Users", "Documents")]
+        public EntityCollection<Document> Documents
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Document>("SchedulerModel.FK_Documents_Users", "Documents");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Document>("SchedulerModel.FK_Documents_Users", "Documents", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Groups_Users", "Groups")]
+        public EntityCollection<Group> Groups
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Group>("SchedulerModel.FK_Groups_Users", "Groups");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Group>("SchedulerModel.FK_Groups_Users", "Groups", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Users_Groups", "Groups")]
         public Group Group
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("ProjectsModel.FK_UsersGroups_Groups", "Groups").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("SchedulerModel.FK_Users_Groups", "Groups").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("ProjectsModel.FK_UsersGroups_Groups", "Groups").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("SchedulerModel.FK_Users_Groups", "Groups").Value = value;
             }
         }
         /// <summary>
@@ -1579,13 +2266,13 @@ namespace Scheduler.Model.EntityModels
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("ProjectsModel.FK_UsersGroups_Groups", "Groups");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("SchedulerModel.FK_Users_Groups", "Groups");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Group>("ProjectsModel.FK_UsersGroups_Groups", "Groups", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Group>("SchedulerModel.FK_Users_Groups", "Groups", value);
                 }
             }
         }
@@ -1596,16 +2283,82 @@ namespace Scheduler.Model.EntityModels
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("ProjectsModel", "FK_UsersGroups_Users", "Users")]
-        public User User
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Messages_Users", "Messages")]
+        public EntityCollection<Message> Messages
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("ProjectsModel.FK_UsersGroups_Users", "Users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Message>("SchedulerModel.FK_Messages_Users", "Messages");
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("ProjectsModel.FK_UsersGroups_Users", "Users").Value = value;
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Message>("SchedulerModel.FK_Messages_Users", "Messages", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Messages_Users1", "Messages")]
+        public EntityCollection<Message> Messages1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Message>("SchedulerModel.FK_Messages_Users1", "Messages");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Message>("SchedulerModel.FK_Messages_Users1", "Messages", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Projects_Users", "Projects")]
+        public EntityCollection<Project> Projects
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Project>("SchedulerModel.FK_Projects_Users", "Projects");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Project>("SchedulerModel.FK_Projects_Users", "Projects", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Users_Roles", "Roles")]
+        public Role Role
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("SchedulerModel.FK_Users_Roles", "Roles").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("SchedulerModel.FK_Users_Roles", "Roles").Value = value;
             }
         }
         /// <summary>
@@ -1613,17 +2366,39 @@ namespace Scheduler.Model.EntityModels
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> UserReference
+        public EntityReference<Role> RoleReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("ProjectsModel.FK_UsersGroups_Users", "Users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("SchedulerModel.FK_Users_Roles", "Roles");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("ProjectsModel.FK_UsersGroups_Users", "Users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Role>("SchedulerModel.FK_Users_Roles", "Roles", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Tasks_Users", "Tasks")]
+        public EntityCollection<Task> Tasks
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Task>("SchedulerModel.FK_Tasks_Users", "Tasks");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Task>("SchedulerModel.FK_Tasks_Users", "Tasks", value);
                 }
             }
         }

@@ -9,20 +9,20 @@ using System.Data.Spatial;
 
 namespace Scheduler.Model.Repositories
 {
-    public class ProjectRepository : BaseRepository<Scheduler.Model.EntityModels.Project, SchedulerEntities>, IProjectRepository, IDisposable
+    public class TaskRepository : BaseRepository<Scheduler.Model.EntityModels.Task, SchedulerEntities>, ITaskRepository, IDisposable
     {
         #region BaseRepository
 
-        public override void Add(Project project)
+        public override void Add(Scheduler.Model.EntityModels.Task task)
         {
-            Entities.AddToProjects(project);
+            Entities.AddToTasks(task);
         }
 
-        public override IQueryable<Project> Items
+        public override IQueryable<Scheduler.Model.EntityModels.Task> Items
         {
             get
             {
-                return Entities.Projects;
+                return Entities.Tasks;
             }
         }
 

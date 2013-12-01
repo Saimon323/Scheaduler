@@ -8,7 +8,7 @@ using System.Data.Spatial;
 
 namespace Scheduler.Model.Repositories.Interfaces
 {
-    public interface IProjectRepository
+    public interface IGroupRepository
     {
     }
 }
