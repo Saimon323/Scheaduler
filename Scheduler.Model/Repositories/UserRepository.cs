@@ -87,6 +87,65 @@ namespace Scheduler.Model.Repositories
             Entities.SaveChanges();
         }
 
+        public void addUserToGroup(string Login, string GroupName)
+        {
+            User userexist = getUserByLogin(Login);
+
+            if (userexist == null)
+                return;
+
+            GroupRepository grouprepo = new GroupRepository();
+
+            Group groupexist = grouprepo.getGroupByGroupName(GroupName);
+
+            if (groupexist == null)
+                return;
+
+            if (userexist.id == groupexist.MenagerId)
+                return;
+
+            userexist.GroupId = groupexist.id;
+            Entities.SaveChanges();
+        } //sprawdzic czy dodawany user nie jest menagerem
+
+        public void deleteUserFromGroup(string Login)
+        {
+            User userexist = getUserByLogin(Login);
+
+            if (userexist == null)
+                return;
+
+            userexist.GroupId = null;
+            Entities.SaveChanges();
+        }
+
+        public void createMassage(string ToUserLogin, string FromUserLogin, string Title, string Text)
+        {
+            User fromUser = getUserByLogin(FromUserLogin);
+            if(fromUser == null)
+                return;
+
+            User toUser = getUserByLogin(ToUserLogin);
+            
+            if(toUser == null)
+                return;
+
+            DateTime today = DateTime.UtcNow;
+            Message message = Message.CreateMessage(autoIncrementId, toUser.id, today, Title, Text, fromUser.id);
+            Entities.AddToMessages(message);
+            Entities.SaveChanges();
+        }
+
+        public void deleteUser(string Login)
+        {
+            User userexist = getUserByLogin(Login);
+
+            if (userexist == null)
+                return;
+
+
+        } //uzgodnic warunki
+
         public Role getRoleById(int id)
         {
             return Entities.Roles.Where(x => x.id.Equals(id)).FirstOrDefault();

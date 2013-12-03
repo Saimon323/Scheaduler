@@ -27,5 +27,19 @@ namespace Scheduler.Model.Repositories
         }
 
         #endregion
+
+        public Project getProjectById(int id)
+        {
+            return Items.Where(x => x.id.Equals(id)).FirstOrDefault();
+        }
+
+        public Project getProjectByName(string ProjectName)
+        {
+            return Items.Where(x => x.ProjectName.Equals(ProjectName)).FirstOrDefault();
+        }
+
+        public void addNewProject()//dopisac logike
+        {
+        }    
     }
 }

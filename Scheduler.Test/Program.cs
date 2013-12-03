@@ -86,10 +86,11 @@ namespace Scheduler.Test
            // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker");
             //UserRepo.addNewUser("Hiro", "Nakamura", "Django", "123", "Worker", );
             //UserRepo.addNewUser("Pitter", "Petrelli", "Ojson", "123", "Menager");
-            GroupRepo.addNewGroups("Ojson", "Sos", creat);
+            //GroupRepo.addNewGroups("Ojson", "Sos", creat);
+            //UserRepo.addUserToGroup("Kavinsky", "Sos");
 
 
-
+            Console.WriteLine("ok");
             Console.ReadLine();
 
 
