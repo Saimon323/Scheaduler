@@ -83,12 +83,16 @@ namespace Scheduler.Test
             DateTime creat = new DateTime(2012, 11, 10);
             //UserRepo.addNewRole("Worker");
            // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker");
-           // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker");
-            //UserRepo.addNewUser("Hiro", "Nakamura", "Django", "123", "Worker", );
+           // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker", "Sos");
+           // UserRepo.addNewUser("Harry", "Osborn", "Goblin", "123", "Worker", "Sos");
+            //UserRepo.addNewUser("Hiro", "Nakamura", "Django", "123", "Worker",1);
             //UserRepo.addNewUser("Pitter", "Petrelli", "Ojson", "123", "Menager");
             //GroupRepo.addNewGroups("Ojson", "Sos", creat);
             //UserRepo.addUserToGroup("Kavinsky", "Sos");
-
+           // UserRepo.addMassage("Goblin", "Kavinsky", "Witaj", "Mam nadzieje ze bedzie nam sie milo pracowalo");
+            //GroupRepo.deleteGroup("Sos");
+            //UserRepo.deleteUser("Ojson");
+            UserRepo.deleteUser("Goblin");
 
             Console.WriteLine("ok");
             Console.ReadLine();

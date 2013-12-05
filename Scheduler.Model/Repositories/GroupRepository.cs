@@ -61,5 +61,15 @@ namespace Scheduler.Model.Repositories
             Entities.AddToGroups(group);
             Entities.SaveChanges();
         }
+
+        public void deleteGroup(string GroupName)
+        {
+            Group groupExist = getGroupByGroupName(GroupName);
+            if (groupExist == null)
+                return;
+
+            Entities.DeleteObject(groupExist);
+            Entities.SaveChanges();
+        }
     }
 }

@@ -56,6 +56,29 @@ namespace Scheduler.Model.Repositories
 
         }
 
+        public Message getMessagesById(int id)
+        {
+            return Entities.Messages.Where(x => x.id.Equals(id)).FirstOrDefault();
+        }
+
+        public IEnumerable<Message> getAllMessageToUser(string Login)
+        {
+            User userExist = getUserByLogin(Login);
+            if (userExist == null)
+                return null;
+
+            return Entities.Messages.Where(x => x.ToUserId.Equals(userExist.id));
+        }
+
+        public IEnumerable<Message> getAllMessageFromUser(string Login)
+        {
+            User userExist = getUserByLogin(Login);
+            if (userExist == null)
+                return null;
+
+            return Entities.Messages.Where(x => x.FromUserId.Equals(userExist.id));
+        }
+
         public void addNewUser(string Name, string Surname, string Login, string Password, string Role)
         {
             User existUser = getUserByLogin(Login);
@@ -71,17 +94,23 @@ namespace Scheduler.Model.Repositories
             Entities.SaveChanges();
         }
 
-        public void addNewUser(string Name, string Surname, string Login, string Password, string Role, int GroupId)
+        public void addNewUser(string Name, string Surname, string Login, string Password, string Role, string GroupName)
         {
             User existUser = getUserByLogin(Login);
             if (existUser != null)
                 return;
 
             Role existRole = getRoleByName(Role);
-            if (existRole != null)
+            if (existRole == null)
                 return;
 
-            User user = new User(Name, Surname, Login, Password, existRole.id, GroupId);
+            IGroupRepository groupRpository = new GroupRepository();
+            Group groupExist = groupRpository.getGroupByGroupName(GroupName);
+            
+            if (groupExist == null)
+                return;
+
+            User user = new User(Name, Surname, Login, Password, existRole.id, groupExist.id);
 
             Entities.AddToUsers(user);
             Entities.SaveChanges();
@@ -92,6 +121,10 @@ namespace Scheduler.Model.Repositories
             User userexist = getUserByLogin(Login);
 
             if (userexist == null)
+                return;
+
+            Role role = getRoleByName("Worker");
+            if (role.id != userexist.RoleId)
                 return;
 
             GroupRepository grouprepo = new GroupRepository();
@@ -106,7 +139,24 @@ namespace Scheduler.Model.Repositories
 
             userexist.GroupId = groupexist.id;
             Entities.SaveChanges();
-        } //sprawdzic czy dodawany user nie jest menagerem
+        }
+
+        public void addMassage(string ToUserLogin, string FromUserLogin, string Title, string Text)
+        {
+            User fromUser = getUserByLogin(FromUserLogin);
+            if (fromUser == null)
+                return;
+
+            User toUser = getUserByLogin(ToUserLogin);
+
+            if (toUser == null)
+                return;
+
+            DateTime today = DateTime.UtcNow;
+            Message message = Message.CreateMessage(autoIncrementId, toUser.id, today, Title, Text, fromUser.id);
+            Entities.AddToMessages(message);
+            Entities.SaveChanges();
+        }
 
         public void deleteUserFromGroup(string Login)
         {
@@ -119,23 +169,6 @@ namespace Scheduler.Model.Repositories
             Entities.SaveChanges();
         }
 
-        public void createMassage(string ToUserLogin, string FromUserLogin, string Title, string Text)
-        {
-            User fromUser = getUserByLogin(FromUserLogin);
-            if(fromUser == null)
-                return;
-
-            User toUser = getUserByLogin(ToUserLogin);
-            
-            if(toUser == null)
-                return;
-
-            DateTime today = DateTime.UtcNow;
-            Message message = Message.CreateMessage(autoIncrementId, toUser.id, today, Title, Text, fromUser.id);
-            Entities.AddToMessages(message);
-            Entities.SaveChanges();
-        }
-
         public void deleteUser(string Login)
         {
             User userexist = getUserByLogin(Login);
@@ -143,8 +176,33 @@ namespace Scheduler.Model.Repositories
             if (userexist == null)
                 return;
 
+            IEnumerable<Message> toUser = getAllMessageToUser(userexist.Login);
+            IEnumerable<Message> fromUser = getAllMessageFromUser(userexist.Login);
 
-        } //uzgodnic warunki
+            foreach (var to in toUser)
+            {
+                Entities.DeleteObject(to);
+            }
+
+            foreach (var from in toUser)
+            {
+                Entities.DeleteObject(from);
+            }
+
+            Entities.DeleteObject(userexist);
+            Entities.SaveChanges();
+
+        }
+
+        public void deleteMessages(int id)
+        {
+            Message messageexist = getMessagesById(id);
+            if (messageexist == null)
+                return;
+
+            Entities.DeleteObject(messageexist);
+            Entities.SaveChanges();
+        }
 
         public Role getRoleById(int id)
         {
