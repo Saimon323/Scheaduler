@@ -56,6 +56,22 @@ namespace Scheduler.Model.Repositories
 
         }
 
+        public User getOwnerByLogin(string Login, string RolaName)
+        {
+            Role existRole = getRoleByName(RolaName);
+            if (existRole == null)
+                return null;
+
+
+            User existUser = Items.Where(x => x.Login.Equals(Login) && x.RoleId.Equals(existRole.id)).FirstOrDefault();
+
+            if (existUser == null)
+                return null;
+            else
+                return existUser;
+
+        }
+
         public Message getMessagesById(int id)
         {
             return Entities.Messages.Where(x => x.id.Equals(id)).FirstOrDefault();
@@ -226,6 +242,22 @@ namespace Scheduler.Model.Repositories
             Entities.SaveChanges();
 
 
+        }
+
+        public User getUserByGroupId(int idGroup)
+        {
+            return Items.Where(x => x.GroupId.Equals(idGroup)).FirstOrDefault();
+        }
+
+        public List<User> getUserListByGroupId(int idGroup)
+        {
+            List<User> userList = new List<User>();
+            var listUser = Items.Where(x => x.GroupId.Equals(idGroup));
+            foreach (var single in listUser)
+            {
+                userList.Add(single);
+            }
+            return userList;
         }
     }
 }

@@ -92,7 +92,9 @@ namespace Scheduler.Test
            // UserRepo.addMassage("Goblin", "Kavinsky", "Witaj", "Mam nadzieje ze bedzie nam sie milo pracowalo");
             //GroupRepo.deleteGroup("Sos");
             //UserRepo.deleteUser("Ojson");
-            UserRepo.deleteUser("Goblin");
+           // UserRepo.deleteUser("Goblin");
+            //GroupRepo.addNewGroups("Ojson", "sos2", creat);
+            GroupRepo.deleteGroup("Sos");
 
             Console.WriteLine("ok");
             Console.ReadLine();

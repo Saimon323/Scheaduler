@@ -15,5 +15,11 @@ namespace Scheduler.Model.Repositories.Interfaces
         Group getGroupByGroupName(string GroupName);
         void addNewGroups(string Login, string GroupName, DateTime CreationDate);
         void deleteGroup(string GroupName);
+        void addRealization(string ProjectName, string GroupName);
+        void deleteRealization(string ProjectName, string GroupName);
+        bool checkRealization(string ProjectName, string GroupName);
+        List<Group> getAllGroupWorkingInProject(string ProjectName);
+        List<User> getUserListInGroup(string GroupName);
+        User getMenagerById(int MenagerId);
     }
 }

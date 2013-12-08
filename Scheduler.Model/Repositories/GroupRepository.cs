@@ -28,7 +28,8 @@ namespace Scheduler.Model.Repositories
 
         #endregion
 
-        UserRepository UserRepo = new UserRepository();
+        IUserRepository UserRepo = new UserRepository();
+        IProjectRepository ProjectRepo = new ProjectRepository();
         string RoleName = "Menager";
         int autoIncrementId = 0;
 
@@ -40,6 +41,29 @@ namespace Scheduler.Model.Repositories
         public IEnumerable<Group> getGroupByMenagerId(int MenagerId)
         {
             return Items.Where(x => x.MenagerId.Equals(MenagerId));
+        }
+
+        public List<Group> getAllGroupWorkingInProject(string ProjectName)
+        {
+            Project projectExist = ProjectRepo.getProjectByName(ProjectName);
+
+            if (projectExist == null)
+                return null;
+
+            IEnumerable<ProjectsToGroupsRealization> realizationsList = Entities.ProjectsToGroupsRealizations.Where(x => x.ProjectId.Equals(projectExist.id));
+            
+            if(realizationsList == null)
+                return null;
+            
+            List<Group> groupList = new List<Group>();
+
+            foreach(var real in realizationsList)
+            {
+                Group group = getGroupById(real.GroupId);
+                groupList.Add(group);
+            }
+
+            return groupList;
         }
 
         public Group getGroupByGroupName(string GroupName)
@@ -70,6 +94,89 @@ namespace Scheduler.Model.Repositories
 
             Entities.DeleteObject(groupExist);
             Entities.SaveChanges();
+        }
+
+        public void addRealization(string ProjectName, string GroupName)
+        {
+            Project projectExist = ProjectRepo.getProjectByName(ProjectName);
+            
+            if (projectExist == null)
+                return;
+
+            Group groupExist = getGroupByGroupName(GroupName);
+
+            if (groupExist == null)
+                return;
+
+            ProjectsToGroupsRealization realization = Entities.ProjectsToGroupsRealizations.Where(x => x.GroupId.Equals(groupExist.id) && x.ProjectId.Equals(projectExist.id)).FirstOrDefault();
+            if (realization != null)
+                return;
+
+            realization = ProjectsToGroupsRealization.CreateProjectsToGroupsRealization(projectExist.id, groupExist.id, autoIncrementId);
+            Entities.AddToProjectsToGroupsRealizations(realization);
+            Entities.SaveChanges();
+        }
+
+        public void deleteRealization(string ProjectName, string GroupName)
+        {
+            Project projectExist = ProjectRepo.getProjectByName(ProjectName);
+
+            if (projectExist == null)
+                return;
+
+            Group groupExist = getGroupByGroupName(GroupName);
+
+            if (groupExist == null)
+                return;
+
+            ProjectsToGroupsRealization realization = Entities.ProjectsToGroupsRealizations.Where(x => x.GroupId.Equals(groupExist.id) && x.ProjectId.Equals(projectExist.id)).FirstOrDefault();
+            if (realization == null)
+                return;
+
+            Entities.DeleteObject(realization);
+            Entities.SaveChanges();
+        }
+
+        public bool checkRealization(string ProjectName, string GroupName)
+        {
+            Project projectExist = ProjectRepo.getProjectByName(ProjectName);
+
+            if (projectExist == null)
+                return false;
+
+            Group groupExist = getGroupByGroupName(GroupName);
+
+            if (groupExist == null)
+                return false;
+
+            ProjectsToGroupsRealization realization = Entities.ProjectsToGroupsRealizations.Where(x => x.GroupId.Equals(groupExist.id) && x.ProjectId.Equals(projectExist.id)).FirstOrDefault();
+            if (realization == null)
+                return false;
+            else
+                return true;
+
+
+        }
+
+        public List<User> getUserListInGroup(string GroupName)
+        {
+            Group groupExist = getGroupByGroupName(GroupName);
+
+            if (groupExist == null)
+                return null;
+
+            List<User> userList = UserRepo.getUserListByGroupId(groupExist.id);
+
+            if (userList == null)
+                return null;
+            else
+                return userList;
+        }
+
+        public User getMenagerById(int MenagerId)
+        {
+            User menager = UserRepo.getUserById(MenagerId);
+            return menager;
         }
     }
 }
