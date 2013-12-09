@@ -28,6 +28,7 @@ namespace Scheduler.Model.Repositories
 
         #endregion
 
+        int autoIncrementId = 0;
         IUserRepository userRepo = new UserRepository();
         IProjectRepository projectRepo = new ProjectRepository();
         IGroupRepository groupRepo = new GroupRepository();
@@ -149,6 +150,60 @@ namespace Scheduler.Model.Repositories
             taskExist.WorkerId = userExist.id;
             Entities.SaveChanges();
 
+        }
+
+        public void addTaskStopTime(string ProjectName, string TaskName, DateTime StopTime)
+        {
+            Project projectExist = projectRepo.getProjectByName(ProjectName);
+
+            if (projectExist == null)
+                return;
+
+            Scheduler.Model.EntityModels.Task taskExist = getTaskByNameAndProjectName(projectExist.ProjectName, TaskName);
+
+            if (taskExist == null)
+                return;
+
+            taskExist.StopTime = StopTime;
+            Entities.SaveChanges();
+        }
+
+        public void deleteTask(string ProjectName, string TaskName)
+        {
+            Project projectExist = projectRepo.getProjectByName(ProjectName);
+
+            if (projectExist == null)
+                return;
+
+            Scheduler.Model.EntityModels.Task taskExist = getTaskByNameAndProjectName(projectExist.ProjectName, TaskName);
+
+            if (taskExist == null)
+                return;
+
+            Entities.DeleteObject(taskExist);
+            Entities.SaveChanges();
+        }
+
+        public void addNewComment(string ProjectName, string TaskName, string Text, DateTime Time, string Login)
+        {
+            Project projectExist = projectRepo.getProjectByName(ProjectName);
+
+            if (projectExist == null)
+                return;
+
+            Scheduler.Model.EntityModels.Task taskExist = getTaskByNameAndProjectName(projectExist.ProjectName, TaskName);
+
+            if (taskExist == null)
+                return;
+
+            User userExist = userRepo.getUserByLogin(Login);
+
+            if (userExist == null)
+                return;
+
+            Comment comment = Comment.CreateComment(autoIncrementId, taskExist.id, Text, Time, userExist.id);
+            Entities.AddToComments(comment);
+            Entities.SaveChanges();
         }
 
         public bool checkRealization(string ProjectName, string Login)
