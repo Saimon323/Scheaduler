@@ -29,9 +29,9 @@ namespace Scheduler.Model.Repositories
         #endregion
 
         int autoIncrementId = 0;
-        IUserRepository userRepo = new UserRepository();
-        IProjectRepository projectRepo = new ProjectRepository();
-        IGroupRepository groupRepo = new GroupRepository();
+        //IUserRepository userRepo = new UserRepository();
+        //IProjectRepository projectRepo = new ProjectRepository();
+        //IGroupRepository groupRepo = new GroupRepository();
 
         public Scheduler.Model.EntityModels.Task getTaskById(int id)
         {
@@ -40,6 +40,7 @@ namespace Scheduler.Model.Repositories
 
         public Scheduler.Model.EntityModels.Task getTaskByNameAndProjectName(string ProjectName, string TaskName)
         {
+            IProjectRepository projectRepo = new ProjectRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
             if (ProjectName == null)
                 return null;
@@ -50,7 +51,9 @@ namespace Scheduler.Model.Repositories
 
         public void addNewTask(string Login, DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName)
         {
-
+            IGroupRepository groupRepo = new GroupRepository();
+            IProjectRepository projectRepo = new ProjectRepository();
+            IUserRepository userRepo = new UserRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
             
             if (projectExist == null)
@@ -77,7 +80,9 @@ namespace Scheduler.Model.Repositories
 
         public void addNewTask(string Login, DateTime StartTime, string TaskName, int Hours, string ProjectName)
         {
-
+            IGroupRepository groupRepo = new GroupRepository();
+            IProjectRepository projectRepo = new ProjectRepository();
+            IUserRepository userRepo = new UserRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
 
             if (projectExist == null)
@@ -104,7 +109,7 @@ namespace Scheduler.Model.Repositories
 
         public void addNewTask(DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName)
         {
-
+            IProjectRepository projectRepo = new ProjectRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
 
             if (projectExist == null)
@@ -120,7 +125,7 @@ namespace Scheduler.Model.Repositories
 
         public void addNewTask(DateTime StartTime, string TaskName, int Hours, string ProjectName)
         {
-
+            IProjectRepository projectRepo = new ProjectRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
 
             if (projectExist == null)
@@ -135,6 +140,8 @@ namespace Scheduler.Model.Repositories
 
         public void addUserToTask(string Login, string TaskName, string ProjectName)
         {
+            IUserRepository userRepo = new UserRepository();
+
             Scheduler.Model.EntityModels.Task taskExist = getTaskByNameAndProjectName(ProjectName, TaskName);
 
             User userExist = userRepo.getUserByLogin(Login);
@@ -154,6 +161,7 @@ namespace Scheduler.Model.Repositories
 
         public void addTaskStopTime(string ProjectName, string TaskName, DateTime StopTime)
         {
+            IProjectRepository projectRepo = new ProjectRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
 
             if (projectExist == null)
@@ -170,6 +178,7 @@ namespace Scheduler.Model.Repositories
 
         public void deleteTask(string ProjectName, string TaskName)
         {
+            IProjectRepository projectRepo = new ProjectRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
 
             if (projectExist == null)
@@ -186,6 +195,8 @@ namespace Scheduler.Model.Repositories
 
         public void addNewComment(string ProjectName, string TaskName, string Text, DateTime Time, string Login)
         {
+            IProjectRepository projectRepo = new ProjectRepository();
+            IUserRepository userRepo = new UserRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
 
             if (projectExist == null)
@@ -208,10 +219,15 @@ namespace Scheduler.Model.Repositories
 
         public bool checkRealization(string ProjectName, string Login)
         {
+            IGroupRepository groupRepo = new GroupRepository();
+            IProjectRepository projectRepo = new ProjectRepository();
+            IUserRepository userRepo = new UserRepository();
+
             Project projectExist = projectRepo.getProjectByName(ProjectName);
+
             User userExist = userRepo.getUserByLogin(Login);
 
-            if (projectExist != null && userExist != null && userExist.GroupId != null)
+            if (projectExist == null || userExist == null || userExist.GroupId == null)
                 return false;
 
             List<Group> groupList = groupRepo.getAllGroupWorkingInProject(projectExist.ProjectName);

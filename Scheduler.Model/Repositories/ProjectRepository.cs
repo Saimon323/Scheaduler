@@ -31,8 +31,8 @@ namespace Scheduler.Model.Repositories
         string ownerRole = "Owner";
         string managerRole = "Menager";
         int autoIncrement = 0;
-        IUserRepository userRepo = new UserRepository();
-        IGroupRepository groupRepo = new GroupRepository();
+       // IUserRepository userRepo = new UserRepository();
+        //IGroupRepository groupRepo = new GroupRepository();
 
         public Project getProjectById(int id)
         {
@@ -46,6 +46,11 @@ namespace Scheduler.Model.Repositories
 
         public void addNewProject(string ProjectName, float Budget, DateTime StartTime, DateTime StopTime, string OwnerLogin)
         {
+            Project projectExist = getProjectByName(ProjectName);
+
+            if (projectExist != null)
+                return;
+
             IUserRepository userRepository = new UserRepository();
 
             User userExist = userRepository.getOwnerByLogin(OwnerLogin, ownerRole);
@@ -61,6 +66,11 @@ namespace Scheduler.Model.Repositories
         public void addNewProject(string ProjectName, float Budget, DateTime StartTime, string OwnerLogin)
         {
             IUserRepository userRepository = new UserRepository();
+
+            Project projectExist = getProjectByName(ProjectName);
+
+            if (projectExist != null)
+                return;
 
             User userExist = userRepository.getOwnerByLogin(OwnerLogin, ownerRole);
 
@@ -99,6 +109,8 @@ namespace Scheduler.Model.Repositories
 
         public void addNewDocument(string ProjectName, string DocumentName, string DocumentContent, string Login)
         {
+            IUserRepository userRepo = new UserRepository();
+            IGroupRepository groupRepo = new GroupRepository();
             Project projectExist = getProjectByName(ProjectName);
 
             if (projectExist == null)
@@ -177,6 +189,17 @@ namespace Scheduler.Model.Repositories
             Entities.DeleteObject(documentExist);
             Entities.SaveChanges();
 
+        }
+
+        public void deleteProject(string ProjectName)
+        {
+            Project projectExist = getProjectByName(ProjectName);
+
+            if (projectExist == null)
+                return;
+
+            Entities.DeleteObject(projectExist);
+            Entities.SaveChanges();
         }
     }
 }

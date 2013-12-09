@@ -80,13 +80,15 @@ namespace Scheduler.Test
             #endregion 
             UserRepository UserRepo = new UserRepository();
             GroupRepository GroupRepo = new GroupRepository();
+            ProjectRepository ProjectRepo = new ProjectRepository();
+            TaskRepository TaskRepo = new TaskRepository();
             DateTime creat = new DateTime(2012, 11, 10);
             //UserRepo.addNewRole("Worker");
            // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker");
            // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker", "Sos");
            // UserRepo.addNewUser("Harry", "Osborn", "Goblin", "123", "Worker", "Sos");
             //UserRepo.addNewUser("Hiro", "Nakamura", "Django", "123", "Worker",1);
-            //UserRepo.addNewUser("Pitter", "Petrelli", "Ojson", "123", "Menager");
+            //UserRepo.addNewUser("Jan", "Kowalski", "Asad", "123", "Owner");
             //GroupRepo.addNewGroups("Ojson", "Sos", creat);
             //UserRepo.addUserToGroup("Kavinsky", "Sos");
            // UserRepo.addMassage("Goblin", "Kavinsky", "Witaj", "Mam nadzieje ze bedzie nam sie milo pracowalo");
@@ -94,7 +96,15 @@ namespace Scheduler.Test
             //UserRepo.deleteUser("Ojson");
            // UserRepo.deleteUser("Goblin");
             //GroupRepo.addNewGroups("Ojson", "sos2", creat);
-            GroupRepo.deleteGroup("Sos");
+            //GroupRepo.deleteGroup("Sos");
+            //ProjectRepo.addNewProject("Scheaduler", 1000.00F, creat, "Asad");
+            //TaskRepo.addNewTask(creat, "Logowanie", 12, "Scheaduler");
+           // ProjectRepo.deleteProject("Scheaduler2");
+  //          UserRepo.addUserToGroup("Kavinsky", "Sos2");
+           // GroupRepo.addRealization("Scheaduler", "Sos2");
+            TaskRepo.addUserToTask("Kavinsky", "Logowanie", "Scheaduler");
+            
+
 
             Console.WriteLine("ok");
             Console.ReadLine();
