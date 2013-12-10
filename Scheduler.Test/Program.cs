@@ -106,7 +106,7 @@ namespace Scheduler.Test
             //ProjectRepo.addNewProject("Scheaduler", 1000.00F, creat, "Asad");
            // ProjectRepo.deleteProject("Scheaduler2");
             //ProjectRepo.addNewDocument("Scheaduler", "Wymagania", "Pierwsze zalozenie", "Kavinsky");
-            ProjectRepo.deleteProject("Scheaduler");
+            //ProjectRepo.deleteProject("Scheaduler");
 
             // TaskRepo.addNewTask(creat, "Rejestracja", 10, "Scheaduler");
 
