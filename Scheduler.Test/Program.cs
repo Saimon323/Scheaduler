@@ -86,28 +86,39 @@ namespace Scheduler.Test
             //UserRepo.addNewRole("Worker");
            // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker");
            // UserRepo.addNewUser("Adam", "Monroe", "Kavinsky", "123", "Worker", "Sos");
-           // UserRepo.addNewUser("Harry", "Osborn", "Goblin", "123", "Worker", "Sos");
+            //UserRepo.addNewUser("Harry", "Osborn", "Goblin", "123", "Worker", "Sos2");
             //UserRepo.addNewUser("Hiro", "Nakamura", "Django", "123", "Worker",1);
             //UserRepo.addNewUser("Jan", "Kowalski", "Asad", "123", "Owner");
-            //GroupRepo.addNewGroups("Ojson", "Sos", creat);
-            //UserRepo.addUserToGroup("Kavinsky", "Sos");
-           // UserRepo.addMassage("Goblin", "Kavinsky", "Witaj", "Mam nadzieje ze bedzie nam sie milo pracowalo");
-            //GroupRepo.deleteGroup("Sos");
+            //UserRepo.addUserToGroup("Django", "Sos");
+            // UserRepo.addMassage("Goblin", "Kavinsky", "Witaj", "Mam nadzieje ze bedzie nam sie milo pracowalo");
             //UserRepo.deleteUser("Ojson");
-           // UserRepo.deleteUser("Goblin");
+            // UserRepo.deleteUser("Goblin");
+            //          UserRepo.addUserToGroup("Kavinsky", "Sos2");
+            //UserRepo.deleteUserFromGroup("Goblin");
+
+
+            // GroupRepo.addNewGroups("Ojson", "Sos", creat);
+            //GroupRepo.deleteGroup("Sos");,
             //GroupRepo.addNewGroups("Ojson", "sos2", creat);
             //GroupRepo.deleteGroup("Sos");
+            //GroupRepo.addRealization("Scheaduler", "Sos");
+
             //ProjectRepo.addNewProject("Scheaduler", 1000.00F, creat, "Asad");
-            //TaskRepo.addNewTask(creat, "Logowanie", 12, "Scheaduler");
            // ProjectRepo.deleteProject("Scheaduler2");
-  //          UserRepo.addUserToGroup("Kavinsky", "Sos2");
-           // GroupRepo.addRealization("Scheaduler", "Sos2");
-            TaskRepo.addUserToTask("Kavinsky", "Logowanie", "Scheaduler");
+            //ProjectRepo.addNewDocument("Scheaduler", "Wymagania", "Pierwsze zalozenie", "Kavinsky");
+            ProjectRepo.deleteProject("Scheaduler");
+
+            // TaskRepo.addNewTask(creat, "Rejestracja", 10, "Scheaduler");
+
+
+            //TaskRepo.addUserToTask("Django", "Rejestracja", "Scheaduler");
+            //TaskRepo.addUserToTask("Goblin", "Logowanie", "Scheaduler");
+            //TaskRepo.addNewComment("Scheaduler", "Logowanie", "Napisz to dobrze", creat, "Asad");
             
 
 
-            Console.WriteLine("ok");
-            Console.ReadLine();
+          //  Console.WriteLine("ok");
+          //  Console.ReadLine();
 
 
         }

@@ -59,6 +59,10 @@ namespace Scheduler.Model.Repositories
             if (projectExist == null)
                 return;
 
+            Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
+            if (taskExist != null)
+                return;
+
             User userExist = userRepo.getUserByLogin(Login);
 
             if (userExist == null || userExist.GroupId == null)
@@ -88,6 +92,10 @@ namespace Scheduler.Model.Repositories
             if (projectExist == null)
                 return;
 
+            Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
+            if (taskExist != null)
+                return;
+
             User userExist = userRepo.getUserByLogin(Login);
 
             if (userExist == null || userExist.GroupId == null)
@@ -115,6 +123,9 @@ namespace Scheduler.Model.Repositories
             if (projectExist == null)
                 return;
 
+            Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
+            if (taskExist != null)
+                return;
 
             Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(StartTime, StopTime, TaskName, Hours, projectExist.id);
             Entities.AddToTasks(task);
@@ -129,6 +140,10 @@ namespace Scheduler.Model.Repositories
             Project projectExist = projectRepo.getProjectByName(ProjectName);
 
             if (projectExist == null)
+                return;
+
+            Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
+            if (taskExist != null)
                 return;
 
             Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(StartTime, TaskName, Hours, projectExist.id);
@@ -239,6 +254,13 @@ namespace Scheduler.Model.Repositories
             }
 
             return false;
+        }
+
+        public Scheduler.Model.EntityModels.Task getTaskInProjectByTaskName(string ProjectName, string TaskName)
+        {
+            IProjectRepository projectRepo = new ProjectRepository();
+            Project projectExist = projectRepo.getProjectByName(ProjectName);
+            return Items.Where(x => x.ProjectId.Equals(projectExist.id) && x.TaskName.Equals(TaskName)).FirstOrDefault();
         }
     }
 }
