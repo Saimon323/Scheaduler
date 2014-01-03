@@ -55,7 +55,7 @@ namespace Scheduler.Site.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class LoginModel
+    public class LoginModels
     {
         [Required]
         [Display(Name = "User name")]
@@ -70,7 +70,7 @@ namespace Scheduler.Site.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterModel
+    public class RegisterModels
     {
         [Required]
         [Display(Name = "User name")]

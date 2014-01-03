@@ -1,0 +1,35 @@
+﻿@model Scheduler.Site.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div>
+        <fieldset>
+            <legend>Rejestracja</legend>
+            @Html.LabelFor(l => l.Name, "Imię")
+            @Html.TextBoxFor(l => l.Name)
+            @Html.ValidationMessageFor(l => l.Name)    
+
+            @Html.LabelFor(l => l.Surname, "Nazwisko")
+            @Html.TextBoxFor(l => l.Surname)
+            @Html.ValidationMessageFor(l => l.Surname)
+
+            @Html.LabelFor(l => l.Login, "Login")
+            @Html.TextBoxFor(l => l.Login)
+            @Html.ValidationMessageFor(l => l.Login)    
+
+            @Html.LabelFor(l => l.Password, "Hasło")
+            @Html.PasswordFor(l => l.Password)
+            @Html.ValidationMessageFor(l => l.Password)
+            
+            @Html.DropDownListFor(model => model.RoleId, Model.RoleSelect)
+    
+
+
+            <input type="submit" value="Zarejestruj" />
+        </fieldset>
+    </div>
+}

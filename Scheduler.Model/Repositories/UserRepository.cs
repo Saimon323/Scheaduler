@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Common.CommandTrees;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -258,6 +261,43 @@ namespace Scheduler.Model.Repositories
                 userList.Add(single);
             }
             return userList;
+        }
+
+        public bool LogIn(string login, string password)
+        {
+            User userExist = Items.Where(x => x.Login.Equals(login) && x.Password.Equals(password)).FirstOrDefault();
+            if (userExist == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public IEnumerable<Role> getAllRole()
+        {
+            var allRoles = Entities.Roles.ToList();
+            IEnumerable<Role> roles = allRoles;
+
+            return roles;
+        }
+
+        public IEnumerable<User> getAllMemberGroup(int idGroup)
+        {
+            
+            var members = Entities.Users.ToList();
+            List<User> membersList = new List<User>();
+            foreach (var member in members)
+            {
+                if (member.GroupId == idGroup)
+                {
+                    membersList.Add(member);
+                }
+            }
+            IEnumerable<User> mamberInGroup = membersList;
+            return mamberInGroup;
         }
     }
 }

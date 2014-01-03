@@ -14,6 +14,19 @@ namespace Scheduler.Site
 
     public class MvcApplication : System.Web.HttpApplication
     {
+      /*  public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("favicon.ico");
+            routes.IgnoreRoute("Files/");
+
+            routes.MapRoute(
+                "JSGenerator",
+                "{partnerName}",
+                new { controller = "SmartCalculator", action = "GetJavaScript" }
+                );
+        }*/
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();

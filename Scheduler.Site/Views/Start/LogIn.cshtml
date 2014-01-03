@@ -1,0 +1,34 @@
+﻿@model Scheduler.Site.Models.LoginModel
+@{
+    ViewBag.Title = "LogIn";
+}
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Movie</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Login,"Login")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Login)
+            @Html.ValidationMessageFor(model => model.Login)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password,"Hasło")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        
+
+        <p>
+            <input type="submit" value="Search" />
+        </p>
+    </fieldset>
+}

@@ -1,0 +1,31 @@
+﻿@model Scheduler.Site.Models.LoginModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@using (Html.BeginForm())
+{
+          <div>
+            <fieldset>
+                <legend>Logowanie</legend>
+                    @Html.LabelFor(l => l.Login, "Login")
+                    @Html.TextBoxFor(l => l.Login)
+                    @Html.ValidationMessageFor(l => l.Login)    
+
+                    @Html.LabelFor(l => l.Password, "Hasło")
+                    @Html.PasswordFor(l => l.Password)
+                    @Html.ValidationMessageFor(l => l.Password)
+            <input type="submit" value="Zaloguj" />
+            </fieldset>
+        </div>
+        <div>
+           @* <fieldset>
+                    <ul>
+                        <li>@Html.ActionLink("Rejestracja", "Register", "Start", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    </ul>
+                    
+            </fieldset>*@
+        </div>
+}

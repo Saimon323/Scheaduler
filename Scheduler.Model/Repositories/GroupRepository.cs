@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -189,5 +190,13 @@ namespace Scheduler.Model.Repositories
             User menager = UserRepo.getUserById(MenagerId);
             return menager;
         }
+
+        public IEnumerable<Group> getAllGroup()
+        {
+            var allGroups = Items.ToList();
+            IEnumerable<Group> groups = allGroups;
+
+            return groups;
+        } 
     }
 }

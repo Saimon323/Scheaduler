@@ -47,5 +47,11 @@ namespace Scheduler.Model.Repositories.Interfaces
         User getUserByGroupId(int idGroup);
 
         List<User> getUserListByGroupId(int idGroup);
+
+        bool LogIn(string login, string password);
+
+        IEnumerable<Role> getAllRole();
+
+        IEnumerable<User> getAllMemberGroup(int idGroup);
     }
 }

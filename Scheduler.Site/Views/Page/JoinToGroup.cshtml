@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "JoinToGroup";
+}
+
+<h2>Dołącz do grupy</h2>
+
+@using Scheduler.Site.Models
+@model List<Scheduler.Site.Models.GroupList>
+ <table>
+
+ @foreach(var x in Model)
+ {
+   <tr>
+      <td>@x.Name</td>
+      <td>@x.Surname</td>
+      <td>@x.Login</td>
+      <td>@x.GroupName</td>
+      <td>@x.Date</td>
+       @*        <td>@Html.ActionLink("Szczegóły", "GroupDetails", "Page", new {GroupList = x})</td>
+       <td>@Html.ActionLink("Szczegóły", "GroupDetails", "Page", new RouteValueDictionary { {"singleGroup", x} })</td>*@
+       <td><a href="@Url.Action("GroupDetails", "Page", new {id = x.id, Name = x.Name, Surname = x.Surname, Login = x.Login, GroupName = x.GroupName, Date = x.Date })">Szczegóły</a></td>
+   </tr>
+ }
+ </table>
