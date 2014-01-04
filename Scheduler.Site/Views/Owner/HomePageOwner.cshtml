@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Scheduler.Model.EntityModels.Project>
+@{
+    ViewBag.Title = "HomePageOwner";
+}
+
+<h2>HomePageOwner</h2>
+<table>
+ @foreach(var x in Model)
+ {
+     <tr>
+         <td>@x.ProjectName</td>
+         <td><a href="@Url.Action("ProjectDetail", "Owner", new {ProjectId = x.id})">Szczegóły</a></td>
+         <td><a href="@Url.Action("Reaization", "Owner", new {ProjectId = x.id})">Realizacja</a></td>
+     </tr>
+ }
+ </table>

@@ -1,0 +1,48 @@
+﻿@model Scheduler.Site.Models.ProjectModel
+@{
+    ViewBag.Title = "AddNewProject";
+}
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Movie</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProjectName,"Nazwa projektu")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProjectName)
+            @Html.ValidationMessageFor(model => model.ProjectName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Budget,"Budżet")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Budget)
+            @Html.ValidationMessageFor(model => model.Budget)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StarTime,"Czas rozpoczęcia")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StarTime)
+            @Html.ValidationMessageFor(model => model.StarTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StopTime,"Czas zakończenia")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StopTime)
+            @Html.ValidationMessageFor(model => model.StopTime)
+        </div>
+
+        <p>
+            <input type="submit" value="Search" />
+        </p>
+    </fieldset>
+}

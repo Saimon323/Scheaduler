@@ -1,0 +1,30 @@
+﻿@model Scheduler.Site.Models.ProjectDetail
+@{
+    ViewBag.Title = "ProjectDetail";
+}
+
+<h2>Szczegóły projektu</h2>
+<table>
+    <tr>
+        <td>@Model.ProjectName</td>
+        <td>@Model.Budget</td>
+        <td>@Model.StartTime</td>
+        <td>@Model.StopTime</td>
+    </tr>
+</table>
+
+<h2>Zadania w projekcie</h2>
+<table>
+    @foreach (var x in Model.tasksInProjectList)
+    {
+        <tr>
+            <td>@x.TaskName</td>
+            <td>@x.StartTime</td>
+            <td>@x.StopTime</td>
+            <td>@x.Hours</td>
+        </tr>
+    }
+
+</table>
+
+<a href="@Url.Action("HomePageOwner", "Owner")">Powrót</a>

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Scheduler.Model.EntityModels
+@using Scheduler.Model.Repositories
+@using Scheduler.Model.Repositories.Interfaces
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -20,12 +23,32 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            @{var cookie = Request.Cookies["LogOn"];}
+                            @{
+                                var cookie = Request.Cookies["LogOn"];
+                            }
+
                             @if (cookie != null)
                             {
-                                <text>
-                            <li>@Html.ActionLink("Home", "HomePage", "Page")</li>
+                                IUserRepository userRepo = new UserRepository();
+                                User userExist = userRepo.getUserByLogin(cookie.Value);
+                                Role role = userRepo.getRoleById(userExist.RoleId);
+                               <text>
+                                 @if (role.Name == "Owner")
+                                 {
+                                     <li>@Html.ActionLink("Projekty", "HomePageOwner", "Owner")</li>
+                                     <li>@Html.ActionLink("Dodaj Projekt", "AddNewProject", "Owner")</li>
+                                         
+                                     
+                                 }
                                 </text>
+                                @* <text>
+                                    <li>@Html.ActionLink("Główna", "HomePage", "Page")</li>
+                                    @if (userExist.GroupId != null)
+                                    {
+                                        <li>@Html.ActionLink("Grupa", "MyGroupDetails", "Page")</li>
+                                    }
+                                </text>*@
+
                             }  
                         </ul>
                     </nav>

@@ -49,6 +49,11 @@ namespace Scheduler.Model.Repositories
             return task;
         }
 
+        public IEnumerable<Scheduler.Model.EntityModels.Task> getAllTasksInProjects(int ProjectId)
+        {
+            return Entities.Tasks.Where(x => x.ProjectId.Equals(ProjectId));
+        } 
+
         public void addNewTask(string Login, DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName)
         {
             IGroupRepository groupRepo = new GroupRepository();

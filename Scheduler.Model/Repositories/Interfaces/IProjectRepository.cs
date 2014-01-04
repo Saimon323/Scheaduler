@@ -14,6 +14,8 @@ namespace Scheduler.Model.Repositories.Interfaces
 
         Project getProjectByName(string ProjectName);
 
+        IEnumerable<Project> getAllProjectByIdOwner(int OwnerId);
+
         void addNewProject(string ProjectName, float Budget, DateTime StartTime, DateTime StopTime, string OwnerLogin);//dopisac logike
 
 

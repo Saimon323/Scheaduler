@@ -59,4 +59,38 @@ namespace Scheduler.Site.Models
             MemberGroupList = new List<User>();
         }
     }
+
+    public class ProjectDetail : Project
+    {
+        public IEnumerable<Scheduler.Model.EntityModels.Task> tasksInProjectList;
+
+        public ProjectDetail()
+        {
+            tasksInProjectList = new List<Scheduler.Model.EntityModels.Task>();
+        }
+    }
+
+    public class RealizationList
+    {
+        public string GroupName { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Login { get; set; }
+        public IEnumerable<User> membersList;
+
+        public RealizationList()
+        {
+            membersList = new List<User>();
+        }
+    }
+
+    public class ProjectModel
+    {
+        public string ProjectName { get; set; }
+        public float Budget { get; set; }
+        public DateTime StarTime { get; set; }
+        public DateTime? StopTime { get; set; }
+    }
+
+
 }

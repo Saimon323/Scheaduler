@@ -44,6 +44,11 @@ namespace Scheduler.Model.Repositories
             return Items.Where(x => x.ProjectName.Equals(ProjectName)).FirstOrDefault();
         }
 
+        public IEnumerable<Project> getAllProjectByIdOwner(int OwnerId)
+        {
+            return Items.Where(x => x.OwnerId.Equals(OwnerId));
+        } 
+
         public void addNewProject(string ProjectName, float Budget, DateTime StartTime, DateTime StopTime, string OwnerLogin)
         {
             Project projectExist = getProjectByName(ProjectName);

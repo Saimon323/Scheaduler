@@ -1,0 +1,32 @@
+﻿@model List<Scheduler.Site.Models.RealizationList>
+@{
+    ViewBag.Title = "Reaization";
+}
+
+<h2>Szczegóły grupy</h2>
+@foreach (var realization in Model)
+{
+    <h1>Nazwa grupy</h1>
+    @realization.GroupName
+
+    <h1>Menager Grupy</h1>
+    @realization.Name
+    @realization.Surname
+    @realization.Login
+
+    <h1>Członkowie grupy</h1>
+    <table>
+        @{
+    foreach (var x in realization.membersList)
+            {
+                <tr>
+                    <td>@x.Name</td>
+                    <td>@x.Surname</td>
+                    <td>@x.Login</td>
+                </tr>
+            }
+        }
+
+    </table>
+}
+<a href="@Url.Action("HomePageOwner", "Owner")">Powrót</a>

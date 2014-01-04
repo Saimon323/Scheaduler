@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Metadata.Edm;
 using System.Linq;
 using System.Web;
+using System.Web.Http.Hosting;
 using System.Web.Mvc;
 using Scheduler.Model.EntityModels;
 using Scheduler.Model.Repositories;
@@ -15,7 +16,7 @@ namespace Scheduler.Site.Controllers
     {
         public ActionResult HomePage()
         {
-            var cookie = Request.Cookies["LogOn"];
+           /* var cookie = Request.Cookies["LogOn"];
             string userLogin = cookie.Value;
             IUserRepository userRepo = new UserRepository();
             User user = userRepo.getUserByLogin(userLogin);
@@ -26,8 +27,35 @@ namespace Scheduler.Site.Controllers
                 return RedirectToAction("JoinToGroup", "Page");
             }
             
+            return View();*/
+            var cookie = Request.Cookies["LogOn"];
+            string userLogin = cookie.Value;
+            IUserRepository userRepo = new UserRepository();
+            User user = userRepo.getUserByLogin(userLogin);
+            Role role = userRepo.getRoleById(user.RoleId);
+            if (role.Name == "Owner")
+            {
+               return RedirectToAction("HomePageOwner", "Owner");
+            }
+
+           /* if (user.GroupId == null && user.RoleId == role.id)
+            {
+                return RedirectToAction("JoinToGroup", "Page");
+            }
+            */
             return View();
         }
+
+     /*   public ActionResult HomePageOwner()
+        {
+            var cookie = Request.Cookies["LogOn"];
+            string userLogin = cookie.Value;
+            IUserRepository userRepo = new UserRepository();
+            User userExist = userRepo.getUserByLogin(userLogin);
+            IProjectRepository projectRepo = new ProjectRepository();
+            IEnumerable<Project> projectList = projectRepo.getAllProjectByIdOwner(userExist.id);
+            return View("HomePageOwner", projectList);
+        }*/
 
         public ActionResult JoinToGroup()
         {
@@ -94,6 +122,9 @@ namespace Scheduler.Site.Controllers
             return View("HomePage");
 
         }
+
+
+
 
     }
 }
