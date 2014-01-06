@@ -130,6 +130,9 @@ namespace Scheduler.Site.Controllers
             {
                 Role role = userRepo.getRoleById(data.RoleId);
                 userRepo.addNewUser(data.Name,data.Surname,data.Login,data.Password,role.Name);
+                string cookieValue = data.Login.ToString();
+                var cookie = new HttpCookie("LogOn", cookieValue);
+                Response.AppendCookie(cookie);
                 return RedirectToAction("HomePage", "Page");
             }
                 

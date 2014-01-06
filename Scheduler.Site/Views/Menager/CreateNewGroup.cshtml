@@ -1,0 +1,34 @@
+﻿@model Scheduler.Model.EntityModels.Group
+@{
+    ViewBag.Title = "CreateNewGroup";
+}
+
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Movie</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GroupName,"Nazwa grupy")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GroupName)
+            @Html.ValidationMessageFor(model => model.GroupName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreationData,"Data utworzenia")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreationData)
+            @Html.ValidationMessageFor(model => model.CreationData)
+        </div>
+
+        <p>
+            <input type="submit" value="Utwórz" />
+        </p>
+    </fieldset>
+}
+

@@ -206,5 +206,6 @@ namespace Scheduler.Model.Repositories
             Entities.DeleteObject(projectExist);
             Entities.SaveChanges();
         }
+ 
     }
 }

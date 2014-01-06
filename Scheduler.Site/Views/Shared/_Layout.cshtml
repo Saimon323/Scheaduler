@@ -37,8 +37,13 @@
                                  {
                                      <li>@Html.ActionLink("Projekty", "HomePageOwner", "Owner")</li>
                                      <li>@Html.ActionLink("Dodaj Projekt", "AddNewProject", "Owner")</li>
-                                         
-                                     
+                                          
+                                 }
+                                 else if (role.Name == "Menager")
+                                 {
+                                     <li>@Html.ActionLink("Moje grupy", "HomePageMenager", "Menager")</li>
+                                     <li>@Html.ActionLink("Dodaj grupę","CreateNewGroup","Menager")</li>
+                                     <li>@Html.ActionLink("Projekty","ProjectsList","Menager")</li>
                                  }
                                 </text>
                                 @* <text>

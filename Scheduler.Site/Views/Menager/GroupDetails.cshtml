@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Scheduler.Model.EntityModels.User>
+@{
+    ViewBag.Title = "GroupDetails";
+}
+
+<table>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.Name</td>
+            <td>@x.Surname</td>
+            <td>@x.Login</td>
+        </tr>    
+    }
+</table>
+<a href="@Url.Action("HomePageMenager", "Menager")">Powrót</a>

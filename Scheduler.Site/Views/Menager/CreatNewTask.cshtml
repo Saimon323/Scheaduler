@@ -1,0 +1,62 @@
+﻿@model Scheduler.Site.Models.NewTask
+@{
+    ViewBag.Title = "CreatNewTask";
+    string identy = ViewBag.projectId.ToString();
+    
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Movie</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TaskName,"Nazwa zadania")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TaskName)
+            @Html.ValidationMessageFor(model => model.TaskName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartTime,"Data utworzenia")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartTime)
+            @Html.ValidationMessageFor(model => model.StartTime)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StopTime,"Data zakończenia")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StopTime)
+            @Html.ValidationMessageFor(model => model.StopTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Hours,"Liczba godzin")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Hours)
+            @Html.ValidationMessageFor(model => model.Hours)
+        </div>
+        
+        <div class="dontShow">
+            @Html.TextBoxFor(modle => Model.id, new { @Value = identy })
+        </div>
+
+        <p>
+             <input type="submit" value="Utwórz" />
+            @*<a href="@Url.Action("CreatNewTasks", "Menager", new {id = identy, TaskName = Model.TaskName, StartTime = Model.StartTime, StopTime = Model.StopTime, Hours = Model.Hours})">Dodaj</a>*@
+        </p>
+    </fieldset>
+}
+
+<style>
+    .dontShow {
+        display: none;
+    }
+</style>

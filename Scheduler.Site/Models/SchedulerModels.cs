@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Security.Permissions;
 using System.Web;
@@ -92,5 +93,47 @@ namespace Scheduler.Site.Models
         public DateTime? StopTime { get; set; }
     }
 
+    public class TaskInProject
+    {
+        public int id { get; set; }
+        public List<TasksInRealization> tasksInRealizationList;
+        public List<WaitingTask> tasksWaitingForRealizaionList; 
+
+        public TaskInProject()
+        {
+            tasksInRealizationList = new List<TasksInRealization>();
+            tasksWaitingForRealizaionList = new List<WaitingTask>();
+        }
+    }
+
+    public class TasksInRealization
+    {
+        public string TaskName { get; set; }
+        public int Hours { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime? StopTime { get; set; }
+        public int id { get; set; }
+        public string Login { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+    }
+
+    public class WaitingTask
+    {
+        public string TaskName { get; set; }
+        public int Hours { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime? StopTime { get; set; }
+        public int id { get; set; }
+    }
+
+    public class NewTask
+    {
+        public int id { get; set; }
+        public string TaskName { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime? StopTime { get; set; }
+        public int Hours { get; set; }
+    }
 
 }

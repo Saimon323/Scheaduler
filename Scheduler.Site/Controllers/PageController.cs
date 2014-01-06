@@ -36,6 +36,10 @@ namespace Scheduler.Site.Controllers
             if (role.Name == "Owner")
             {
                return RedirectToAction("HomePageOwner", "Owner");
+            
+            } else if (role.Name == "Menager")
+            {
+                return RedirectToAction("HomePageMenager", "Menager");
             }
 
            /* if (user.GroupId == null && user.RoleId == role.id)

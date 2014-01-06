@@ -22,5 +22,7 @@ namespace Scheduler.Model.Repositories.Interfaces
         List<User> getUserListInGroup(string GroupName);
         User getMenagerById(int MenagerId);
         IEnumerable<Group> getAllGroup();
+        IEnumerable<Group> getAllGroupByMenagerId(int MenagerId);
+        IEnumerable<Project> GetAllProjectsRealizationByGroup(int GroupId);
     }
 }

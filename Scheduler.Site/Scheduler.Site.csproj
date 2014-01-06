@@ -183,6 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenagerController.cs" />
     <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\StartController.cs" />
@@ -319,6 +320,14 @@
     <Content Include="Views\Owner\ProjectDetail.cshtml" />
     <Content Include="Views\Owner\Reaization.cshtml" />
     <Content Include="Views\Owner\Exist.cshtml" />
+    <Content Include="Views\Menager\HomePageMenager.cshtml" />
+    <Content Include="Views\Menager\GroupDetails.cshtml" />
+    <Content Include="Views\Menager\CreateNewGroup.cshtml" />
+    <Content Include="Views\Menager\Exist.cshtml" />
+    <Content Include="Views\Menager\ProjectsList.cshtml" />
+    <Content Include="Views\Menager\TasksInProject.cshtml" />
+    <Content Include="Views\Menager\CreatNewTask.cshtml" />
+    <Content Include="Views\Menager\TaskExist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

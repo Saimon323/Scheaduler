@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Scheduler.Model.Repositories.Interfaces;
 using Scheduler.Model.EntityModels;
 using System.Data.Spatial;
+using Task = Scheduler.Model.EntityModels.Task;
 
 namespace Scheduler.Model.Repositories
 {
@@ -51,7 +52,16 @@ namespace Scheduler.Model.Repositories
 
         public IEnumerable<Scheduler.Model.EntityModels.Task> getAllTasksInProjects(int ProjectId)
         {
-            return Entities.Tasks.Where(x => x.ProjectId.Equals(ProjectId));
+            var list = Entities.Tasks.ToList();
+            List<Scheduler.Model.EntityModels.Task> tasksList = new List<Scheduler.Model.EntityModels.Task>();
+            foreach (var x in list)
+            {
+                if (x.ProjectId == ProjectId)
+                {
+                    tasksList.Add(x);
+                }
+            }
+            return tasksList;
         } 
 
         public void addNewTask(string Login, DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName)

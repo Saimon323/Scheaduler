@@ -197,6 +197,26 @@ namespace Scheduler.Model.Repositories
             IEnumerable<Group> groups = allGroups;
 
             return groups;
-        } 
+        }
+
+        public IEnumerable<Group> getAllGroupByMenagerId(int MenagerId)
+        {
+            return Items.Where(x => x.MenagerId.Equals(MenagerId));
+        }
+
+        public IEnumerable<Project> GetAllProjectsRealizationByGroup(int GroupId)
+        {
+            IProjectRepository projectRepo = new ProjectRepository();
+            IEnumerable<ProjectsToGroupsRealization> realizationsList = Entities.ProjectsToGroupsRealizations.Where(x => x.GroupId.Equals(GroupId));
+            List<Project> projectsList = new List<Project>();
+            Project project;
+            
+            foreach (var r in realizationsList)
+            {
+                project = projectRepo.getProjectById(r.ProjectId);
+                projectsList.Add(project);
+            }
+            return projectsList;
+        }  
     }
 }
