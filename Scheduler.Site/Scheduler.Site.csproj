@@ -328,6 +328,9 @@
     <Content Include="Views\Menager\TasksInProject.cshtml" />
     <Content Include="Views\Menager\CreatNewTask.cshtml" />
     <Content Include="Views\Menager\TaskExist.cshtml" />
+    <Content Include="Views\Menager\SelectProject.cshtml" />
+    <Content Include="Views\Menager\SelectGroup.cshtml" />
+    <Content Include="Views\Menager\AddRealization.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

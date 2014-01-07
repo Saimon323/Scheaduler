@@ -2,7 +2,7 @@
 @if (cookie != null)
 {
     <text>
-        Hello, @{  string value = cookie.Value; @Html.Raw(value)}!
+        Witaj, @{  string value = cookie.Value; @Html.Raw(value)}!
         @using (Html.BeginForm("LogOut", "Start", FormMethod.Post, new { id = "logoutForm" }))
         {
             @Html.AntiForgeryToken()

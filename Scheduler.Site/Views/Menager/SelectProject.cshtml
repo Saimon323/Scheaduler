@@ -1,0 +1,19 @@
+﻿@model List<Scheduler.Model.EntityModels.Project>
+@{
+    ViewBag.Title = "JoinToProjectRealization";
+}
+
+<h2>Krok 1</h2><br/>
+<h2>Wybierz projekt</h2>
+
+<table>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.ProjectName</td>
+            <td><a href="@Url.Action("SelectGroup", "Menager", new {ProjectId = x.id})">Wybierz</a></td>
+        </tr>    
+    }
+</table>
+
+<a href="@Url.Action("HomePageMenager", "Menager")">Powrót</a>

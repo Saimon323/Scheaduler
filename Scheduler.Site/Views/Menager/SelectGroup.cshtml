@@ -1,0 +1,21 @@
+﻿@model List<Scheduler.Model.EntityModels.Group>
+@{
+    ViewBag.Title = "SelectGroup";
+    int identy = ViewBag.projectId;
+}
+
+<h2>Krok 2</h2><br/>
+<h2>Wybierz grupę</h2>
+
+<table>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.GroupName</td>
+            <td><a href="@Url.Action("AddRealization", "Menager", new {GroupId = x.id, ProjectId = identy})">Wybierz</a></td>
+        </tr>    
+    }
+</table>
+
+<a href="@Url.Action("HomePageMenager", "Menager")">Powrót</a>
+

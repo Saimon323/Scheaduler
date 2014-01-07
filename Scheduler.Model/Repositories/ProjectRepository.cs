@@ -206,6 +206,14 @@ namespace Scheduler.Model.Repositories
             Entities.DeleteObject(projectExist);
             Entities.SaveChanges();
         }
+
+        public IEnumerable<Project> getAllProjects()
+        {
+            var allProjects= Items.ToList();
+            IEnumerable<Project> projects = allProjects;
+
+            return projects;
+        }
  
     }
 }

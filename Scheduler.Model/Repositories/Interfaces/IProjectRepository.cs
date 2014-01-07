@@ -28,5 +28,7 @@ namespace Scheduler.Model.Repositories.Interfaces
         IEnumerable<Document> getAllDocumentsByProjectName(string ProjectName);
 
         void addNewDocument(string ProjectName, string DocumentName, string DocumentContent, string Login);//dopisac user pracujacy nad projektem
+
+        IEnumerable<Project> getAllProjects();
     }
 }

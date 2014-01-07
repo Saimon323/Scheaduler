@@ -145,5 +145,75 @@ namespace Scheduler.Site.Controllers
 
             return RedirectToAction("TasksInProject", "Menager", new { ProjectId = data.id});
         }
+
+        public ActionResult SelectProject()
+        {
+            IUserRepository userRepo = new UserRepository();
+            IGroupRepository groupRepo = new GroupRepository();
+            IProjectRepository projectRepo = new ProjectRepository();
+            var cookie = Request.Cookies["LogOn"];
+            string userLogin = cookie.Value;
+            User menagerExist = userRepo.getUserByLogin(userLogin);
+            IEnumerable<Group> menagerGroups = groupRepo.getAllGroupByMenagerId(menagerExist.id);
+            IEnumerable<Project> allProjects = projectRepo.getAllProjects();
+            List<Project> projectsToRealizationList = new List<Project>();
+            bool add;
+
+            foreach (var project in allProjects)
+            {
+                foreach (var group in menagerGroups)
+                {
+                    add = groupRepo.checkRealization(project.ProjectName, group.GroupName);
+                    if (add == false)
+                    {
+                        projectsToRealizationList.Add(project);
+                        break;
+                    }
+                }
+            }
+
+            return View("SelectProject", projectsToRealizationList);
+        }
+
+        public ActionResult SelectGroup(int ProjectId)
+        {
+            IUserRepository userRepo = new UserRepository();
+            IGroupRepository groupRepo = new GroupRepository();
+            IProjectRepository projectRepo = new ProjectRepository();  
+ 
+            var cookie = Request.Cookies["LogOn"];
+            string userLogin = cookie.Value;
+            User menagerExist = userRepo.getUserByLogin(userLogin);
+            IEnumerable<Group> menagerGroupsList = groupRepo.getGroupByMenagerId(menagerExist.id);
+            Project projectExist = projectRepo.getProjectById(ProjectId);
+
+            List<Group> groupsList = new List<Group>();
+            bool add;
+
+            foreach (var group in menagerGroupsList)
+            {
+                add = groupRepo.checkRealization(projectExist.ProjectName, group.GroupName);
+                if (add == false)
+                {
+                    groupsList.Add(group);
+                }
+            }
+
+            ViewBag.projectId = ProjectId;
+            return View("SelectGroup",groupsList);
+        }
+
+        public ActionResult AddRealization(int GroupId, int ProjectId)
+        {
+            IGroupRepository groupRepo = new GroupRepository();
+            IProjectRepository projectRepo = new ProjectRepository();
+
+            Group groupExist = groupRepo.getGroupById(GroupId);
+            Project projectExist = projectRepo.getProjectById(ProjectId);
+
+            groupRepo.addRealization(projectExist.ProjectName,groupExist.GroupName);
+
+            return RedirectToAction("SelectProject", "Menager");
+        }
     }
 }
