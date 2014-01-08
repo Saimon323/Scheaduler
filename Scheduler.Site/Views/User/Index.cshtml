@@ -9,6 +9,14 @@
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
 </p>
+
+@using (Html.BeginForm("SearchByName", "User"))
+{
+    <p>
+        Szukaj po imieniu: @Html.TextBox("name")  
+        <input type="submit" value="Szukaj" /></p>
+}
+
 <table>
     <tr>
         <th>

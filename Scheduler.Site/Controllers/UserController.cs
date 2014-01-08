@@ -68,12 +68,14 @@ namespace Scheduler.Site.Controllers
             return View(users.ToList());
         }
 
-        //public ActionResult Sort()
-        //{
-        //    UserRepository UserRepo = new UserRepository();
-        //    var users = UserRepo.GetAll().OrderBy(u => u.Login).ToList();
+        public ActionResult SearchByName(string name)
+        {
+            UserRepository UserRepo = new UserRepository();
+            var users = (!String.IsNullOrWhiteSpace(name)) ?
+                        UserRepo.GetAll().Where(u => u.Name.ToLower().Contains(name.ToLower())).ToList() 
+                        : UserRepo.GetAll().ToList();
 
-        //    return View("Index", users);
-        //}
+            return View("Index", users);
+        }
     }
 }
