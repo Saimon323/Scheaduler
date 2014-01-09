@@ -15,8 +15,13 @@ namespace Scheduler.Site
 
             routes.MapRoute(
                 "Search",
-                "Search/Users/{action}/{id}",
+                "Search/{controller}s/{action}/{id}",
                 new { controller = "User", action = "Index", id = UrlParameter.Optional });
+
+            //routes.MapRoute(
+            //    "SearchTasks",
+            //    "Search/Tasks/{action}/{id}",
+            //    new { controller = "Tasks", action = "Index", id = UrlParameter.Optional });
 
             routes.MapRoute(
                 name: "Default",

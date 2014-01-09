@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Scheduler.Model.EntityModels.Task>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@*@using (Html.BeginForm("SearchByName", "User"))
+{
+    <p>
+        Szukaj po imieniu: @Html.TextBox("Param")  
+        <input type="submit" value="Szukaj" /></p>
+}*@
+
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("ID_Pracownika↑", "Index", new { sortBy = "WorkerId"})
+            @Html.ActionLink("ID_Pracownika↓", "Index", new { sortBy = "WorkerId_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Start↑", "Index", new { sortBy = "StartTime"})
+            @Html.ActionLink("Start↓", "Index", new { sortBy = "StartTime_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Stop↑", "Index", new { sortBy = "StopTime"})
+            @Html.ActionLink("Stop↓", "Index", new { sortBy = "StopTime_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Nazwa↑", "Index", new { sortBy = "TaskName"})
+            @Html.ActionLink("Nazwa↓", "Index", new { sortBy = "TaskName_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Godziny↑", "Index", new { sortBy = "Hours"})
+            @Html.ActionLink("Godziny↓", "Index", new { sortBy = "Hours_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("ID_Projektu↑", "Index", new { sortBy = "ProjectId"})
+            @Html.ActionLink("ID_Projektu↓", "Index", new { sortBy = "ProjectId_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Nazwa_Projektu↑", "Index", new { sortBy = "ProjectName"})
+            @Html.ActionLink("Nazwa_Projektu↓", "Index", new { sortBy = "ProjectName_desc"})
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StopTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hours)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.ProjectName)
+        </td>
+
+
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>*@
+    </tr>
+}
+
+</table>

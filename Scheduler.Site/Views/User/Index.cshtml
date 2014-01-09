@@ -13,10 +13,45 @@
 @using (Html.BeginForm("SearchByName", "User"))
 {
     <p>
-        Szukaj po imieniu: @Html.TextBox("name")  
+        Szukaj po imieniu: @Html.TextBox("Param")  
         <input type="submit" value="Szukaj" /></p>
 }
-
+@using (Html.BeginForm("SearchBySurname", "User"))
+{
+    <p>
+        Szukaj po Nazwisku: @Html.TextBox("Param")  
+        <input type="submit" value="Szukaj" /></p>
+}
+@using (Html.BeginForm("SearchByLogin", "User"))
+{
+    <p>
+        Szukaj po Loginie: @Html.TextBox("Param")  
+        <input type="submit" value="Szukaj" /></p>
+}
+@using (Html.BeginForm("SearchByPassword", "User"))
+{
+    <p>
+        Szukaj po Haśle: @Html.TextBox("Param")  
+        <input type="submit" value="Szukaj" /></p>
+}
+@using (Html.BeginForm("SearchByRoleId", "User"))
+{
+    <p>
+        Szukaj po ID Roli: @Html.TextBox("Param")  
+        <input type="submit" value="Szukaj" /></p>
+}
+@using (Html.BeginForm("SearchByGroupId", "User"))
+{
+    <p>
+        Szukaj po ID Grupy: @Html.TextBox("Param")  
+        <input type="submit" value="Szukaj" /></p>
+}
+@using (Html.BeginForm("SearchByGroupName", "User"))
+{
+    <p>
+        Szukaj po nazwie grupy: @Html.TextBox("GroupName")  
+        <input type="submit" value="Szukaj" /></p>
+}
 <table>
     <tr>
         <th>
@@ -43,6 +78,10 @@
             @Html.ActionLink("ID Grupy ↑", "Index", new { sortBy = "GroupId"})
             @Html.ActionLink("ID Grupy ↓", "Index", new { sortBy = "GroupId_desc"})
         </th>
+        <th>
+            @Html.ActionLink("Nazwa Grupy ↑", "Index", new { sortBy = "GroupName"})
+            @Html.ActionLink("Nazwa Grupy ↓", "Index", new { sortBy = "GroupName_desc"})
+        </th>
         <th></th>
     </tr>
 
@@ -65,6 +104,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.GroupId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Group.GroupName)
         </td>
         @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
