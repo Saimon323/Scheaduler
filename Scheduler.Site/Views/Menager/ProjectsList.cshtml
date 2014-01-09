@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Scheduler.Model.EntityModels.Project>
+﻿@model List<Scheduler.Site.Models.ProjectAndGroupRealizationList>
 @{
     ViewBag.Title = "ProjectsList";
 }
@@ -8,7 +8,8 @@
     {
         <tr>
             <td>@x.ProjectName</td>
-            <td><a href="@Url.Action("TasksInProject", "Menager", new {ProjectId = x.id})">Widok zadań</a></td>
+            <td>@x.GroupName</td>
+            <td><a href="@Url.Action("TasksInProject", "Menager", new {ProjectId = x.ProjectId, GroupId = x.GroupId})">Widok zadań</a></td>
         </tr>    
     }
 </table>

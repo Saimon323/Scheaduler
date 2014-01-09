@@ -172,7 +172,8 @@ namespace Scheduler.Model.Repositories
                 return;
 
             DateTime today = DateTime.UtcNow;
-            Message message = Message.CreateMessage(autoIncrementId, toUser.id, today, Title, Text, fromUser.id);
+            //Message message = Message.CreateMessage(autoIncrementId, toUser.id, today, Title, Text, fromUser.id);
+            Message message = Message.CreateMessage(autoIncrementId, toUser.id, today, Title, Text, fromUser.id, true);
             Entities.AddToMessages(message);
             Entities.SaveChanges();
         }

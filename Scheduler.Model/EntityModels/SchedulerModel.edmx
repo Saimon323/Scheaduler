@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SchedulerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SchedulerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="SchedulerModelStoreContainer">
           <EntitySet Name="Comments" EntityType="SchedulerModel.Store.Comments" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Documents" EntityType="SchedulerModel.Store.Documents" store:Type="Tables" Schema="dbo" />
@@ -54,6 +54,10 @@
           <AssociationSet Name="FK_ProjectsToGroupsRealizations_Projects" Association="SchedulerModel.Store.FK_ProjectsToGroupsRealizations_Projects">
             <End Role="Projects" EntitySet="Projects" />
             <End Role="ProjectsToGroupsRealizations" EntitySet="ProjectsToGroupsRealizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Groups" Association="SchedulerModel.Store.FK_Tasks_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
           <AssociationSet Name="FK_Tasks_Projects" Association="SchedulerModel.Store.FK_Tasks_Projects">
             <End Role="Projects" EntitySet="Projects" />
@@ -111,6 +115,7 @@
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Text" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="FromUserId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Projects">
           <Key>
@@ -149,6 +154,7 @@
           <Property Name="TaskName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Hours" Type="int" Nullable="false" />
           <Property Name="ProjectId" Type="int" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -294,6 +300,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tasks_Groups">
+          <End Role="Groups" Type="SchedulerModel.Store.Groups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tasks" Type="SchedulerModel.Store.Tasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tasks">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tasks_Projects">
           <End Role="Projects" Type="SchedulerModel.Store.Projects" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -344,8 +364,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SchedulerModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -415,6 +434,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Tasks" EntitySet="Tasks" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tasks_Groups" Association="SchedulerModel.FK_Tasks_Groups">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Comment">
           <Key>
@@ -451,6 +474,7 @@
           <NavigationProperty Name="User" Relationship="SchedulerModel.FK_Groups_Users" FromRole="Groups" ToRole="Users" />
           <NavigationProperty Name="ProjectsToGroupsRealizations" Relationship="SchedulerModel.FK_ProjectsToGroupsRealizations_Groups" FromRole="Groups" ToRole="ProjectsToGroupsRealizations" />
           <NavigationProperty Name="Users" Relationship="SchedulerModel.FK_Users_Groups" FromRole="Groups" ToRole="Users" />
+          <NavigationProperty Name="Tasks" Relationship="SchedulerModel.FK_Tasks_Groups" FromRole="Group" ToRole="Task" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -464,6 +488,7 @@
           <Property Name="FromUserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="SchedulerModel.FK_Messages_Users" FromRole="Messages" ToRole="Users" />
           <NavigationProperty Name="User1" Relationship="SchedulerModel.FK_Messages_Users1" FromRole="Messages" ToRole="Users" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -512,6 +537,8 @@
           <NavigationProperty Name="Comments" Relationship="SchedulerModel.FK_Coments_Tasks" FromRole="Tasks" ToRole="Comments" />
           <NavigationProperty Name="Project" Relationship="SchedulerModel.FK_Tasks_Projects" FromRole="Tasks" ToRole="Projects" />
           <NavigationProperty Name="User" Relationship="SchedulerModel.FK_Tasks_Users" FromRole="Tasks" ToRole="Users" />
+          <Property Type="Int32" Name="GroupId" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="SchedulerModel.FK_Tasks_Groups" FromRole="Task" ToRole="Group" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -716,6 +743,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tasks_Groups">
+          <End Type="SchedulerModel.Group" Role="Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SchedulerModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -757,6 +798,7 @@
           <EntitySetMapping Name="Messages">
             <EntityTypeMapping TypeName="SchedulerModel.Message">
               <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="ToUserId" ColumnName="ToUserId" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
@@ -798,6 +840,7 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="SchedulerModel.Task">
               <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="WorkerId" ColumnName="WorkerId" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
@@ -835,7 +878,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
       </DesignerInfoPropertySet>

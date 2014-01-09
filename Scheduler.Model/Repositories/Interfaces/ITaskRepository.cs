@@ -16,12 +16,13 @@ namespace Scheduler.Model.Repositories.Interfaces
         void addNewTask(string Login, DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName);
         void addNewTask(string Login, DateTime StartTime, string TaskName, int Hours, string ProjectName);
         void addNewTask(DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName);
-        void addNewTask(DateTime StartTime, string TaskName, int Hours, string ProjectName);
+        void addNewTask(DateTime StartTime, string TaskName, int Hours, string ProjectName, int GroupId);
         void addUserToTask(string Login, string TaskName, string ProjectName);
         void addTaskStopTime(string ProjectName, string TaskName, DateTime StopTime);
         void deleteTask(string ProjectName, string TaskName);
         void addNewComment(string ProjectName, string TaskName, string Text, DateTime Time, string Login);
         bool checkRealization(string ProjectName, string Login);
         Scheduler.Model.EntityModels.Task getTaskInProjectByTaskName(string ProjectName, string TaskName);
+        IEnumerable<Scheduler.Model.EntityModels.Task> GetAllTasksInProjectByGroupId(int ProjectId, int GroupId);
     }
 }

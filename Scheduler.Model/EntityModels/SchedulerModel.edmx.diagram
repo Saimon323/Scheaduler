@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="11ce0cc1fd3c4219ab0c304a55faf704" Name="Diagram1">
+      <Diagram DiagramId="11ce0cc1fd3c4219ab0c304a55faf704" Name="Diagram1" ZoomLevel="61">
         <EntityTypeShape EntityType="SchedulerModel.Comment" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SchedulerModel.Document" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SchedulerModel.Group" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
@@ -28,6 +28,7 @@
         <AssociationConnector Association="SchedulerModel.FK_Tasks_Projects" ManuallyRouted="false" />
         <AssociationConnector Association="SchedulerModel.FK_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="SchedulerModel.FK_Tasks_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulerModel.FK_Tasks_Groups" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

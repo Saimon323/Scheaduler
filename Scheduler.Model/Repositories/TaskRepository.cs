@@ -149,7 +149,7 @@ namespace Scheduler.Model.Repositories
 
         }
 
-        public void addNewTask(DateTime StartTime, string TaskName, int Hours, string ProjectName)
+        public void addNewTask(DateTime StartTime, string TaskName, int Hours, string ProjectName, int GroupId)
         {
             IProjectRepository projectRepo = new ProjectRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
@@ -161,7 +161,15 @@ namespace Scheduler.Model.Repositories
             if (taskExist != null)
                 return;
 
-            Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(StartTime, TaskName, Hours, projectExist.id);
+            //Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(StartTime, TaskName, Hours, projectExist.id);
+            Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task
+            {
+                StartTime = StartTime,
+                TaskName = TaskName,
+                Hours = Hours,
+                ProjectId = projectExist.id,
+                GroupId = GroupId
+            };
             Entities.AddToTasks(task);
             Entities.SaveChanges();
 
@@ -276,6 +284,11 @@ namespace Scheduler.Model.Repositories
             IProjectRepository projectRepo = new ProjectRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
             return Items.Where(x => x.ProjectId.Equals(projectExist.id) && x.TaskName.Equals(TaskName)).FirstOrDefault();
+        }
+
+        public IEnumerable<Scheduler.Model.EntityModels.Task> GetAllTasksInProjectByGroupId(int ProjectId, int GroupId)
+        {
+            return Items.Where(x => x.ProjectId.Equals(ProjectId) && x.GroupId.Equals(GroupId));
         }
     }
 }

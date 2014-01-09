@@ -33,6 +33,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Tasks_Projects", "Projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Project), "Tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Task), true)]
 [assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Users_Roles", "Roles", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Role), "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.User), true)]
 [assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Tasks_Users", "Users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Scheduler.Model.EntityModels.User), "Tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Task), true)]
+[assembly: EdmRelationshipAttribute("SchedulerModel", "FK_Tasks_Groups", "Group", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Scheduler.Model.EntityModels.Group), "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Scheduler.Model.EntityModels.Task), true)]
 
 #endregion
 
@@ -1007,6 +1008,28 @@ namespace Scheduler.Model.EntityModels
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Tasks_Groups", "Task")]
+        public EntityCollection<Task> Tasks
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Task>("SchedulerModel.FK_Tasks_Groups", "Task");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Task>("SchedulerModel.FK_Tasks_Groups", "Task", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -1031,7 +1054,8 @@ namespace Scheduler.Model.EntityModels
         /// <param name="title">Initial value of the Title property.</param>
         /// <param name="text">Initial value of the Text property.</param>
         /// <param name="fromUserId">Initial value of the FromUserId property.</param>
-        public static Message CreateMessage(global::System.Int32 id, global::System.Int32 toUserId, global::System.DateTime time, global::System.String title, global::System.String text, global::System.Int32 fromUserId)
+        /// <param name="status">Initial value of the Status property.</param>
+        public static Message CreateMessage(global::System.Int32 id, global::System.Int32 toUserId, global::System.DateTime time, global::System.String title, global::System.String text, global::System.Int32 fromUserId, global::System.Boolean status)
         {
             Message message = new Message();
             message.id = id;
@@ -1040,6 +1064,7 @@ namespace Scheduler.Model.EntityModels
             message.Title = title;
             message.Text = text;
             message.FromUserId = fromUserId;
+            message.Status = status;
             return message;
         }
 
@@ -1193,6 +1218,30 @@ namespace Scheduler.Model.EntityModels
         private global::System.Int32 _FromUserId;
         partial void OnFromUserIdChanging(global::System.Int32 value);
         partial void OnFromUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, "Status");
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.Boolean _Status;
+        partial void OnStatusChanging(global::System.Boolean value);
+        partial void OnStatusChanged();
 
         #endregion
 
@@ -1884,7 +1933,8 @@ namespace Scheduler.Model.EntityModels
         /// <param name="taskName">Initial value of the TaskName property.</param>
         /// <param name="hours">Initial value of the Hours property.</param>
         /// <param name="projectId">Initial value of the ProjectId property.</param>
-        public static Task CreateTask(global::System.Int32 id, global::System.DateTime startTime, global::System.String taskName, global::System.Int32 hours, global::System.Int32 projectId)
+        /// <param name="groupId">Initial value of the GroupId property.</param>
+        public static Task CreateTask(global::System.Int32 id, global::System.DateTime startTime, global::System.String taskName, global::System.Int32 hours, global::System.Int32 projectId, global::System.Int32 groupId)
         {
             Task task = new Task();
             task.id = id;
@@ -1892,6 +1942,7 @@ namespace Scheduler.Model.EntityModels
             task.TaskName = taskName;
             task.Hours = hours;
             task.ProjectId = projectId;
+            task.GroupId = groupId;
             return task;
         }
 
@@ -2069,6 +2120,30 @@ namespace Scheduler.Model.EntityModels
         private global::System.Int32 _ProjectId;
         partial void OnProjectIdChanging(global::System.Int32 value);
         partial void OnProjectIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GroupId
+        {
+            get
+            {
+                return _GroupId;
+            }
+            set
+            {
+                OnGroupIdChanging(value);
+                ReportPropertyChanging("GroupId");
+                _GroupId = StructuralObject.SetValidValue(value, "GroupId");
+                ReportPropertyChanged("GroupId");
+                OnGroupIdChanged();
+            }
+        }
+        private global::System.Int32 _GroupId;
+        partial void OnGroupIdChanging(global::System.Int32 value);
+        partial void OnGroupIdChanged();
 
         #endregion
 
@@ -2168,6 +2243,44 @@ namespace Scheduler.Model.EntityModels
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SchedulerModel.FK_Tasks_Users", "Users", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SchedulerModel", "FK_Tasks_Groups", "Group")]
+        public Group Group
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("SchedulerModel.FK_Tasks_Groups", "Group").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("SchedulerModel.FK_Tasks_Groups", "Group").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Group> GroupReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Group>("SchedulerModel.FK_Tasks_Groups", "Group");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Group>("SchedulerModel.FK_Tasks_Groups", "Group", value);
                 }
             }
         }
