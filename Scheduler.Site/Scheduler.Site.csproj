@@ -186,7 +186,9 @@
     <Compile Include="Controllers\MenagerController.cs" />
     <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Controllers\PageController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StartController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -331,6 +333,8 @@
     <Content Include="Views\Menager\SelectProject.cshtml" />
     <Content Include="Views\Menager\SelectGroup.cshtml" />
     <Content Include="Views\Menager\AddRealization.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

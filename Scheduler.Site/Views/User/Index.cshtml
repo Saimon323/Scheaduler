@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Scheduler.Model.EntityModels.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+
+@using (Html.BeginForm("SearchByName", "User"))
+{
+    <p>
+        Szukaj po imieniu: @Html.TextBox("name")  
+        <input type="submit" value="Szukaj" /></p>
+}
+
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("Imię ↑", "Index", new { sortBy = "Name"})
+            @Html.ActionLink("Imię ↓", "Index", new { sortBy = "Name_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Nazwosko ↑", "Index", new { sortBy = "Surname"})
+            @Html.ActionLink("Nazwosko ↓", "Index", new { sortBy = "Surname_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Login↑", "Index", new { sortBy = "Login"})
+            @Html.ActionLink("Login ↓", "Index", new { sortBy = "Login_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Hasło ↑", "Index", new { sortBy = "Password"})
+            @Html.ActionLink("Hasło ↓", "Index", new { sortBy = "Password_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("ID Roli ↑", "Index", new { sortBy = "RoleId"})
+            @Html.ActionLink("ID Roli ↓", "Index", new { sortBy = "RoleId_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("ID Grupy ↑", "Index", new { sortBy = "GroupId"})
+            @Html.ActionLink("ID Grupy ↓", "Index", new { sortBy = "GroupId_desc"})
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GroupId)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>*@
+    </tr>
+}
+
+</table>
