@@ -47,12 +47,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Hours)
         </td>
-
-        @*<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>*@
+        <td>
+            <a href="@Url.Action("DeleteRealization", "Worker", new {TaskId = item.id})">Zrezygnuj</a>
+        </td>
     </tr>
 }
 

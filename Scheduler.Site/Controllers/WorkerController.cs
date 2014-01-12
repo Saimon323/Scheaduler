@@ -120,8 +120,17 @@ namespace Scheduler.Site.Controllers
             var cookie = Request.Cookies["LogOn"];
             string userLogin = cookie.Value;
             IUserRepository userRepo = new UserRepository();
-            userRepo.deleteUserFromGroup(userLogin,GroupName);
+            ITaskRepository taskRepo = new TaskRepository();
 
+            User userExist = userRepo.getUserByLogin(userLogin);
+            IEnumerable<Scheduler.Model.EntityModels.Task> tasksList = taskRepo.getAllTasksUser(userExist.id);
+            userRepo.deleteUserFromGroup(userLogin,GroupName);
+            foreach (var x in tasksList)
+            {
+                x.WorkerId = null;
+            }
+            taskRepo.setValueNullAllTaskUser(userExist.id);
+            
             return RedirectToAction("HomePageWorker", "Worker");
         }
 
@@ -281,6 +290,14 @@ namespace Scheduler.Site.Controllers
             }
 
             return View(myTasksList.ToList());
+        }
+
+        public ActionResult DeleteRealization(int TaskId)
+        {
+            ITaskRepository taskRepository = new TaskRepository();
+            taskRepository.setValueNullTaskUser(TaskId);
+
+            return RedirectToAction("MyTasks", "Worker");
         }
 
     }

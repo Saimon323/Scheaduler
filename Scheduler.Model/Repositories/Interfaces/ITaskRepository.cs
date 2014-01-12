@@ -25,5 +25,7 @@ namespace Scheduler.Model.Repositories.Interfaces
         Scheduler.Model.EntityModels.Task getTaskInProjectByTaskName(string ProjectName, string TaskName);
         IEnumerable<Scheduler.Model.EntityModels.Task> GetAllTasksInProjectByGroupId(int ProjectId, int GroupId);
         IEnumerable<Scheduler.Model.EntityModels.Task> getAllTasksUser(int id);
+        void setValueNullAllTaskUser(int id);
+        void setValueNullTaskUser(int TaskId);
     }
 }

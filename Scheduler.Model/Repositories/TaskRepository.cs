@@ -305,6 +305,24 @@ namespace Scheduler.Model.Repositories
             }
 
             return resultList;
-        } 
+        }
+
+        public void setValueNullAllTaskUser(int id)
+        {
+            IEnumerable<Scheduler.Model.EntityModels.Task> tasksList = getAllTasksUser(id);
+            foreach (var x in tasksList)
+            {
+                x.WorkerId = null;
+            }
+
+            Entities.SaveChanges();
+        }
+
+        public void setValueNullTaskUser(int TaskId)
+        {
+            Scheduler.Model.EntityModels.Task task = getTaskById(TaskId);
+            task.WorkerId = null;
+            Entities.SaveChanges();
+        }
     }
 }
