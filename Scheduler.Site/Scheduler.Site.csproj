@@ -189,6 +189,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WorkerController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -315,8 +316,8 @@
     <Content Include="Views\Start\Register.cshtml" />
     <Content Include="Views\Start\Zarejestrowany.cshtml" />
     <Content Include="Views\Page\HomePage.cshtml" />
-    <Content Include="Views\Page\JoinToGroup.cshtml" />
-    <Content Include="Views\Page\GroupDetails.cshtml" />
+    <Content Include="Views\Worker\JoinToGroup.cshtml" />
+    <Content Include="Views\Worker\GroupDetails.cshtml" />
     <Content Include="Views\Owner\HomePageOwner.cshtml" />
     <Content Include="Views\Owner\AddNewProject.cshtml" />
     <Content Include="Views\Owner\ProjectDetail.cshtml" />
@@ -335,6 +336,10 @@
     <Content Include="Views\Menager\AddRealization.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Worker\HomePageWorker.cshtml" />
+    <Content Include="Views\Worker\Projects.cshtml" />
+    <Content Include="Views\Worker\TasksList.cshtml" />
+    <Content Include="Views\Worker\MyTasks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

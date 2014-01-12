@@ -33,8 +33,9 @@
             @Html.LabelFor(model => model.StopTime,"Data zakończenia")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StopTime)
-            @Html.ValidationMessageFor(model => model.StopTime)
+                        @Html.TextBoxFor(modle => Model.StopTime, new { @Value = "null" })
+            @*  @Html.EditorFor(model => model.StopTime)
+            @Html.ValidationMessageFor(model => model.StopTime)*@
         </div>
 
         <div class="editor-label">

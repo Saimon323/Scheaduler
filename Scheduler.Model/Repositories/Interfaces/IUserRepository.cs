@@ -53,5 +53,7 @@ namespace Scheduler.Model.Repositories.Interfaces
         IEnumerable<Role> getAllRole();
 
         IEnumerable<User> getAllMemberGroup(int idGroup);
+
+        void deleteUserFromGroup(string Login, string GroupName);
     }
 }

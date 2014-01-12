@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Scheduler.Model.EntityModels.Project>
+@{
+    ViewBag.Title = "Projects";
+}
+
+<table>
+@{
+    foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.ProjectName</td>
+            <td><a href="@Url.Action("TasksList", "Worker", new{ProjectId = x.id})">Zadania</a></td>
+        </tr>
+    }
+}
+
+</table>

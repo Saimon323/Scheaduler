@@ -1,0 +1,37 @@
+﻿@model Scheduler.Site.Models.TaskInProject
+@{
+    ViewBag.Title = "TasksInProject";
+}
+
+<h2>Zadania w realizacji</h2>
+
+<table>
+    @foreach (var x in Model.tasksInRealizationList)
+    {
+        <tr>
+            <td>@x.TaskName</td>
+            <td>@x.StartTime</td>
+            <td>@x.StopTime</td>
+            <td>@x.Hours</td>
+            <td>@x.Login</td>
+            <td>@x.Name</td>
+            <td>@x.Surname</td>
+        </tr>    
+    }
+</table>
+
+<h2>Zadania czekające na realizację</h2>
+<table>
+    @foreach (var x in Model.tasksWaitingForRealizaionList)
+    {
+        <tr>
+            <td>@x.TaskName</td>
+            <td>@x.StartTime</td>
+            <td>@x.StopTime</td>
+            <td>@x.Hours</td>
+            <td><a href="@Url.Action("AddUserToTask", "Worker", new{TaskName = x.TaskName, ProjectName = Model.ProjectName})">Realizuj</a></td>
+        </tr>    
+    }
+</table>
+
+<a href="@Url.Action("Projects", "Worker")">Powrót</a>

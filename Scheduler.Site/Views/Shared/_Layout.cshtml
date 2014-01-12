@@ -47,15 +47,16 @@
                                      <li>@Html.ActionLink("Projekty","ProjectsList","Menager")</li>
                                      <li>@Html.ActionLink("Dołącz do projektu","SelectProject","Menager")</li>
                                  }
+                                 else if (role.Name == "Worker")
+                                 {
+                                     <li>@Html.ActionLink("Moja grupa", "HomePageWorker", "Worker")</li>
+                                     if (userExist.GroupId != null)
+                                     {
+                                         <li>@Html.ActionLink("Projekty", "Projects", "Worker")</li>
+                                         <li>@Html.ActionLink("Moje Zadania", "MyTasks", "Worker")</li>
+                                     }
+                                 }
                                 </text>
-                                @* <text>
-                                    <li>@Html.ActionLink("Główna", "HomePage", "Page")</li>
-                                    @if (userExist.GroupId != null)
-                                    {
-                                        <li>@Html.ActionLink("Grupa", "MyGroupDetails", "Page")</li>
-                                    }
-                                </text>*@
-
                             }  
                         </ul>
                     </nav>

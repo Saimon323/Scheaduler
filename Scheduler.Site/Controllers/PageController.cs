@@ -33,6 +33,7 @@ namespace Scheduler.Site.Controllers
             IUserRepository userRepo = new UserRepository();
             User user = userRepo.getUserByLogin(userLogin);
             Role role = userRepo.getRoleById(user.RoleId);
+            
             if (role.Name == "Owner")
             {
                return RedirectToAction("HomePageOwner", "Owner");
@@ -40,13 +41,16 @@ namespace Scheduler.Site.Controllers
             } else if (role.Name == "Menager")
             {
                 return RedirectToAction("HomePageMenager", "Menager");
-            }
 
-           /* if (user.GroupId == null && user.RoleId == role.id)
+            }else if (user.GroupId == null && role.Name == "Worker")
             {
-                return RedirectToAction("JoinToGroup", "Page");
+                return RedirectToAction("JoinToGroup", "Worker");
             }
-            */
+            else if (user.GroupId != null && role.Name == "Worker")
+            {
+                return RedirectToAction("HomePageWorker", "Worker");
+            }
+            
             return View();
         }
 

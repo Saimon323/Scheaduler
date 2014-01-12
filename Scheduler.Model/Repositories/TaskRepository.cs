@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Odbc;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -290,5 +291,20 @@ namespace Scheduler.Model.Repositories
         {
             return Items.Where(x => x.ProjectId.Equals(ProjectId) && x.GroupId.Equals(GroupId));
         }
+
+        public IEnumerable<Scheduler.Model.EntityModels.Task> getAllTasksUser(int id)
+        {
+            List<Scheduler.Model.EntityModels.Task> tasks = Items.ToList();
+            List<Scheduler.Model.EntityModels.Task> resultList = new List<Task>();
+            foreach (var x in tasks)
+            {
+                if (x.WorkerId == id)
+                {
+                    resultList.Add(x);
+                }
+            }
+
+            return resultList;
+        } 
     }
 }
