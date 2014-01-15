@@ -78,5 +78,69 @@ namespace Scheduler.Site.Controllers
             
             return View(tasks.ToList());
         }
+
+        public ActionResult SearchByWorkerId(string workerId)
+        {
+            TaskRepository TaskRepo = new TaskRepository();
+
+            int id;
+
+            if(int.TryParse(workerId, out id))
+            {
+                var tasks = TaskRepo.GetAll().Where(t => t.WorkerId == id).ToList();
+                return View("Index", tasks);
+            }
+
+            return View("Index", TaskRepo.GetAll().ToList());
+            
+        }
+
+        public ActionResult SearchByName(string taskName)
+        {
+            TaskRepository TaskRepo = new TaskRepository();
+
+            var tasks = TaskRepo.GetAll().Where(t => t.TaskName.ToLower().Contains(taskName.ToLower())).ToList();
+
+            return View("Index", tasks);
+        }
+
+        public ActionResult SearchByTime(string time)
+        {
+            TaskRepository TaskRepo = new TaskRepository();
+
+            int hours;
+
+            if(int.TryParse(time, out hours))
+            {
+                var tasks = TaskRepo.GetAll().Where(t => t.Hours == hours).ToList();
+                return View("Index", tasks);
+            }
+
+            return View("Index", TaskRepo.GetAll().ToList());
+        }
+
+        public ActionResult SearchByProjectId(string projectId)
+        {
+           TaskRepository TaskRepo = new TaskRepository();
+
+            int id;
+
+            if(int.TryParse(projectId, out id))
+            {
+                var tasks = TaskRepo.GetAll().Where(t => t.ProjectId == id).ToList();
+                return View("Index", tasks);
+            }
+
+            return View("Index", TaskRepo.GetAll().ToList());
+        }
+
+        public ActionResult SearchByProjectName(string projectName)
+        {
+            TaskRepository TaskRepo = new TaskRepository();
+
+            var tasks = TaskRepo.GetAll().Where(t => (t.Project != null) && (t.Project.ProjectName.ToLower().Contains(projectName.ToLower()))).ToList();
+
+            return View("Index", tasks);
+        }
     }
 }

@@ -13,37 +13,37 @@
 @using (Html.BeginForm("SearchByName", "User"))
 {
     <p>
-        Szukaj po imieniu: @Html.TextBox("Param")  
+        Szukaj po imieniu: @Html.TextBox("Name")  
         <input type="submit" value="Szukaj" /></p>
 }
 @using (Html.BeginForm("SearchBySurname", "User"))
 {
     <p>
-        Szukaj po Nazwisku: @Html.TextBox("Param")  
+        Szukaj po Nazwisku: @Html.TextBox("Surname")  
         <input type="submit" value="Szukaj" /></p>
 }
 @using (Html.BeginForm("SearchByLogin", "User"))
 {
     <p>
-        Szukaj po Loginie: @Html.TextBox("Param")  
+        Szukaj po Loginie: @Html.TextBox("Login")  
         <input type="submit" value="Szukaj" /></p>
 }
 @using (Html.BeginForm("SearchByPassword", "User"))
 {
     <p>
-        Szukaj po Haśle: @Html.TextBox("Param")  
+        Szukaj po Haśle: @Html.TextBox("Password")  
         <input type="submit" value="Szukaj" /></p>
 }
 @using (Html.BeginForm("SearchByRoleId", "User"))
 {
     <p>
-        Szukaj po ID Roli: @Html.TextBox("Param")  
+        Szukaj po ID Roli: @Html.TextBox("RoleId")  
         <input type="submit" value="Szukaj" /></p>
 }
 @using (Html.BeginForm("SearchByGroupId", "User"))
 {
     <p>
-        Szukaj po ID Grupy: @Html.TextBox("Param")  
+        Szukaj po ID Grupy: @Html.TextBox("GroupId")  
         <input type="submit" value="Szukaj" /></p>
 }
 @using (Html.BeginForm("SearchByGroupName", "User"))

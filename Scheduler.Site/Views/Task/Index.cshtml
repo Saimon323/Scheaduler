@@ -13,6 +13,41 @@
         <input type="submit" value="Szukaj" /></p>
 }*@
 
+@using (Html.BeginForm("SearchByWorkerId", "Task"))
+{
+    <p>
+        Szukaj po ID Pracownika: @Html.TextBox("WorkerId")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+@using (Html.BeginForm("SearchByName", "Task"))
+{
+    <p>
+        Szukaj po Nazwie zadania: @Html.TextBox("TaskName")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+@using (Html.BeginForm("SearchByTime", "Task"))
+{
+    <p>
+        Szukaj po Czasie: @Html.TextBox("Time")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+@using (Html.BeginForm("SearchByProjectId", "Task"))
+{
+    <p>
+        Szukaj po ID projektu: @Html.TextBox("ProjectId")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+@using (Html.BeginForm("SearchByProjectName", "Task"))
+{
+    <p>
+        Szukaj po Nazwie projektu: @Html.TextBox("ProjectName")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
 <table>
     <tr>
         <th>

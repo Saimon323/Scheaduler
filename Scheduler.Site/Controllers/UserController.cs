@@ -78,61 +78,61 @@ namespace Scheduler.Site.Controllers
             return View(users);
         }
 
-        public ActionResult SearchByName(string param)
+        public ActionResult SearchByName(string name)
         {
             UserRepository UserRepo = new UserRepository();
-            var users = (!String.IsNullOrWhiteSpace(param)) ?
-                        UserRepo.GetAll().Where(u => u.Name.ToLower().Contains(param.ToLower())).ToList() 
+            var users = (!String.IsNullOrWhiteSpace(name)) ?
+                        UserRepo.GetAll().Where(u => u.Name.ToLower().Contains(name.ToLower())).ToList() 
                         : UserRepo.GetAll().ToList();
 
             return View("Index", users);
         }
 
-        public ActionResult SearchBySurname(string param)
+        public ActionResult SearchBySurname(string surname)
         {
             UserRepository UserRepo = new UserRepository();
-            var users = (!String.IsNullOrWhiteSpace(param)) ?
-                        UserRepo.GetAll().Where(u => u.Surname.ToLower().Contains(param.ToLower())).ToList()
+            var users = (!String.IsNullOrWhiteSpace(surname)) ?
+                        UserRepo.GetAll().Where(u => u.Surname.ToLower().Contains(surname.ToLower())).ToList()
                         : UserRepo.GetAll().ToList();
 
             return View("Index", users);
         }
 
-        public ActionResult SearchByLogin(string param)
+        public ActionResult SearchByLogin(string login)
         {
             UserRepository UserRepo = new UserRepository();
-            var users = (!String.IsNullOrWhiteSpace(param)) ?
-                        UserRepo.GetAll().Where(u => u.Login.ToLower().Contains(param.ToLower())).ToList()
+            var users = (!String.IsNullOrWhiteSpace(login)) ?
+                        UserRepo.GetAll().Where(u => u.Login.ToLower().Contains(login.ToLower())).ToList()
                         : UserRepo.GetAll().ToList();
 
             return View("Index", users);
         }
 
-        public ActionResult SearchByPassword(string param)
+        public ActionResult SearchByPassword(string password)
         {
             UserRepository UserRepo = new UserRepository();
-            var users = (!String.IsNullOrWhiteSpace(param)) ?
-                        UserRepo.GetAll().Where(u => u.Password.ToLower().Contains(param.ToLower())).ToList()
+            var users = (!String.IsNullOrWhiteSpace(password)) ?
+                        UserRepo.GetAll().Where(u => u.Password.ToLower().Contains(password.ToLower())).ToList()
                         : UserRepo.GetAll().ToList();
 
             return View("Index", users);
         }
 
-        public ActionResult SearchByRoleId(string param)
+        public ActionResult SearchByRoleId(string roleId)
         {
             UserRepository UserRepo = new UserRepository();
-            var users = (!String.IsNullOrWhiteSpace(param)) ?
-                        UserRepo.GetAll().Where(u => u.RoleId.ToString().Contains(param.ToLower())).ToList()
+            var users = (!String.IsNullOrWhiteSpace(roleId)) ?
+                        UserRepo.GetAll().Where(u => u.RoleId.ToString().Contains(roleId.ToLower())).ToList()
                         : UserRepo.GetAll().ToList();
 
             return View("Index", users);
         }
 
-        public ActionResult SearchByGroupId(string param)
+        public ActionResult SearchByGroupId(string groupId)
         {
             UserRepository UserRepo = new UserRepository();
-            var users = (!String.IsNullOrWhiteSpace(param)) ?
-                        UserRepo.GetAll().Where(u => u.GroupId.ToString().Contains(param.ToLower())).ToList()
+            var users = (!String.IsNullOrWhiteSpace(groupId)) ?
+                        UserRepo.GetAll().Where(u => u.GroupId.ToString().Contains(groupId.ToLower())).ToList()
                         : UserRepo.GetAll().ToList();
 
             return View("Index", users);
@@ -142,7 +142,7 @@ namespace Scheduler.Site.Controllers
         {
             UserRepository UserRepo = new UserRepository();
             var users = (!String.IsNullOrWhiteSpace(groupName)) ?
-                        UserRepo.GetAll().Where(u => ((u.Group != null) && (u.Group.GroupName.Contains(groupName.ToLower())))).ToList()
+                        UserRepo.GetAll().Where(u => ((u.Group != null) && (u.Group.GroupName.ToLower().Contains(groupName.ToLower())))).ToList()
                         : UserRepo.GetAll().ToList();
 
             return View("Index", users);

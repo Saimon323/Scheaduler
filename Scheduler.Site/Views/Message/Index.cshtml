@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Scheduler.Model.EntityModels.Message>
+
+
+@using (Html.BeginForm("SearchByToUserId", "Message"))
+{
+    <p>
+        Szukaj po ID Odbiorcy: @Html.TextBox("ToUserId")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+@using (Html.BeginForm("SearchByTime", "Message"))
+{
+    <p>
+        Szukaj po Czasie: @Html.TextBox("Time")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+@using (Html.BeginForm("SearchByTitle", "Message"))
+{
+    <p>
+        Szukaj po Tytule: @Html.TextBox("Title")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+@using (Html.BeginForm("SearchByText", "Message"))
+{
+    <p>
+        Szukaj po Treści: @Html.TextBox("Text")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+@using (Html.BeginForm("SearchByFromUserId", "Message"))
+{
+    <p>
+        Szukaj po ID Nadawcy: @Html.TextBox("FromUserId")  
+        <input type="submit" value="Szukaj" />
+    </p>
+}
+
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("Odbiorca↑", "Index", new { sortBy = "ToUserId"})
+            @Html.ActionLink("Odbiorca↓", "Index", new { sortBy = "ToUserId_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Czas↑", "Index", new { sortBy = "Time"})
+            @Html.ActionLink("Czas↓", "Index", new { sortBy = "Time_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Tytuł↑", "Index", new { sortBy = "Title"})
+            @Html.ActionLink("Tytuł↓", "Index", new { sortBy = "Title_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Tekst↑", "Index", new { sortBy = "Text"})
+            @Html.ActionLink("Tekst↓", "Index", new { sortBy = "Text_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Nadawca↑", "Index", new { sortBy = "FromUserId"})
+            @Html.ActionLink("Nadawca↓", "Index", new { sortBy = "FromUserId_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Status↑", "Index", new { sortBy = "Status"})
+            @Html.ActionLink("Status↓", "Index", new { sortBy = "Status_desc"})
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromUserId)
+        </td>
+        <td>
+            @(item.Status ? "przeczytana" : "nieprzeczytana")
+            @*@Html.DisplayFor(modelItem => item.Status)*@
+        </td>
+    </tr>
+}
+
+</table>
