@@ -90,12 +90,14 @@ namespace Scheduler.Site.Models
         public string ProjectName { get; set; }
         public float Budget { get; set; }
         public DateTime StarTime { get; set; }
-        public DateTime? StopTime { get; set; }
+        public DateTime StopTime { get; set; }
     }
 
     public class TaskInProject
     {
         public int id { get; set; }
+        public int GroupId { get; set; }
+        public string ProjectName { get; set; }
         public List<TasksInRealization> tasksInRealizationList;
         public List<WaitingTask> tasksWaitingForRealizaionList; 
 
@@ -130,9 +132,28 @@ namespace Scheduler.Site.Models
     public class NewTask
     {
         public int id { get; set; }
+        public int GroupId { get; set; }
         public string TaskName { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime? StopTime { get; set; }
+        public DateTime StopTime { get; set; }
+        public int Hours { get; set; }
+    }
+
+    public class ProjectAndGroupRealizationList
+    {
+        public string ProjectName { get; set; }
+        public int ProjectId { get; set; }
+        public string GroupName { get; set; }
+        public int GroupId { get; set; }
+    }
+
+    public class MyTask
+    {
+        public int id { get; set; }
+        public string ProjectName { get; set; }
+        public string TaskName { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime StopTime { get; set; }
         public int Hours { get; set; }
     }
 

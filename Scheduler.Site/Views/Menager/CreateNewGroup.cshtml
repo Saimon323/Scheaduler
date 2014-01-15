@@ -22,7 +22,7 @@
             @Html.LabelFor(model => model.CreationData,"Data utworzenia")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.CreationData)
+            @Html.TextBoxFor(model => model.CreationData, new { @Value = DateTime.Now, id = "datepicker" })
             @Html.ValidationMessageFor(model => model.CreationData)
         </div>
 

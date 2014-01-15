@@ -90,14 +90,15 @@ namespace Scheduler.Site.Controllers
             if (projectExist != null)
                 return View("Exist");
 
-            if (data.StopTime == null)
+           /* if (data.StopTime == null)
             {
                 projectRepo.addNewProject(data.ProjectName, data.Budget, data.StarTime, userExist.Login);
             
             }else if (data.StopTime != null)
             {
                 projectRepo.addNewProject(data.ProjectName, data.Budget, data.StarTime, userExist.Login);
-            }
+            }*/
+            projectRepo.addNewProject(data.ProjectName, data.Budget, data.StarTime, data.StopTime, userExist.Login);
 
             return RedirectToAction("HomePageOwner", "Owner");
         }

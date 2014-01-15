@@ -18,7 +18,7 @@
       <td>@x.Date</td>
        @*        <td>@Html.ActionLink("Szczegóły", "GroupDetails", "Page", new {GroupList = x})</td>
        <td>@Html.ActionLink("Szczegóły", "GroupDetails", "Page", new RouteValueDictionary { {"singleGroup", x} })</td>*@
-       <td><a href="@Url.Action("GroupDetails", "Page", new {id = x.id, Name = x.Name, Surname = x.Surname, Login = x.Login, GroupName = x.GroupName, Date = x.Date })">Szczegóły</a></td>
+       <td><a href="@Url.Action("GroupDetails", "Worker", new {id = x.id, Name = x.Name, Surname = x.Surname, Login = x.Login, GroupName = x.GroupName, Date = x.Date })">Szczegóły</a></td>
    </tr>
  }
  </table>

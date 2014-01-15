@@ -29,9 +29,9 @@
             <td>@x.StartTime</td>
             <td>@x.StopTime</td>
             <td>@x.Hours</td>
+            <td><a href="@Url.Action("AddUserToTask", "Worker", new{TaskName = x.TaskName, ProjectName = Model.ProjectName})">Realizuj</a></td>
         </tr>    
     }
 </table>
 
-<a href="@Url.Action("ProjectsList", "Menager")">Powrót</a>
-<a href="@Url.Action("CreatNewTask", "Menager", new {Projectid = Model.id, GroupId = Model.GroupId})">Dodaj zadanie</a>
+<a href="@Url.Action("Projects", "Worker")">Powrót</a>

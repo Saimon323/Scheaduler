@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "CreatNewTask";
     string identy = ViewBag.projectId.ToString();
+    string groupIdentity = ViewBag.groupId.ToString();
     
 }
 
@@ -24,7 +25,7 @@
             @Html.LabelFor(model => model.StartTime,"Data utworzenia")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StartTime)
+            @Html.TextBoxFor(model => model.StartTime, new { @Value = DateTime.Now, id = "datepicker" })
             @Html.ValidationMessageFor(model => model.StartTime)
         </div>
         
@@ -32,7 +33,7 @@
             @Html.LabelFor(model => model.StopTime,"Data zakończenia")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StopTime)
+            @Html.TextBoxFor(model => model.StopTime, new { @Value = DateTime.Now, id = "datepicker2" })
             @Html.ValidationMessageFor(model => model.StopTime)
         </div>
 
@@ -46,6 +47,10 @@
         
         <div class="dontShow">
             @Html.TextBoxFor(modle => Model.id, new { @Value = identy })
+        </div>
+        
+        <div class="dontShow">
+            @Html.TextBoxFor(modle => Model.GroupId, new { @Value = groupIdentity })
         </div>
 
         <p>

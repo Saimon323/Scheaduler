@@ -24,12 +24,12 @@
             @Html.EditorFor(model => model.Budget)
             @Html.ValidationMessageFor(model => model.Budget)
         </div>
-
+        
         <div class="editor-label">
             @Html.LabelFor(model => model.StarTime,"Czas rozpoczęcia")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StarTime)
+            @Html.TextBoxFor(model => model.StarTime, new { @Value = DateTime.Now, id = "datepicker" })
             @Html.ValidationMessageFor(model => model.StarTime)
         </div>
 
@@ -37,12 +37,12 @@
             @Html.LabelFor(model => model.StopTime,"Czas zakończenia")
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StopTime)
+            @Html.TextBoxFor(model => model.StopTime, new { @Value = DateTime.Now, id = "datepicker2" })
             @Html.ValidationMessageFor(model => model.StopTime)
         </div>
 
         <p>
-            <input type="submit" value="Search" />
+            <input type="submit" value="Dodaj" />
         </p>
     </fieldset>
 }

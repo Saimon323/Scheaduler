@@ -172,7 +172,8 @@ namespace Scheduler.Model.Repositories
                 return;
 
             DateTime today = DateTime.UtcNow;
-            Message message = Message.CreateMessage(autoIncrementId, toUser.id, today, Title, Text, fromUser.id);
+            //Message message = Message.CreateMessage(autoIncrementId, toUser.id, today, Title, Text, fromUser.id);
+            Message message = Message.CreateMessage(autoIncrementId, toUser.id, today, Title, Text, fromUser.id, true);
             Entities.AddToMessages(message);
             Entities.SaveChanges();
         }
@@ -298,6 +299,31 @@ namespace Scheduler.Model.Repositories
             }
             IEnumerable<User> mamberInGroup = membersList;
             return mamberInGroup;
+        }
+
+        public void deleteUserFromGroup(string Login, string GroupName)
+        {
+            User userexist = getUserByLogin(Login);
+
+            if (userexist == null)
+                return;
+
+            Role role = getRoleByName("Worker");
+            if (role.id != userexist.RoleId)
+                return;
+
+            GroupRepository grouprepo = new GroupRepository();
+
+            Group groupexist = grouprepo.getGroupByGroupName(GroupName);
+
+            if (groupexist == null)
+                return;
+
+            if (userexist.id == groupexist.MenagerId)
+                return;
+
+            userexist.GroupId = null;
+            Entities.SaveChanges();
         }
     }
 }

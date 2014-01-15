@@ -1,0 +1,33 @@
+﻿@model Scheduler.Site.Models.GroupDetail
+@{
+    ViewBag.Title = "GroupDetails";
+}
+
+<h2>Szczegóły grupy</h2>
+
+<h1>Nazwa grupy</h1>
+@Model.GroupName
+@Model.Date
+
+<h1>Menager Grupy</h1>
+@Model.Name
+@Model.Surname
+@Model.Login
+
+<h1>Członkowie grupy</h1>
+<table>
+    @{
+        foreach (var x in Model.MemberGroupList)
+        {
+            <tr>
+                <td>@x.Name</td>
+                <td>@x.Surname</td>
+                <td>@x.Login</td>
+            </tr>
+        }
+    }
+
+</table>
+
+<a href="@Url.Action("DeleteUserFromGroup", "Worker", new {GroupName = Model.GroupName})">Opuść grupe</a>
+

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Scheduler.Site.Models.MyTask>
+@{
+    ViewBag.Title = "MyTasks";
+}
+
+<h2>MyTasks</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("ProjectName ↑", "MyTasks", new { sortBy = "ProjectName"})
+            @Html.ActionLink("ProjectName ↓", "MyTasks", new { sortBy = "ProjectName_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("TaskName ↑", "MyTasks", new { sortBy = "TaskName"})
+            @Html.ActionLink("TaskName ↓", "MyTasks", new { sortBy = "TaskName_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("StartTime↑", "MyTasks", new { sortBy = "StartTime"})
+            @Html.ActionLink("StartTime ↓", "MyTasks", new { sortBy = "StartTime_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("StopTime ↑", "MyTasks", new { sortBy = "StopTime"})
+            @Html.ActionLink("StopTime ↓", "MyTasks", new { sortBy = "StopTime_desc"})
+        </th>
+        <th>
+            @Html.ActionLink("Hours ↑", "MyTasks", new { sortBy = "Hours"})
+            @Html.ActionLink("Hours ↓", "MyTasks", new { sortBy = "Hours_desc"})
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StopTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hours)
+        </td>
+        <td>
+            <a href="@Url.Action("DeleteRealization", "Worker", new {TaskId = item.id})">Zrezygnuj</a>
+        </td>
+    </tr>
+}
+
+</table>

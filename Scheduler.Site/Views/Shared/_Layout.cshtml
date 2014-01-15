@@ -8,6 +8,11 @@
         <title>@ViewBag.Title - My ASP.NET MVC Application</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
+
+          <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+          <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+                  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+        <script src="@Url.Content("~/Scripts/JSScheduler.js")" type="text/javascript"></script>
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
     </head>
@@ -47,15 +52,16 @@
                                      <li>@Html.ActionLink("Projekty","ProjectsList","Menager")</li>
                                      <li>@Html.ActionLink("Dołącz do projektu","SelectProject","Menager")</li>
                                  }
+                                 else if (role.Name == "Worker")
+                                 {
+                                     <li>@Html.ActionLink("Moja grupa", "HomePageWorker", "Worker")</li>
+                                     if (userExist.GroupId != null)
+                                     {
+                                         <li>@Html.ActionLink("Projekty", "Projects", "Worker")</li>
+                                         <li>@Html.ActionLink("Moje Zadania", "MyTasks", "Worker")</li>
+                                     }
+                                 }
                                 </text>
-                                @* <text>
-                                    <li>@Html.ActionLink("Główna", "HomePage", "Page")</li>
-                                    @if (userExist.GroupId != null)
-                                    {
-                                        <li>@Html.ActionLink("Grupa", "MyGroupDetails", "Page")</li>
-                                    }
-                                </text>*@
-
                             }  
                         </ul>
                     </nav>

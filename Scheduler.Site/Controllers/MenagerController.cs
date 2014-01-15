@@ -61,7 +61,7 @@ namespace Scheduler.Site.Controllers
 
         public ActionResult ProjectsList()
         {
-            var cookie = Request.Cookies["LogOn"];
+           /* var cookie = Request.Cookies["LogOn"];
             string userLogin = cookie.Value;
             IUserRepository userRepo = new UserRepository();
             IGroupRepository groupRepo = new GroupRepository();
@@ -69,10 +69,40 @@ namespace Scheduler.Site.Controllers
             IEnumerable<Group> menagerGroupsList = groupRepo.getAllGroupByMenagerId(userExist.id);
             IEnumerable<Project> projectsList = groupRepo.GetAllProjectsRealizationByGroup(userExist.id);
 
-            return View("ProjectsList",projectsList);
+            return View("ProjectsList",projectsList);*/
+
+            var cookie = Request.Cookies["LogOn"];
+            string userLogin = cookie.Value;
+            IUserRepository userRepo = new UserRepository();
+            IGroupRepository groupRepo = new GroupRepository();
+            List<Project> projectsRealization = new List<Project>();
+            User userExist = userRepo.getUserByLogin(userLogin);
+            IEnumerable<Project> projectsList;
+            ProjectAndGroupRealizationList item;
+            IEnumerable<Group> menagerGroupsList = groupRepo.getAllGroupByMenagerId(userExist.id);
+            //IEnumerable<Project> projectsList = groupRepo.GetAllProjectsRealizationByGroup(userExist.id);
+
+            List<ProjectAndGroupRealizationList> projectAndGroupRealizationLists = new List<ProjectAndGroupRealizationList>();
+            foreach (var group in menagerGroupsList)
+            {
+                projectsList = groupRepo.GetAllProjectsRealizationByGroup(group.id);
+                foreach (var project in projectsList)
+                {
+                    item = new ProjectAndGroupRealizationList
+                    {
+                        GroupId = group.id,
+                        GroupName = group.GroupName,
+                        ProjectId = project.id,
+                        ProjectName = project.ProjectName
+                    };
+                    projectAndGroupRealizationLists.Add(item);
+                }
+            }
+
+            return View("ProjectsList", projectAndGroupRealizationLists);
         }
 
-        public ActionResult TasksInProject(int ProjectId)
+        public ActionResult TasksInProject(int ProjectId, int GroupId)
         {
             ITaskRepository taskRepo = new TaskRepository();
             IUserRepository userRepo = new UserRepository();
@@ -80,8 +110,10 @@ namespace Scheduler.Site.Controllers
             List<TaskInProject> tasksAndDetailsList = new List<TaskInProject>();
             TaskInProject taskInProject = new TaskInProject();
             taskInProject.id = ProjectId;
+            taskInProject.GroupId = GroupId;
 
-            IEnumerable<Scheduler.Model.EntityModels.Task> tasksInProject = taskRepo.getAllTasksInProjects(ProjectId);
+            //IEnumerable<Scheduler.Model.EntityModels.Task> tasksInProject = taskRepo.getAllTasksInProjects(ProjectId);
+            IEnumerable<Scheduler.Model.EntityModels.Task> tasksInProject = taskRepo.GetAllTasksInProjectByGroupId(ProjectId,GroupId);
 
             foreach (var x in tasksInProject)
             {
@@ -119,7 +151,7 @@ namespace Scheduler.Site.Controllers
             return View("TasksInProject", taskInProject);
         }
 
-        public ActionResult CreatNewTask(int ProjectId)
+        public ActionResult CreatNewTask(int ProjectId, int GroupId)
         {
          /*   NewTask newTask = new NewTask
             {
@@ -128,6 +160,8 @@ namespace Scheduler.Site.Controllers
 
             return View("CreatNewTask", newTask);*/
             ViewBag.projectId = ProjectId;
+            ViewBag.groupId = GroupId;
+
             return View();
         }
 
@@ -141,9 +175,10 @@ namespace Scheduler.Site.Controllers
             if (taskExist != null)
                 return View("TaskExist");
 
-            taskRepo.addNewTask(data.StartTime,data.TaskName,data.Hours,projectExist.ProjectName);
+           // taskRepo.addNewTask(data.StartTime,data.TaskName,data.Hours,projectExist.ProjectName, data.GroupId);
+            taskRepo.addNewTask(data.StartTime,data.StopTime,data.TaskName,data.Hours,projectExist.ProjectName, data.GroupId);
 
-            return RedirectToAction("TasksInProject", "Menager", new { ProjectId = data.id});
+            return RedirectToAction("TasksInProject", "Menager", new { ProjectId = data.id, GroupId = data.GroupId});
         }
 
         public ActionResult SelectProject()

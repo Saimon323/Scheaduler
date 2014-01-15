@@ -4,6 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+<<<<<<< HEAD
+      <Diagram DiagramId="11ce0cc1fd3c4219ab0c304a55faf704" Name="Diagram1" ZoomLevel="61">
+        <EntityTypeShape EntityType="SchedulerModel.Comment" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.Document" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.Group" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.Message" Width="1.5" PointX="5.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.Project" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SchedulerModel.ProjectsToGroupsRealization" Width="1.5" PointX="7.5" PointY="16.625" IsExpanded="true" />
+=======
       <Diagram DiagramId="11ce0cc1fd3c4219ab0c304a55faf704" Name="Diagram1" ZoomLevel="63">
         <EntityTypeShape EntityType="SchedulerModel.Comment" Width="1.5" PointX="3.25" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="SchedulerModel.Document" Width="1.5" PointX="7.125" PointY="10.375" IsExpanded="true" />
@@ -11,6 +20,7 @@
         <EntityTypeShape EntityType="SchedulerModel.Message" Width="1.5" PointX="1" PointY="14.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SchedulerModel.Project" Width="1.5" PointX="9.5" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="SchedulerModel.ProjectsToGroupsRealization" Width="1.5" PointX="7.125" PointY="14.375" IsExpanded="true" />
+>>>>>>> cb6dbd482759403abf945de4a542a7e59f4c665a
         <EntityTypeShape EntityType="SchedulerModel.Role" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SchedulerModel.Task" Width="1.5" PointX="7" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SchedulerModel.User" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
@@ -28,6 +38,7 @@
         <AssociationConnector Association="SchedulerModel.FK_Tasks_Projects" ManuallyRouted="false" />
         <AssociationConnector Association="SchedulerModel.FK_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="SchedulerModel.FK_Tasks_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="SchedulerModel.FK_Tasks_Groups" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
