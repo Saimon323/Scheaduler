@@ -14,20 +14,30 @@ namespace Scheduler.Site
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "Search",
-                "Search/{controller}s/{action}/{id}",
-                new { controller = "User", action = "Index", id = UrlParameter.Optional });
+                name: "SearchUsers",
+                url: "Search/Users/{action}/{id}",
+                defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
+                );
 
-            //routes.MapRoute(
-            //    "SearchTasks",
-            //    "Search/Tasks/{action}/{id}",
-            //    new { controller = "Tasks", action = "Index", id = UrlParameter.Optional });
+            routes.MapRoute(
+                name: "SearchTasks",
+                url: "Search/Tasks/{action}/{id}",
+                defaults: new { controller = "Task", action = "Index", id = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "SearchMessages",
+                url: "Search/Messages/{action}/{id}",
+                defaults: new { controller = "Message", action = "Index", id = UrlParameter.Optional }
+                );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Start", action = "Index", id = UrlParameter.Optional }
             );
+
+            
         }
     }
 }

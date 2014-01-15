@@ -1,0 +1,42 @@
+﻿@model Scheduler.Model.EntityModels.Message
+
+@{
+    ViewBag.Title = "Pokaż";
+}
+
+<h2>Pokaż</h2>
+
+<fieldset>
+    <legend>Wiadomość</legend>
+
+    <div class="display-label">
+         <b>Otrzymano:</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Time)
+    </div>
+
+    <div class="display-label">
+         <b>Tytuł:</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         <b>Treść:</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Text)
+    </div>
+
+    <div class="display-label">
+        <b>Od:</b>
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FromUserId)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Wróć", "Received")
+</p>

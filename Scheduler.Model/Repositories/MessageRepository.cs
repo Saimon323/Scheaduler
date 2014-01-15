@@ -19,6 +19,7 @@ namespace Scheduler.Model.Repositories
         public override void Add(Message message)
         {
             Entities.AddToMessages(message);
+            Entities.SaveChanges();
         }
 
         public override IQueryable<Message> Items
@@ -37,6 +38,28 @@ namespace Scheduler.Model.Repositories
         public Message getMessageById(int id)
         {
             return Items.FirstOrDefault(x => x.id == id);
+        }
+
+        public void MarkAsRead(int id)
+        {
+            var mess = Items.FirstOrDefault(t => t.id == id);
+            if (mess != null)
+            {
+                mess.Status = false;
+            }
+
+            Entities.SaveChanges();
+        }
+
+        public void MarkAsNotRead(int id)
+        {
+            var mess = Items.FirstOrDefault(t => t.id == id);
+            if (mess != null)
+            {
+                mess.Status = true;
+            }
+
+            Entities.SaveChanges();
         }
 
         public IEnumerable<Message> GetAllMessages()

@@ -191,6 +191,7 @@
     <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserMessagerController.cs" />
     <Compile Include="Controllers\WorkerController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -345,6 +346,11 @@
     <Content Include="Views\Worker\TasksList.cshtml" />
     <Content Include="Views\Worker\MyTasks.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\UserMessager\Index.cshtml" />
+    <Content Include="Views\UserMessager\Received.cshtml" />
+    <Content Include="Views\UserMessager\Sent.cshtml" />
+    <Content Include="Views\UserMessager\Show.cshtml" />
+    <Content Include="Views\UserMessager\CreateNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

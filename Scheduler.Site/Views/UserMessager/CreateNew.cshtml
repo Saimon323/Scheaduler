@@ -1,0 +1,57 @@
+﻿@model Scheduler.Site.Models.MessageModel
+
+@{
+    ViewBag.Title = "Nowa Wiadomość";
+}
+
+<h2>Utwórz nową</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Wiadomość</legend>
+
+        <div class="editor-label">
+            Tytuł:
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            Treść:
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Text)
+            @Html.ValidationMessageFor(model => model.Text)
+        </div>
+
+        <div class="editor-label">
+            Odbiorca:
+        </div>
+        <select name="ToUser">
+            @{
+                foreach(string item in ViewBag.Logins)
+                {
+                    <option value=@item>@item</option>
+                }
+            }
+        </select>
+
+        <p>
+            <input type="submit" value="Wyślij" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Wróć", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
