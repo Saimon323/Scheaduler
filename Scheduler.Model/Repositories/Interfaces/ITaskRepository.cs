@@ -13,9 +13,9 @@ namespace Scheduler.Model.Repositories.Interfaces
         Scheduler.Model.EntityModels.Task getTaskById(int id);
         Scheduler.Model.EntityModels.Task getTaskByNameAndProjectName(string ProjectName, string TaskName);
         IEnumerable<Scheduler.Model.EntityModels.Task> getAllTasksInProjects(int ProjectId);
-        void addNewTask(string Login, DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName);
-        void addNewTask(string Login, DateTime StartTime, string TaskName, int Hours, string ProjectName);
-        void addNewTask(DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName);
+     //   void addNewTask(string Login, DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName);
+       // void addNewTask(string Login, DateTime StartTime, string TaskName, int Hours, string ProjectName);
+        void addNewTask(DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName, int GroupId);
         void addNewTask(DateTime StartTime, string TaskName, int Hours, string ProjectName, int GroupId);
         void addUserToTask(string Login, string TaskName, string ProjectName);
         void addTaskStopTime(string ProjectName, string TaskName, DateTime StopTime);

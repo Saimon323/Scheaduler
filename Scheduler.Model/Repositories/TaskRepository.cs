@@ -63,46 +63,77 @@ namespace Scheduler.Model.Repositories
                 }
             }
             return tasksList;
-        } 
-
-        public void addNewTask(string Login, DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName)
-        {
-            IGroupRepository groupRepo = new GroupRepository();
-            IProjectRepository projectRepo = new ProjectRepository();
-            IUserRepository userRepo = new UserRepository();
-            Project projectExist = projectRepo.getProjectByName(ProjectName);
-            
-            if (projectExist == null)
-                return;
-
-            Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
-            if (taskExist != null)
-                return;
-
-            User userExist = userRepo.getUserByLogin(Login);
-
-            if (userExist == null || userExist.GroupId == null)
-                return;
-            
-            List<Group> GroupInProject = groupRepo.getAllGroupWorkingInProject(projectExist.ProjectName);
-
-            foreach (var x in GroupInProject)
-            {
-                if (userExist.GroupId == x.id)
-                {
-                    Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(userExist.id, StartTime, StopTime, TaskName, Hours, projectExist.id);
-                    Entities.AddToTasks(task);
-                    Entities.SaveChanges();
-                }
-            }
-            
         }
 
-        public void addNewTask(string Login, DateTime StartTime, string TaskName, int Hours, string ProjectName)
+        //public void addNewTask(string Login, DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName, int GroupId)
+        //{
+        //    IGroupRepository groupRepo = new GroupRepository();
+        //    IProjectRepository projectRepo = new ProjectRepository();
+        //    IUserRepository userRepo = new UserRepository();
+        //    Project projectExist = projectRepo.getProjectByName(ProjectName);
+            
+        //    if (projectExist == null)
+        //        return;
+
+        //    Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
+        //    if (taskExist != null)
+        //        return;
+
+        //    User userExist = userRepo.getUserByLogin(Login);
+
+        //    if (userExist == null || userExist.GroupId == null)
+        //        return;
+            
+        //    List<Group> GroupInProject = groupRepo.getAllGroupWorkingInProject(projectExist.ProjectName);
+
+        //    foreach (var x in GroupInProject)
+        //    {
+        //        if (userExist.GroupId == x.id)
+        //        {
+        //            Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(userExist.id, StartTime, StopTime, TaskName, Hours, projectExist.id);
+        //            Entities.AddToTasks(task);
+        //            Entities.SaveChanges();
+        //        }
+        //    }
+            
+        //}
+
+        //public void addNewTask(string Login, DateTime StartTime, string TaskName, int Hours, string ProjectName, int GroupId)
+        //{
+        //    IGroupRepository groupRepo = new GroupRepository();
+        //    IProjectRepository projectRepo = new ProjectRepository();
+        //    IUserRepository userRepo = new UserRepository();
+        //    Project projectExist = projectRepo.getProjectByName(ProjectName);
+
+        //    if (projectExist == null)
+        //        return;
+
+        //    Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
+        //    if (taskExist != null)
+        //        return;
+
+        //    User userExist = userRepo.getUserByLogin(Login);
+
+        //    if (userExist == null || userExist.GroupId == null)
+        //        return;
+
+        //    List<Group> GroupInProject = groupRepo.getAllGroupWorkingInProject(projectExist.ProjectName);
+
+        //    foreach (var x in GroupInProject)
+        //    {
+        //        if (userExist.GroupId == x.id)
+        //        {
+        //            Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(userExist.id, StartTime, TaskName, Hours, projectExist.id);
+        //            Entities.AddToTasks(task);
+        //            Entities.SaveChanges();
+        //        }
+        //    }
+
+        //}
+
+        public void addNewTask(DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName, int GroupId)
         {
-            IGroupRepository groupRepo = new GroupRepository();
             IProjectRepository projectRepo = new ProjectRepository();
-            IUserRepository userRepo = new UserRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
 
             if (projectExist == null)
@@ -112,41 +143,19 @@ namespace Scheduler.Model.Repositories
             if (taskExist != null)
                 return;
 
-            User userExist = userRepo.getUserByLogin(Login);
-
-            if (userExist == null || userExist.GroupId == null)
-                return;
-
-            List<Group> GroupInProject = groupRepo.getAllGroupWorkingInProject(projectExist.ProjectName);
-
-            foreach (var x in GroupInProject)
+            //Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(StartTime, StopTime, TaskName, Hours, projectExist.id);
+            Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task
             {
-                if (userExist.GroupId == x.id)
-                {
-                    Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(userExist.id, StartTime, TaskName, Hours, projectExist.id);
-                    Entities.AddToTasks(task);
-                    Entities.SaveChanges();
-                }
-            }
-
-        }
-
-        public void addNewTask(DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName)
-        {
-            IProjectRepository projectRepo = new ProjectRepository();
-            Project projectExist = projectRepo.getProjectByName(ProjectName);
-
-            if (projectExist == null)
-                return;
-
-            Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
-            if (taskExist != null)
-                return;
-
-            Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(StartTime, StopTime, TaskName, Hours, projectExist.id);
+                StartTime = StartTime,
+                StopTime = StopTime,
+                TaskName = TaskName,
+                Hours = Hours,
+                ProjectId = projectExist.id,
+                GroupId = GroupId
+            };
             Entities.AddToTasks(task);
             Entities.SaveChanges();
-             
+
 
         }
 

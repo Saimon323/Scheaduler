@@ -175,7 +175,8 @@ namespace Scheduler.Site.Controllers
             if (taskExist != null)
                 return View("TaskExist");
 
-            taskRepo.addNewTask(data.StartTime,data.TaskName,data.Hours,projectExist.ProjectName, data.GroupId);
+           // taskRepo.addNewTask(data.StartTime,data.TaskName,data.Hours,projectExist.ProjectName, data.GroupId);
+            taskRepo.addNewTask(data.StartTime,data.StopTime,data.TaskName,data.Hours,projectExist.ProjectName, data.GroupId);
 
             return RedirectToAction("TasksInProject", "Menager", new { ProjectId = data.id, GroupId = data.GroupId});
         }

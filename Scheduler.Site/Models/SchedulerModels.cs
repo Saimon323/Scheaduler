@@ -90,7 +90,7 @@ namespace Scheduler.Site.Models
         public string ProjectName { get; set; }
         public float Budget { get; set; }
         public DateTime StarTime { get; set; }
-        public DateTime? StopTime { get; set; }
+        public DateTime StopTime { get; set; }
     }
 
     public class TaskInProject
@@ -135,7 +135,7 @@ namespace Scheduler.Site.Models
         public int GroupId { get; set; }
         public string TaskName { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime? StopTime { get; set; }
+        public DateTime StopTime { get; set; }
         public int Hours { get; set; }
     }
 
