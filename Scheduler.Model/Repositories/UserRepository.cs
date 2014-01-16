@@ -371,5 +371,10 @@ namespace Scheduler.Model.Repositories
             userexist.GroupId = null;
             Entities.SaveChanges();
         }
+
+        public List<User> getAll()
+        {
+            return Entities.Users.ToList();
+        }
     }
 }

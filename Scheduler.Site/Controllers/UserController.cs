@@ -8,6 +8,7 @@ using Scheduler.Model.EntityModels;
 using Scheduler.Model.Repositories;
 using Scheduler.Model.Repositories.Interfaces;
 using Scheduler.Site.Models;
+using System.Xml.Linq;
 
 
 namespace Scheduler.Site.Controllers
@@ -146,6 +147,26 @@ namespace Scheduler.Site.Controllers
                         : UserRepo.GetAll().ToList();
 
             return View("Index", users);
+        }
+
+        public ActionResult ExportToXml()
+        {
+            IUserRepository userRepo = new UserRepository();
+            var allUsers = userRepo.getAll();
+            XElement xmlDoc = new XElement("Users",
+                  from c in allUsers
+                  orderby c.id
+                  select new XElement("User",
+                         new XElement("id", c.id),
+                         new XElement("Name", c.Name),
+                         new XElement("Surname", c.Surname),
+                         new XElement("Login", c.Login),
+                         new XElement("Password", c.Password),
+                         new XElement("Rola", c.RoleId),
+                         new XElement("Group", c.GroupId)
+                         ));
+            xmlDoc.Save(Server.MapPath(@"~/export.xml"));
+            return RedirectToAction("HomePage", "Page");
         }
     }
 }
