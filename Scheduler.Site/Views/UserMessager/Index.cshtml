@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<h3>Nowe Wiadomości: @ViewBag.NewMessages</h3>
+
+
+<li>@Html.ActionLink("Utwórz Nową", "CreateNew")</li>
+
+
+<li>@Html.ActionLink("Odebrane", "Received")</li>
+<li>@Html.ActionLink("Wysłane", "Sent")</li>
