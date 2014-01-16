@@ -119,7 +119,8 @@ namespace Scheduler.Site.Controllers
         [HttpPost]
         public ActionResult Register(RegisterModel data)
         {
-            IUserRepository userRepo = new UserRepository();
+            #region rejestracja
+            /* IUserRepository userRepo = new UserRepository();
             bool userExist = userRepo.LogIn(data.Login, data.Password);
 
             if (userExist == true)
@@ -134,10 +135,29 @@ namespace Scheduler.Site.Controllers
                 var cookie = new HttpCookie("LogOn", cookieValue);
                 Response.AppendCookie(cookie);
                 return RedirectToAction("HomePage", "Page");
-            }
-                
+            }*/
+            #endregion
+
             //ViewBag.messageString = data;
             //return View("Zalogowany");
+            IUserRepository userRepo = new UserRepository();
+
+
+            Role role = userRepo.getRoleById(data.RoleId);
+            bool succes = userRepo.addNewUser(data.Name, data.Surname, data.Login, data.Password, role.Name);
+            if (succes == true)
+            {
+                string cookieValue = data.Login.ToString();
+                var cookie = new HttpCookie("LogOn", cookieValue);
+                Response.AppendCookie(cookie);
+                return RedirectToAction("HomePage", "Page");
+            }
+            else
+            {
+                return View("Exist");
+            }
+
+            
         }
 
        

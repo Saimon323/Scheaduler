@@ -345,6 +345,7 @@
     <Content Include="Views\Worker\TasksList.cshtml" />
     <Content Include="Views\Worker\MyTasks.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Start\Exist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

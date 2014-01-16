@@ -8,6 +8,7 @@ using Scheduler.Model.Repositories.Interfaces;
 using Scheduler.Model.EntityModels;
 using System.Data.Spatial;
 using Task = Scheduler.Model.EntityModels.Task;
+using System.Data.SqlClient;
 
 namespace Scheduler.Model.Repositories
 {
@@ -155,7 +156,23 @@ namespace Scheduler.Model.Repositories
             };
             Entities.AddToTasks(task);
             Entities.SaveChanges();
+            /*try
+            {
+                Entities.SaveChanges();
+            }
 
+            catch (SqlException ex)
+            {
+                Entities.Detach(task);
+                int index = ex.InnerException.Message.IndexOf('\r');
+                //return ex.InnerException.Message.Substring(0, index);
+            }
+            catch (Exception ex)
+            {
+                Entities.Detach(task);
+                int index = ex.InnerException.Message.IndexOf('\r');
+              //  return ex.InnerException.Message.Substring(0, index);
+            }*/
 
         }
 

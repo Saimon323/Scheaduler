@@ -24,7 +24,7 @@ namespace Scheduler.Model.Repositories.Interfaces
 
         IEnumerable<Message> getAllMessageFromUser(string Login);
 
-        void addNewUser(string Name, string Surname, string Login, string Password, string Role);
+        bool addNewUser(string Name, string Surname, string Login, string Password, string Role);
 
         void addNewUser(string Name, string Surname, string Login, string Password, string Role, string GroupName);
 

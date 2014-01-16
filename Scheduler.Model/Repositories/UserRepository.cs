@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Scheduler.Model.Repositories.Interfaces;
 using Scheduler.Model.EntityModels;
 using System.Data.Spatial;
+using System.Data.SqlClient;
 
 namespace Scheduler.Model.Repositories
 {
@@ -98,9 +99,10 @@ namespace Scheduler.Model.Repositories
             return Entities.Messages.Where(x => x.FromUserId.Equals(userExist.id));
         }
 
-        public void addNewUser(string Name, string Surname, string Login, string Password, string Role)
+        public bool addNewUser(string Name, string Surname, string Login, string Password, string Role)
         {
-            User existUser = getUserByLogin(Login);
+            #region starelogowanie
+            /*User existUser = getUserByLogin(Login);
             if (existUser != null)
                 return;
 
@@ -110,7 +112,51 @@ namespace Scheduler.Model.Repositories
 
             User user = User.CreateUser(autoIncrementId, Name, Surname, Login, Password, existRole.id);
             Entities.AddToUsers(user);
-            Entities.SaveChanges();
+            try
+            {
+                Entities.SaveChanges();
+            }
+
+            catch (SqlException ex)
+            {
+                Entities.Detach(user);
+                int index = ex.InnerException.Message.IndexOf('\r');
+                //return ex.InnerException.Message.Substring(0, index);
+            }
+            catch (Exception ex)
+            {
+                Entities.Detach(user);
+                int index = ex.InnerException.Message.IndexOf('\r');
+                //  return ex.InnerException.Message.Substring(0, index);
+            }*/
+            #endregion nowe logowan
+
+
+            Role existRole = getRoleByName(Role);
+
+
+            User user = User.CreateUser(autoIncrementId, Name, Surname, Login, Password, existRole.id);
+            Entities.AddToUsers(user);
+            try
+            {
+                Entities.SaveChanges();
+            }
+
+            catch (SqlException ex)
+            {
+                Entities.Detach(user);
+                int index = ex.InnerException.Message.IndexOf('\r');
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Entities.Detach(user);
+                int index = ex.InnerException.Message.IndexOf('\r');
+                //  return ex.InnerException.Message.Substring(0, index);
+                return false;
+            }
+
+            return true;
         }
 
         public void addNewUser(string Name, string Surname, string Login, string Password, string Role, string GroupName)
