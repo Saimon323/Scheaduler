@@ -8,6 +8,7 @@ using Scheduler.Model.EntityModels;
 using Scheduler.Model.Repositories;
 using Scheduler.Model.Repositories.Interfaces;
 using Scheduler.Site.Models;
+using System.Xml.Linq;
 
 namespace Scheduler.Site.Controllers
 {
@@ -187,7 +188,38 @@ namespace Scheduler.Site.Controllers
 
             return RedirectToAction("Index");
         }
-        
 
+        public ActionResult ImportFromXml()
+        {
+            IUserRepository userRepo = new UserRepository();
+
+
+
+
+            XDocument xDoc;
+            xDoc = XDocument.Load("c:\\Scheduler.xml");
+            var result = from q in xDoc.Descendants("user")
+                         select new
+
+                         {
+                             Name = q.Element("name").Value,
+                             Surname = q.Element("surname").Value,
+                             Login = q.Element("login").Value,
+                             Password = q.Element("password").Value,
+                             RoleId = Int32.Parse(q.Element("roleId").Value),
+
+                         };
+            foreach (var e in result)
+            {
+                Role role = userRepo.getRoleById(e.RoleId);
+                bool succes = userRepo.addNewUser(e.Name, e.Surname, e.Login, e.Password, role.Name);
+                if (succes == false)
+                {
+                    return View("Faill");
+                }
+            }
+
+            return View("Success");
+        }
     }
 }
