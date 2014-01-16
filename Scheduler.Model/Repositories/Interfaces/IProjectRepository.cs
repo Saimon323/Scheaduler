@@ -16,7 +16,7 @@ namespace Scheduler.Model.Repositories.Interfaces
 
         IEnumerable<Project> getAllProjectByIdOwner(int OwnerId);
 
-        void addNewProject(string ProjectName, float Budget, DateTime StartTime, DateTime StopTime, string OwnerLogin);//dopisac logike
+        bool addNewProject(string ProjectName, float Budget, DateTime StartTime, DateTime StopTime, string OwnerLogin);//dopisac logike
 
 
         void addNewProject(string ProjectName, float Budget, DateTime StartTime, string OwnerLogin);//dopisac logike

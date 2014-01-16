@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Scheduler.Model.Repositories.Interfaces;
 using Scheduler.Model.EntityModels;
 using System.Data.Spatial;
+using System.Data.SqlClient;
 
 namespace Scheduler.Model.Repositories
 {
@@ -49,23 +50,42 @@ namespace Scheduler.Model.Repositories
             return Items.Where(x => x.OwnerId.Equals(OwnerId));
         } 
 
-        public void addNewProject(string ProjectName, float Budget, DateTime StartTime, DateTime StopTime, string OwnerLogin)
+        public bool addNewProject(string ProjectName, float Budget, DateTime StartTime, DateTime StopTime, string OwnerLogin)
         {
-            Project projectExist = getProjectByName(ProjectName);
+           /* Project projectExist = getProjectByName(ProjectName);
 
             if (projectExist != null)
-                return;
+                return;*/
 
             IUserRepository userRepository = new UserRepository();
 
             User userExist = userRepository.getOwnerByLogin(OwnerLogin, ownerRole);
 
-            if (userExist == null)
-                return;
+           /* if (userExist == null)
+                return;*/
 
             Project project = new Project(ProjectName, Budget, StartTime, StopTime, userExist.id);
             Entities.AddToProjects(project);
-            Entities.SaveChanges();
+            //Entities.SaveChanges();
+            try
+            {
+                Entities.SaveChanges();
+            }
+
+            catch (SqlException ex)
+            {
+                Entities.Detach(project);
+                int index = ex.InnerException.Message.IndexOf('\r');
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Entities.Detach(project);
+                int index = ex.InnerException.Message.IndexOf('\r');
+                //  return ex.InnerException.Message.Substring(0, index);
+                return false;
+            }
+            return true;
         }
 
         public void addNewProject(string ProjectName, float Budget, DateTime StartTime, string OwnerLogin)

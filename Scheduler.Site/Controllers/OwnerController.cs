@@ -85,10 +85,10 @@ namespace Scheduler.Site.Controllers
 
             var cookie = Request.Cookies["LogOn"];
             string userLogin = cookie.Value;
-            Project projectExist = projectRepo.getProjectByName(data.ProjectName);
+            //Project projectExist = projectRepo.getProjectByName(data.ProjectName);
             User userExist = userRepo.getUserByLogin(userLogin);
-            if (projectExist != null)
-                return View("Exist");
+          //  if (projectExist != null)
+            //    return View("Exist");
 
            /* if (data.StopTime == null)
             {
@@ -98,9 +98,17 @@ namespace Scheduler.Site.Controllers
             {
                 projectRepo.addNewProject(data.ProjectName, data.Budget, data.StarTime, userExist.Login);
             }*/
-            projectRepo.addNewProject(data.ProjectName, data.Budget, data.StarTime, data.StopTime, userExist.Login);
+            bool status = projectRepo.addNewProject(data.ProjectName, data.Budget, data.StarTime, data.StopTime, userExist.Login);
 
-            return RedirectToAction("HomePageOwner", "Owner");
+            if (status == true)
+            {
+                return RedirectToAction("HomePageOwner", "Owner");
+            }
+            else
+            {
+                return View("Exist");
+            }
+            
         }
 
 

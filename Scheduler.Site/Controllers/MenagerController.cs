@@ -171,14 +171,22 @@ namespace Scheduler.Site.Controllers
             ITaskRepository taskRepo = new TaskRepository();
             IProjectRepository projectRepo = new ProjectRepository();
             Project projectExist = projectRepo.getProjectById(data.id);
-            Scheduler.Model.EntityModels.Task taskExist = taskRepo.getTaskByNameAndProjectName(projectExist.ProjectName, data.TaskName);
-            if (taskExist != null)
-                return View("TaskExist");
+           /* Scheduler.Model.EntityModels.Task taskExist = taskRepo.getTaskByNameAndProjectName(projectExist.ProjectName, data.TaskName);
+            if (taskExist != null)*/
+               // return View("TaskExist");
 
            // taskRepo.addNewTask(data.StartTime,data.TaskName,data.Hours,projectExist.ProjectName, data.GroupId);
-            taskRepo.addNewTask(data.StartTime,data.StopTime,data.TaskName,data.Hours,projectExist.ProjectName, data.GroupId);
+            bool status = taskRepo.addNewTask(data.StartTime,data.StopTime,data.TaskName,data.Hours,projectExist.ProjectName, data.GroupId);
 
-            return RedirectToAction("TasksInProject", "Menager", new { ProjectId = data.id, GroupId = data.GroupId});
+            if (status == true)
+            {
+                return RedirectToAction("TasksInProject", "Menager", new { ProjectId = data.id, GroupId = data.GroupId });
+            }
+            else
+            {
+                return View("TaskExist");
+            }
+           
         }
 
         public ActionResult SelectProject()

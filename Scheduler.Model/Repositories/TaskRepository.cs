@@ -132,17 +132,17 @@ namespace Scheduler.Model.Repositories
 
         //}
 
-        public void addNewTask(DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName, int GroupId)
+        public bool addNewTask(DateTime StartTime, DateTime StopTime, string TaskName, int Hours, string ProjectName, int GroupId)
         {
             IProjectRepository projectRepo = new ProjectRepository();
             Project projectExist = projectRepo.getProjectByName(ProjectName);
 
-            if (projectExist == null)
-                return;
+           /* if (projectExist == null)
+                return;*/
 
-            Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
+            /*Scheduler.Model.EntityModels.Task taskExist = getTaskInProjectByTaskName(projectExist.ProjectName, TaskName);
             if (taskExist != null)
-                return;
+                return;*/
 
             //Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task(StartTime, StopTime, TaskName, Hours, projectExist.id);
             Scheduler.Model.EntityModels.Task task = new Scheduler.Model.EntityModels.Task
@@ -155,8 +155,8 @@ namespace Scheduler.Model.Repositories
                 GroupId = GroupId
             };
             Entities.AddToTasks(task);
-            Entities.SaveChanges();
-            /*try
+          //  Entities.SaveChanges();
+            try
             {
                 Entities.SaveChanges();
             }
@@ -166,14 +166,16 @@ namespace Scheduler.Model.Repositories
                 Entities.Detach(task);
                 int index = ex.InnerException.Message.IndexOf('\r');
                 //return ex.InnerException.Message.Substring(0, index);
+                return false;
             }
             catch (Exception ex)
             {
                 Entities.Detach(task);
                 int index = ex.InnerException.Message.IndexOf('\r');
               //  return ex.InnerException.Message.Substring(0, index);
-            }*/
-
+                return false;
+            }
+            return true;
         }
 
         public void addNewTask(DateTime StartTime, string TaskName, int Hours, string ProjectName, int GroupId)
